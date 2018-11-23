@@ -24,6 +24,8 @@
 <link rel="stylesheet" href="<?= base_url('public/backend/assets/css/owl-carousel/owl.carousel.min.css') ?>">
 <link rel="stylesheet" href="<?= base_url('public/backend/assets/css/owl-carousel/owl.theme.min.css') ?>">
 <link rel="stylesheet" href="<?= base_url('public/backend/assets/css/animate/animate.min.css') ?>">
+
+<?php !empty($css_file) ? $this->load->view($css_file) : '' ?>
 <link rel="stylesheet" href="<?= base_url('public/backend/assets/css/backend/backend.css') ?>">
         <!-- Tweaks for older IEs--><!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>

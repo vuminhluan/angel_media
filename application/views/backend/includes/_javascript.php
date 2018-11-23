@@ -19,5 +19,9 @@
 <script src="<?= base_url('public/backend/assets/js/dashboard/db-default.js') ?>"></script>
 <script src="<?= base_url('tinymce/tinymce.min.js') ?>"></script>
 <script src="<?= base_url('public/backend/assets/plugins/fancybox/dist/jquery.fancybox.js') ?>"></script>
+
+<?php
+	!empty($js_file) ? $this->load->view($js_file) : ''
+?>
 <script src="<?= base_url('public/backend/assets/js/backend/backend.js') ?>"></script>
 		<!-- End Page Snippets -->

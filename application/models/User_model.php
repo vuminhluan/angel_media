@@ -103,4 +103,29 @@ class User_model extends MY_Model
 		return $this->User->update($form_data, ['id' => $this->session->userdata('id')]);
 	}
 
+
+
+	// Datatable:
+	// get all users for server-side datatable processing (ajax based)
+	public function get_all_users() {
+		$wh = ['is_admin' => 0];
+		$this->db->select(['U.id as user_id', 'firstname', 'lastname', 'email', 'created_at', 'mobile_no', 'role', 'is_active', 'is_verify', 'is_admin', 'last_login', 'G.id as group_id', 'group_name']);
+		$this->db->from('users as U');
+		$this->db->join('user_groups as G', 'U.role = G.id');
+		$this->db->where($wh);
+
+		$SQL = $this->db->get_compiled_select();
+		return $this->datatable->LoadJson($SQL);
+
+		// if(count($wh)>0)
+		// {
+		// 	$WHERE = implode(' and ',$wh);
+		// 	return $this->datatable->LoadJson($SQL,$WHERE);
+		// }
+		// else
+		// {
+		// 	return $this->datatable->LoadJson($SQL);
+		// }
+	}
+
 }

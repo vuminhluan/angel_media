@@ -3,7 +3,7 @@
 	<nav class="side-navbar box-scroll sidebar-scroll">
 		<!-- Begin Main Navigation -->
 		<ul class="list-unstyled">
-			<li class="active"><a href="components-widgets.html"><i class="la la-dashboard"></i><span>Dashboard</span></a></li>
+			<li class="active"><a href="components-widgets.html"><i class="la la-dashboard"></i><span>Bảng điều khiển</span></a></li>
 			<!-- <li class="active">
 				<a href="#dropdown-db" aria-expanded="true" data-toggle="collapse"><i class="la la-columns"></i><span>Dashboard</span></a>
 				<ul id="dropdown-db" class="collapse list-unstyled show pt-0">
@@ -16,22 +16,13 @@
 					<li><a href="db-all.html">All</a></li>
 				</ul>
 			</li> -->
-			<li>
-				<a href="#dropdown-app" aria-expanded="false" data-toggle="collapse"><i class="la la-puzzle-piece"></i><span>Applications</span></a>
-				<ul id="dropdown-app" class="collapse list-unstyled pt-0">
-					<li><a href="app-calendar.html">Calendar</a></li>
-					<li><a href="app-chat.html">Chat</a></li>
-					<li><a href="app-mail.html">Mail</a></li>
-					<li><a href="app-contact.html">Contact</a></li>
-				</ul>
-			</li>
-			<li><a href="components-widgets.html"><i class="la la-spinner"></i><span>Widgets</span></a></li>
+			<li><a href="<?= base_url('admin/profile') ?>"><i class="la la-user"></i><span>Hồ sơ cá nhân</span></a></li>
 		</ul>
-		<span class="heading">Components</span>
+		<span class="heading">Quản lý</span>
 		<ul class="list-unstyled">
-			<li><a href="#dropdown-ui" aria-expanded="false" data-toggle="collapse"><i class="la la-share-alt"></i><span>UI Elements</span></a>
+			<li><a href="#dropdown-ui" aria-expanded="false" data-toggle="collapse"><i class="la la-users"></i><span>Thành viên</span></a>
 				<ul id="dropdown-ui" class="collapse list-unstyled pt-0">
-					<li><a href="components-buttons.html">Buttons</a></li>
+					<li><a href="<?= base_url('admin/users') ?>">Danh sách thành viên</a></li>
 					<li><a href="components-alerts.html">Alerts</a></li>
 					<li><a href="components-modal.html">Modal</a></li>
 					<li><a href="components-notifications.html">Noty</a></li>
@@ -70,7 +61,7 @@
 			</li>
 			<li><a href="maps-leaflet.html"><i class="la la-map"></i><span>Maps</span></a></li>
 		</ul>
-		<span class="heading">Pages</span>
+		<span class="heading">Cài đặt</span>
 		<ul class="list-unstyled">
 			<li><a href="#dropdown-authentication" aria-expanded="false" data-toggle="collapse"><i class="la la-user"></i><span>Authentication</span></a>
 				<ul id="dropdown-authentication" class="collapse list-unstyled pt-0">

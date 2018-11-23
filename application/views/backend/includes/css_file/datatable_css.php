@@ -1,0 +1,1 @@
+<link rel="stylesheet" href="<?= base_url('public/backend/assets/css/datatables/datatables.min.css') ?>">

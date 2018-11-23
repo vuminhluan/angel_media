@@ -94,5 +94,10 @@ $route['admin/profile/update/password'] = 'backend/user/update_password';
 $route['admin/profile/update/avatar'] = 'backend/user/update_avatar';
 
 
+// Dashboard - User : Danh sách user, chỉnh sửa user, ...
+$route['admin/users'] = 'backend/user/render_user_list_page';
+$route['admin/users/datatable_json'] = 'backend/user/datatable_json';
 
-// ========= ========= ADMIN ROUTES ========= ========= //
+
+
+// ========= ========= END ADMIN ROUTES ========= ========= //
