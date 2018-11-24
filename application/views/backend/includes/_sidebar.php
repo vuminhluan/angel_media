@@ -23,17 +23,9 @@
 			<li><a href="#dropdown-ui" aria-expanded="false" data-toggle="collapse"><i class="la la-users"></i><span>Thành viên</span></a>
 				<ul id="dropdown-ui" class="collapse list-unstyled pt-0">
 					<li><a href="<?= base_url('admin/users') ?>">Danh sách thành viên</a></li>
-					<li><a href="components-alerts.html">Alerts</a></li>
-					<li><a href="components-modal.html">Modal</a></li>
-					<li><a href="components-notifications.html">Noty</a></li>
-					<li><a href="components-timeline.html">Timeline</a></li>
-					<li><a href="components-progress.html">Progress</a></li>
-					<li><a href="components-tabs.html">Tabs</a></li>
-					<li><a href="components-charts.html">Chart Js</a></li>
-					<li><a href="components-accordion.html">Accordion</a></li>
-					<li><a href="components-popover.html">Popover</a></li>
-					<li><a href="components-tooltip.html">Tooltip</a></li>
-					<li><a href="components-scrollable.html">Scrollable</a></li>
+					<li><a href="<?= base_url('admin/users/new') ?>">Thêm thành viên mới</a></li>
+					<li><a href="<?= base_url('admin/user-groups') ?>">Danh sách nhóm</a></li>
+					<li><a href="<?= base_url('admin/user-groups/new') ?>">Thêm nhóm mới</a></li>
 				</ul>
 			</li>
 			<li><a href="#dropdown-icons" aria-expanded="false" data-toggle="collapse"><i class="la la-font"></i><span>Icons</span></a>
@@ -112,6 +104,14 @@
 				</ul>
 			</li>
 		</ul>
+
+		<!-- HƯỚNG DẪN -->
+		<span class="heading">Hướng Dẫn Sử Dụng</span>
+		<ul class="list-unstyled">
+			<li class=""><a href="components-widgets.html"><i class="la la-dashboard"></i><span>Hướng dẫn 1</span></a></li>
+			<li><a href="<?= base_url('admin/profile') ?>"><i class="la la-user"></i><span>Hướng dẫn 2</span></a></li>
+		</ul>
+		<!-- KẾT THÚC HƯỚNG DẪN -->
 		<!-- End Main Navigation -->
 	</nav>
 	<!-- End Side Navbar -->

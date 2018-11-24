@@ -8,14 +8,14 @@ class Datatable
 	//--------------------------------------------
 	function LoadJson($SQL,$EXTRA_WHERE='',$GROUP_BY='')
 	{
-		// if(!empty($EXTRA_WHERE))
-		// {
-		// 	$SQL.= " WHERE ( $EXTRA_WHERE )";
-		// }
-		// else
-		// {
-		// 	$SQL.= " WHERE (1)";
-		// }
+		if(!empty($EXTRA_WHERE))
+		{
+			// $SQL.= " WHERE ( $EXTRA_WHERE )";
+		}
+		else
+		{
+			$SQL.= " WHERE (1)";
+		}
 		$query = $this->obj->db->query($SQL);
 		$total = $query->num_rows();
 		//------------------------------------------------

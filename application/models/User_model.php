@@ -115,17 +115,37 @@ class User_model extends MY_Model
 		$this->db->where($wh);
 
 		$SQL = $this->db->get_compiled_select();
-		return $this->datatable->LoadJson($SQL);
-
-		// if(count($wh)>0)
-		// {
-		// 	$WHERE = implode(' and ',$wh);
-		// 	return $this->datatable->LoadJson($SQL,$WHERE);
-		// }
-		// else
-		// {
-		// 	return $this->datatable->LoadJson($SQL);
-		// }
+		return $this->datatable->LoadJson($SQL, $wh);
 	}
+
+	/**
+	 * Lấy tất cả thành viên trong 1 nhóm
+	 * @param: $group_id
+	 * @return: $array
+	 */
+	public function get_users_by_group($group_id) {
+		return $this->db->get_where($this->table, ['role' => $group_id])->result_array();
+	}
+
+
+	/**
+	 * Đổi nhóm cho nhiều thanh viên
+	 * @param: Danh sách thành viên (mảng)
+	 */
+	public function change_users_group($user_list) {
+		if (!$user_list) {
+			return FALSE;
+		}
+		// Lấy danh sách id từ danh sách thành viên
+		$user_id_list = $this->get_columns($user_list, 'id');
+		// echo "<pre>"; print_r($user_id_list); return;
+		// Cập nhật nhóm cho mỗi thành viên
+		$this->db->where_in('id', $user_id_list);
+		$this->db->update($this->table, ['role' => 1]);
+
+		return $this->db->affected_rows() > 0;
+	}
+
+
 
 }

@@ -42,6 +42,12 @@ class Validation
 			'rules' => 'trim|required|min_length[10]|max_length[11]|numeric'
 		],
 
+		'address' => [
+			'field' => 'address',
+			'label' => 'Địa chỉ',
+			'rules' => 'trim|required|min_length[10]|max_length[255]'
+		],
+
 		'current_password' => [
 			'field' => 'current_password',
 			'label' => 'Mật khẩu hiện tại',
@@ -61,7 +67,7 @@ class Validation
 		'email' => [
 			'field' => 'email',
 			'label' => 'Email',
-			'rules' => 'trim|required|valid_email'
+			'rules' => 'trim|required|valid_email|is_unique[users.email]'
 		],
 		'email_login' => [
 			'field' => 'email_login',
@@ -72,6 +78,17 @@ class Validation
 			'field' => 'email_register',
 			'label' => 'Email',
 			'rules' => 'trim|required|valid_email|is_unique[users.email]'
+		],
+
+		'group_name_create' => [
+			'field' => 'group_name_create',
+			'label' => 'Tên nhóm thành viên',
+			'rules' => 'trim|required|min_length[3]|is_unique[user_groups.group_name]'
+		],
+		'group_name_edit' => [
+			'field' => 'group_name_edit',
+			'label' => 'Tên nhóm thành viên',
+			'rules' => 'trim|required|min_length[3]'
 		]
 	);
 

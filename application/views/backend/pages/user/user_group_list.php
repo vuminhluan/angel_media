@@ -7,14 +7,11 @@
 			</div>
 			<div class="widget-body">
 				<div class="table-responsive">
-					<table id="user_list_datatable" class="table mb-0">
+					<table id="user_group_list_datatable" class="table mb-0">
 						<thead>
 							<tr>
 								<th>#</th>
-								<th>Email</th>
-								<th>Ngày tạo</th>
-								<th>Trạng thái</th>
-								<th>Nhóm</th>
+								<th>Tên nhóm</th>
 								<th class="text-right">Chức năng</th>
 							</tr>
 						</thead>

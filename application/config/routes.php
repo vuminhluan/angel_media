@@ -96,7 +96,24 @@ $route['admin/profile/update/avatar'] = 'backend/user/update_avatar';
 
 // Dashboard - User : Danh sách user, chỉnh sửa user, ...
 $route['admin/users'] = 'backend/user/render_user_list_page';
-$route['admin/users/datatable_json'] = 'backend/user/datatable_json';
+$route['admin/users/datatable_json'] = 'backend/user/user_list_datatable_json';
+
+$route['admin/users/(:num)/edit'] = 'backend/user/render_edit_user_page/$1';
+$route['admin/users/update'] = 'backend/user/update_user';
+
+$route['admin/users/new'] = 'backend/user/render_create_user_page';
+$route['admin/users/create'] = 'backend/user/create_user';
+
+// Dashboard - User Group : Danh sách nhóm thành viên, chỉnh sửa nhóm thành viên, ...
+$route['admin/user-groups'] = 'backend/user/render_user_group_list_page';
+$route['admin/user-groups/datatable_json'] = 'backend/user/user_group_list_datatable_json';
+
+$route['admin/user-groups/(:num)/delete'] = 'backend/user/delete_user_group/$1';
+$route['admin/user-groups/(:num)/edit'] = 'backend/user/render_edit_user_group_page/$1';
+$route['admin/user-groups/update'] = 'backend/user/update_user_group';
+
+$route['admin/user-groups/new'] = 'backend/user/render_create_user_group_page';
+$route['admin/user-groups/create'] = 'backend/user/create_user_group';
 
 
 

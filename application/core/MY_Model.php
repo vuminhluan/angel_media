@@ -12,33 +12,33 @@ class MY_Model extends CI_Model
 	protected $table = "default_model";
 	protected $primaryKey = "id";
 
-	protected $rules = array(
-		'password_reset_code' => [
-			'field' => 'password_reset_code',
-			'label' => 'Mã đặt lại mật khẩu',
-			'rules' => 'trim|required|min_length[6]|max_length[6]|alpha_numeric'
-		],
-		'password' => [
-			'field' => 'password',
-			'label' => 'Mật khẩu',
-			'rules' => 'trim|required|min_length[6]|max_length[32]'
-		],
-		'password_confirmation' => [
-			'field' => 'password_confirmation',
-			'label' => 'Mật khẩu xác nhận',
-			'rules' => 'trim|required|matches[password]'
-		],
-		'email_login' => [
-			'field' => 'email_login',
-			'label' => 'Email',
-			'rules' => 'trim|required|valid_email'
-		],
-		'email_register' => [
-			'field' => 'email_register',
-			'label' => 'Email',
-			'rules' => 'trim|required|valid_email|is_unique[users.email]'
-		]
-	);
+	// protected $rules = array(
+	// 	'password_reset_code' => [
+	// 		'field' => 'password_reset_code',
+	// 		'label' => 'Mã đặt lại mật khẩu',
+	// 		'rules' => 'trim|required|min_length[6]|max_length[6]|alpha_numeric'
+	// 	],
+	// 	'password' => [
+	// 		'field' => 'password',
+	// 		'label' => 'Mật khẩu',
+	// 		'rules' => 'trim|required|min_length[6]|max_length[32]'
+	// 	],
+	// 	'password_confirmation' => [
+	// 		'field' => 'password_confirmation',
+	// 		'label' => 'Mật khẩu xác nhận',
+	// 		'rules' => 'trim|required|matches[password]'
+	// 	],
+	// 	'email_login' => [
+	// 		'field' => 'email_login',
+	// 		'label' => 'Email',
+	// 		'rules' => 'trim|required|valid_email'
+	// 	],
+	// 	'email_register' => [
+	// 		'field' => 'email_register',
+	// 		'label' => 'Email',
+	// 		'rules' => 'trim|required|valid_email|is_unique[users.email]'
+	// 	]
+	// );
 
 	/**
 	 * Lấy bộ cài đặt cho form validate
@@ -46,21 +46,21 @@ class MY_Model extends CI_Model
 	 * @return: Trả về mảng cài đặt
 	 * @link: https://www.codeigniter.com/userguide3/libraries/form_validation.html#setting-rules-using-an-array
 	 */
-	public function get_validation_config($form_data = []) {
-		if (empty($form_data)) {
-			return FALSE;
-		}
+	// public function get_validation_config($form_data = []) {
+	// 	if (empty($form_data)) {
+	// 		return FALSE;
+	// 	}
 
-		$config = [];
-		foreach ($form_data as $form_data_key => $value) {
-			foreach ($this->rules as $key => $rule) {
-				if ($form_data_key == $key) {
-					$config[] = $rule;
-				}
-			}
-		}
-		return $config;
-	}
+	// 	$config = [];
+	// 	foreach ($form_data as $form_data_key => $value) {
+	// 		foreach ($this->rules as $key => $rule) {
+	// 			if ($form_data_key == $key) {
+	// 				$config[] = $rule;
+	// 			}
+	// 		}
+	// 	}
+	// 	return $config;
+	// }
 
 	/**
 	 * Check 1 cột với dữ liệu truyền vào
@@ -161,7 +161,7 @@ class MY_Model extends CI_Model
 	 */
 
 	public function all($return_type = 'result_array') {
-		return $this->db->get($this->table)->$object();
+		return $this->db->get($this->table)->$return_type();
 	}
 
 
@@ -169,7 +169,7 @@ class MY_Model extends CI_Model
 	 * Lấy cột của một bảng
 	 * 
 	 * @param ---
-	 * @return mảng chứa dữ liệu của 1 bảng
+	 * @return mảng chứa dữ liệu 1 cột của 1 mảng
 	 *
 	 */
 
@@ -182,11 +182,11 @@ class MY_Model extends CI_Model
 	 * Xóa dữ liệu trong bảng
 	 * @param: Khóa chính hoặc mảng chứa điều kiện
 	 */
-	public function delete($array_or_id) {
-		if (!is_array($array_or_id)) {
-			$array_or_id = [$this->primaryKey => $array_or_id];
+	public function delete($condition_or_id) {
+		if (!is_array($condition_or_id)) {
+			$condition_or_id = [$this->primaryKey => $condition_or_id];
 		}
-		$this->db->delete($this->table, $array_or_id);
+		$this->db->delete($this->table, $condition_or_id);
 	}
 
 }
