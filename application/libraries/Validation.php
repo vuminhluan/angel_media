@@ -12,7 +12,7 @@ class Validation
 	function __construct() {
 		$this->CI = &get_instance();
 		$this->CI->load->library('form_validation');
-		$this->CI->load->config('myconfig');
+		// $this->CI->load->config('myconfig');
 
 		// Đổi sang ngôn ngữ Vietnam để hiển thị lỗi validation
 		$this->CI->config->set_item('language', 'vietnam');
@@ -69,6 +69,11 @@ class Validation
 			'label' => 'Email',
 			'rules' => 'trim|required|valid_email|is_unique[users.email]'
 		],
+		'email_edit' => [
+			'field' => 'email_edit',
+			'label' => 'Email',
+			'rules' => 'trim|required|valid_email'
+		],
 		'email_login' => [
 			'field' => 'email_login',
 			'label' => 'Email',
@@ -89,7 +94,20 @@ class Validation
 			'field' => 'group_name_edit',
 			'label' => 'Tên nhóm thành viên',
 			'rules' => 'trim|required|min_length[3]'
-		]
+		],
+
+		'news_category_name' => [
+			'field' => 'news_category_name',
+			'label' => 'Tên danh mục',
+			'rules' => 'trim|required|min_length[3]'
+		],
+		'news_category_alias_create' => [
+			'field' => 'news_category_alias_create',
+			'label' => 'Đường dẫn',
+			'rules' => 'trim|min_length[3]|is_unique[news_categories.alias]'
+		],
+
+
 	);
 
 	/**

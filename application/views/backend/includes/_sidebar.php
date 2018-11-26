@@ -3,7 +3,7 @@
 	<nav class="side-navbar box-scroll sidebar-scroll">
 		<!-- Begin Main Navigation -->
 		<ul class="list-unstyled">
-			<li class="active"><a href="components-widgets.html"><i class="la la-dashboard"></i><span>Bảng điều khiển</span></a></li>
+			<li data-primary-tab="dashboard"><a href="<?= base_url('admin/dashboard') ?>"><i class="la la-dashboard"></i><span>Bảng điều khiển</span></a></li>
 			<!-- <li class="active">
 				<a href="#dropdown-db" aria-expanded="true" data-toggle="collapse"><i class="la la-columns"></i><span>Dashboard</span></a>
 				<ul id="dropdown-db" class="collapse list-unstyled show pt-0">
@@ -16,24 +16,24 @@
 					<li><a href="db-all.html">All</a></li>
 				</ul>
 			</li> -->
-			<li><a href="<?= base_url('admin/profile') ?>"><i class="la la-user"></i><span>Hồ sơ cá nhân</span></a></li>
+			<li data-primary-tab="profile"><a href="<?= base_url('admin/profile') ?>"><i class="la la-user"></i><span>Hồ sơ cá nhân</span></a></li>
 		</ul>
 		<span class="heading">Quản lý</span>
 		<ul class="list-unstyled">
-			<li><a href="#dropdown-ui" aria-expanded="false" data-toggle="collapse"><i class="la la-users"></i><span>Thành viên</span></a>
+			<li data-primary-tab="users"><a href="#dropdown-ui" aria-expanded="false" data-toggle="collapse"><i class="la la-users"></i><span>Thành viên</span></a>
 				<ul id="dropdown-ui" class="collapse list-unstyled pt-0">
-					<li><a href="<?= base_url('admin/users') ?>">Danh sách thành viên</a></li>
-					<li><a href="<?= base_url('admin/users/new') ?>">Thêm thành viên mới</a></li>
-					<li><a href="<?= base_url('admin/user-groups') ?>">Danh sách nhóm</a></li>
-					<li><a href="<?= base_url('admin/user-groups/new') ?>">Thêm nhóm mới</a></li>
+					<li data-secondary-tab="user_list"><a href="<?= base_url('admin/users') ?>">Danh sách thành viên</a></li>
+					<li data-secondary-tab="user_create"><a href="<?= base_url('admin/users/new') ?>">Thêm thành viên mới</a></li>
+					<li data-secondary-tab="user_group_list"><a href="<?= base_url('admin/user-groups') ?>">Danh sách nhóm</a></li>
+					<li data-secondary-tab="user_group_create"><a href="<?= base_url('admin/user-groups/new') ?>">Thêm nhóm mới</a></li>
 				</ul>
 			</li>
-			<li><a href="#dropdown-icons" aria-expanded="false" data-toggle="collapse"><i class="la la-font"></i><span>Icons</span></a>
+			<li data-primary-tab="news" ><a href="#dropdown-icons" aria-expanded="false" data-toggle="collapse"><i class="la la-newspaper-o"></i><span>Tin tức</span></a>
 				<ul id="dropdown-icons" class="collapse list-unstyled pt-0">
-					<li><a href="icons-lineawesome.html">Line Awesome</a></li>
-					<li><a href="icons-themify.html">Themify</a></li>
-					<li><a href="icons-ionicons.html">Ionicons</a></li>
-					<li><a href="icons-meteocons.html">Meteocons</a></li>
+					<li><a href="icons-lineawesome.html">Danh sách tin tức</a></li>
+					<li><a href="<?= base_url('admin/news/new') ?>">Thêm tin tức mới</a></li>
+					<li data-secondary-tab="category_list"><a href="<?= base_url('admin/news/categories') ?>">Danh mục tin tức</a></li>
+					<li data-secondary-tab="category_create"><a href="<?= base_url('admin/news/category/new') ?>">Thêm danh mục tin tức</a></li>
 				</ul>
 			</li>
 			<li><a href="#dropdown-forms" aria-expanded="false" data-toggle="collapse"><i class="la la-list-alt"></i><span>Forms</span></a>

@@ -32,6 +32,7 @@
 			<?php $this->load->view('backend/includes/_breadcrumb') ?>
 
 			<!-- MAIN VIEW -->
+			<input type="hidden" id="menu_tab" value="<?= !empty($tab) ? $tab : '' ?>">
 			<?php $this->load->view($view) ?>
 		</div>
 		<!-- End container -->

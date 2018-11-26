@@ -115,6 +115,82 @@ $route['admin/user-groups/update'] = 'backend/user/update_user_group';
 $route['admin/user-groups/new'] = 'backend/user/render_create_user_group_page';
 $route['admin/user-groups/create'] = 'backend/user/create_user_group';
 
+// Dashboard - News Category : Danh sách danh mục tin tức, chỉnh sửa Danh mục tin tức, ...
+$route['admin/news/categories'] = 'backend/news/render_news_category_list_page';
+$route['admin/news/category/datatable_json'] = 'backend/news/news_categories_datatable_json';
+
+$route['admin/news/category/(:num)/delete'] = 'backend/news/delete_news_category/$1';
+$route['admin/news/category/(:num)/edit'] = 'backend/news/render_edit_news_category_page/$1';
+$route['admin/news/category/update'] = 'backend/news/update_news_category';
+
+$route['admin/news/category/new'] = 'backend/news/render_create_news_category_page';
+$route['admin/news/category/create'] = 'backend/news/create_news_category';
+
+
+// Dashboard - News : Danh sách tin tức, chỉnh sửa tin tức, ...
+$route['admin/news'] = 'backend/news/render_news_list_page';
+$route['admin/news/datatable_json'] = 'backend/news/news_datatable_json';
+
+$route['admin/news/(:num)/delete'] = 'backend/news/delete_news/$1';
+$route['admin/news/(:num)/edit'] = 'backend/news/render_edit_news_page/$1';
+$route['admin/news/update'] = 'backend/news/update_news';
+
+$route['admin/news/new'] = 'backend/news/render_create_news_page';
+$route['admin/news/create'] = 'backend/news/create_news';
+
+
+// AJAX ROUTE
+$route['ajax/create-alias'] = 'ajax/create_alias';
+
 
 
 // ========= ========= END ADMIN ROUTES ========= ========= //
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ===================== BEGIN ROUTES TEST ===================== //
+$route['test'] = 'Luan/index';
+$route['test/crop_image'] = 'Luan/crop_image';
+$route['test/wm_image'] = 'Luan/watermake_image';
+
+// ===================== END ROUTES TEST ===================== //

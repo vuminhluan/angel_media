@@ -34,7 +34,7 @@ class Auth extends MY_Controller
 
 		// Nếu đăng nhập:
 		$form_data = [
-			'email' => $this->input->post('email'),
+			'email_login' => $this->input->post('email'),
 			'password' => $this->input->post('password')
 		];
 
@@ -111,7 +111,7 @@ class Auth extends MY_Controller
 		if (count($form_data) < 2) {
 			return FALSE;
 		}
-		$user = $this->User->get_user_by_email($form_data['email']);
+		$user = $this->User->get_user_by_email($form_data['email_login']);
 		if (!$user) {
 			return FALSE;
 		}

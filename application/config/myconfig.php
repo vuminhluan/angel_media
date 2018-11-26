@@ -9,3 +9,4 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $config['password_minlength'] = 6;
 $config['password_maxlength'] = 32;
+$config['absolute_path'] = str_replace(basename($_SERVER["SCRIPT_FILENAME"]),"",$_SERVER["SCRIPT_FILENAME"]);

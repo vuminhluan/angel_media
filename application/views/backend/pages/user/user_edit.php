@@ -33,7 +33,7 @@
 					<div class="form-group row d-flex align-items-center mb-5">
 						<label class="col-md-3 form-control-label d-flex justify-content-md-end">Email</label>
 						<div class="col-md-6">
-							<input type="email" class="form-control" required name="email" value="<?= $user['email'] ?>">
+							<input type="email" class="form-control" required name="email_edit" value="<?= $user['email'] ?>">
 							<small>
 								<code>Bắt buộc.</code>
 							</small>

@@ -28,7 +28,8 @@ class User extends Admin_Controller
 		$view_data = [
 			'title' => 'Hồ sơ cá nhân',
 			'view' => 'backend/pages/user/profile',
-			'user' => $this->User->find($this->session->userdata('id'))
+			'user' => $this->User->find($this->session->userdata('id')),
+			'tab' => 'profile,'
 		];
 		$this->load->view('backend/layout', $view_data);
 		return;
@@ -135,7 +136,8 @@ class User extends Admin_Controller
 			'title' => 'Danh sách thành viên',
 			// 'css_file' => 'backend/includes/css_file/datatable_css.php',
 			// 'js_file' => 'backend/includes/js_file/datatable_js.php',
-			'view' => 'backend/pages/user/user_list.php'
+			'view' => 'backend/pages/user/user_list.php',
+			'tab' => 'users, user_list'
 		];
 		$this->load->view('backend/layout', $view_data);
 	}
@@ -181,7 +183,8 @@ class User extends Admin_Controller
 			// 'js_file' => 'backend/includes/js_file/datatable_js.php',
 			'view' => 'backend/pages/user/user_edit.php',
 			'user' => $user,
-			'groups' => $groups
+			'groups' => $groups,
+			'tab' => 'users,'
 		];
 		$this->load->view('backend/layout', $view_data);
 	}
@@ -196,7 +199,7 @@ class User extends Admin_Controller
 
 		$form_data = [
 			'id' => $this->input->post('user_id'),
-			'email' => $this->input->post('email'),
+			'email_edit' => $this->input->post('email_edit'),
 			'is_active' => $this->input->post('status'),
 			'role' => $this->input->post('select_user_groups')
 		];
@@ -221,7 +224,26 @@ class User extends Admin_Controller
 			return;
 		}
 
-		if (!$this->User->update($form_data, ['id' => $form_data['id']])) {
+		// Kiểm tra email mới đã được sửa dụng chưa
+		$user_has_current_email = $this->User->find($form_data['id']);
+		// Xét xem có muốn cập nhật email mới hay không.
+		// Nếu email hiện tại của user khác với email gửi lên từ form => có cập nhật
+		if ($user_has_current_email->email != $form_data['email_edit']) {
+			// Tìm xem email mới có người sử dụng chưa
+			$user_has_new_email = $this->User->get_user_by_email($form_data['email_edit']);
+			if ($user_has_new_email) {
+				$this->flash('Email mới: '.$form_data['email_edit'].' đã có người sử dụng.');
+				$this->render_edit_user_page($form_data['id']);
+				return;
+			}
+		}
+
+		$data_to_update = $form_data;
+		$data_to_update['email'] = $form_data['email_edit'];
+		unset($data_to_update['email_edit']);
+		
+
+		if (!$this->User->update($data_to_update, ['id' => $data_to_update['id']])) {
 			$this->flash('Có lỗi xảy ra. Không thể cập nhật thành viên bây giờ');
 		} else {
 			$this->flash('Cập nhật tài khoản thành công');
@@ -240,7 +262,8 @@ class User extends Admin_Controller
 			// 'css_file' => 'backend/includes/css_file/datatable_css.php',
 			// 'js_file' => 'backend/includes/js_file/datatable_js.php',
 			'view' => 'backend/pages/user/user_create.php',
-			'groups' => $groups
+			'groups' => $groups,
+			'tab' => 'users, user_create'
 		];
 		$this->load->view('backend/layout', $view_data);
 	}
@@ -308,7 +331,8 @@ class User extends Admin_Controller
 			'title' => 'Danh sách các nhóm thành viên',
 			// 'css_file' => 'backend/includes/css_file/datatable_css.php',
 			// 'js_file' => 'backend/includes/js_file/datatable_js.php',
-			'view' => 'backend/pages/user/user_group_list.php'
+			'view' => 'backend/pages/user/user_group_list.php',
+			'tab' => 'users, user_group_list'
 		];
 		$this->load->view('backend/layout', $view_data);
 	}
@@ -343,7 +367,8 @@ class User extends Admin_Controller
 			'title' => 'Thêm mới nhóm thành viên',
 			// 'css_file' => 'backend/includes/css_file/datatable_css.php',
 			// 'js_file' => 'backend/includes/js_file/datatable_js.php',
-			'view' => 'backend/pages/user/user_group_create.php'
+			'view' => 'backend/pages/user/user_group_create.php',
+			'tab' => 'users, user_group_create'
 		];
 		$this->load->view('backend/layout', $view_data);
 	}
@@ -382,6 +407,7 @@ class User extends Admin_Controller
 			// 'js_file' => 'backend/includes/js_file/datatable_js.php',
 			'view' => 'backend/pages/user/user_group_edit.php',
 			'group' => $group,
+			'tab' => 'users,'
 		];
 		$this->load->view('backend/layout', $view_data);
 	}

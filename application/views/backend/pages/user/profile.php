@@ -9,7 +9,7 @@
 					<div class="avatar-action">
 						<?php echo form_open_multipart(base_url('admin/profile/update/avatar'), ['class'=>'update-avatar-form']); ?>
 							<input type="hidden" name="avatar" id="avatar" value="">
-							<a href="/filemanager/dialog.php?type=1&field_id=avatar&relative_url=1" class="btn btn-secondary btn-square change-avatar-btn"><i class="la la-upload"></i></a>
+							<a href="/filemanager/dialog.php?type=1&field_id=avatar&relative_url=1" class="btn btn-secondary btn-square change-avatar-btn stand-alone-filemanager"><i class="la la-upload"></i></a>
 							<button type="submit" class="btn btn-danger btn-square"><i class="la la-save"></i></button>
 						<?php echo form_close(); ?>
 					</div>
