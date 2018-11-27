@@ -239,3 +239,56 @@ $(document).ready(function() {
 
 	});
 });
+
+
+// Datatable Danh sách tin tức
+$(document).ready(function() {
+ 	//---------------------------------------------------
+ 	if ($('#news_list_datatable')[0]) {
+	 	var table = $('#news_list_datatable').DataTable( {
+	 		"processing": true,
+	 		"serverSide": true,
+	 		"ajax": baseUrl+"/admin/news/datatable_json",
+	 		"order": [[0,'asc']],
+	 		"columnDefs": [
+		 		{ "targets": 0, "name": "N.id", 'searchable':true, 'orderable':true},
+		 		{ "targets": 1, "name": "N.name", 'searchable':true, 'orderable':true,},
+		 		{ "targets": 2, "name": "N.alias", 'searchable':true, 'orderable':true,},
+		 		{ "targets": 3, "name": "NC.name", 'searchable':true, 'orderable':true,},
+		 		{ "targets": 4, "name": "N.created_at", 'searchable':true, 'orderable':true,},
+		 		{ "targets": 5, "name": "Action", 'searchable':false, 'orderable':false,},
+	 		]
+	 	});
+ 		// $('#news_list_datatable').on('click', '.btn.btn-info.btn-square', function(event) {
+	 	// 	event.preventDefault();
+	 	// 	keyword = $(this).html();
+	 	// 	$('input[type=search]').val(keyword);
+	 	// 	// table.fnFilter(keyword,4,true,false);
+	 	// 	table.search(keyword).draw();
+	 	// });
+ 	}
+});
+
+// Xóa tin tức
+$(document).ready(function() {
+	$('table#news_list_datatable').on('click', '.action-buttons .delete-action', function(event) {
+		event.preventDefault();
+		var href = $(this).attr('data-href');
+		var newsName = $(this).attr('data-news-name') ? '"'+$(this).attr('data-news-name')+'"' : 'này';
+		var deleteNoty = new Noty({
+			text: 'Bạn muốn xóa tin tức: '+newsName+' ? Nếu xóa sẽ không thể khôi phục lại được',
+			layout:'centerRight',
+			buttons: [
+				Noty.button('Xóa', 'btn btn-danger', function () {
+					window.location.href=href;
+				}, {id: 'button1', 'data-status': 'ok'}),
+
+				Noty.button('Bỏ qua', 'btn btn-success', function () {
+					deleteNoty.close();
+				})
+			]
+		});
+		deleteNoty.show();
+
+	});
+});

@@ -9,6 +9,7 @@ class News extends Admin_Controller
 	
 	function __construct() {
 		parent::__construct();
+		$this->load->model('News_model', 'News');
 		$this->load->model('News_category_model', 'NewsCategory');
 		$this->load->library('datatable'); // loaded my custom serverside datatable library
 	}
@@ -93,11 +94,12 @@ class News extends Admin_Controller
 		
 		$categories = $this->NewsCategory->get_all_news_categories();
 		$category_data = array();
+		$alias_prefix = "tin-tuc/danh-muc/";
 		foreach ($categories['data'] as $category) {
 			$category_data[] = array(
 				$category['id'],
 				$category['name'],
-				'/tin-tuc/danh-muc/'.$category['alias'],
+				$alias_prefix.$category['alias'],
 				'<div class="action-buttons td-actions text-right">
 					<a href="'.base_url("admin/news/category/".$category['id']."/edit").'" class="edit-action"><i class="la la-edit edit"></i></a>
 					<a data-category-name="'.$category['name'].'" data-href="'.base_url("admin/news/category/".$category['id']."/delete").'" href="#/" class="delete-action"><i class="la la-close delete"></i></a>
@@ -188,6 +190,7 @@ class News extends Admin_Controller
 
 	// ================= END NEWS CATEGORY - DANH MỤC TIN TỨC ================= //
 
+
 	// ================= NEWS - TIN TỨC ================= //
 
 	/**
@@ -220,11 +223,71 @@ class News extends Admin_Controller
 		$this->load->view('backend/layout', $view_data);
 	}
 
+	public function news_datatable_json() {
+		
+		$news = $this->News->get_all_news();
+		$news_data = array();
+		$alias_prefix = "tin-tuc/";
+		foreach ($news['data'] as $news_piece) {
+			$news_data[] = array(
+				$news_piece['news_id'],
+				$news_piece['news_name'],
+				$alias_prefix.$news_piece['news_alias'],
+				$news_piece['category_name'],
+				$news_piece['news_created_at'],
+				'<div class="action-buttons td-actions text-right">
+					<a href="'.base_url("admin/news/".$news_piece['news_id']."/edit").'" class="edit-action"><i class="la la-edit edit"></i></a>
+					<a data-news_piece-name="'.$news_piece['news_name'].'" data-href="'.base_url("admin/news/news_piece/".$news_piece['news_id']."/delete").'" href="#/" class="delete-action"><i class="la la-close delete"></i></a>
+				</div>'
+			);
+		}
+		$news['data']=$news_data;
+		echo json_encode($news);						   
+	}
+
 	/**
 	 * Thêm tin tức mới
 	 */
 	public function create_news() {
-		echo "create new news";
+		$form_data = [
+			'news_name' => $this->input->post('name'),
+			'news_alias' => make_alias($this->input->post('name')),
+			'news_thumbnail' => $this->input->post('thumbnail'),
+			'news_content' => $this->input->post('content', FALSE),
+		];
+
+		// Sử dụng Library Validation
+		if ($this->validation->validate_form($form_data) == FALSE) {
+			$this->render_create_news_page();
+			return;
+		}
+		
+		$data_to_insert = [
+			'category_id' => $this->input->post('select_news_category'),
+			'name' => $this->input->post('name'),
+			'alias' => make_alias($this->input->post('name')),
+			'thumbnail' => $this->input->post('thumbnail'),
+			'content' => $this->input->post('content', FALSE),
+			'caption' => $this->input->post('caption'),
+			'created_at' => date('Y-m-d H:i:s'),
+			'status' => $this->input->post('status'),
+			'keyword' => $this->input->post('keyword'),
+			'description' => $this->input->post('keyword'),
+		];
+
+		if (!$this->News->insert($data_to_insert)) {
+			$this->flash('Thêm tin tức thành công');
+			$this->render_create_news_page();
+			return;
+		} else {
+			$this->flash('Thêm tin tức thành công');
+			redirect(base_url('admin/news'));
+			return;
+		}
+
+		
+
+
 	}
 
 	// ================= END NEWS - TIN TỨC ================= //

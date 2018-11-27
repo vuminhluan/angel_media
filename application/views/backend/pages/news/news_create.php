@@ -25,9 +25,9 @@
 					<div class="form-group row d-flex align-items-center mb-5">
 						<label class="col-md-2 form-control-label d-flex justify-content-md-end">Tiêu đề tin tức</label>
 						<div class="col-md-10">
-							<input type="text" class="form-control unicode name" name="name" value="<?= set_value('news_category_name') ?>" autocomplete="off">
+							<input type="text" class="form-control unicode name" name="name" value="<?= set_value('news_name') ?>" autocomplete="off">
 							<small>
-								<code>Bắt buộc</code>
+								<code>Bắt buộc. Tối thiểu 10 ký tự</code>
 							</small>
 						</div>
 					</div>
@@ -35,7 +35,7 @@
 					<div class="form-group row d-flex align-items-center mb-5">
 						<label class="col-md-2 form-control-label d-flex justify-content-md-end">Đường dấn</label>
 						<div class="col-md-10">
-							<input type="text" class="form-control alias news_category_alias" data-alias-prefix="tin-tuc/" name="alias" disabled value="tin-tuc/<?= set_value('news_category_alias_create') ?>">
+							<input type="text" class="form-control alias news_category_alias" data-alias-prefix="tin-tuc/" name="alias" disabled value="tin-tuc/<?= set_value('news_alias') ?>">
 							<small>
 								<!-- <code>Bắt buộc</code> -->
 							</small>
@@ -45,7 +45,7 @@
 					<div class="form-group row d-flex align-items-center mb-5">
 						<label class="col-md-2 form-control-label d-flex justify-content-md-end">Mô tả</label>
 						<div class="col-md-10">
-							<textarea type="text" class="form-control news_category_name" name="caption" value="<?= set_value('news_category_name') ?>" autocomplete="off"></textarea>
+							<textarea type="text" class="form-control news_category_name" name="caption" value="<?= set_value('caption') ?>" autocomplete="off"></textarea>
 							<small>
 								<code>Nên có</code>
 							</small>
@@ -62,11 +62,11 @@
 								<br>
 								<div class="input-group">
 									<span class="input-group-btn">
-										<a href="/filemanager/dialog.php?type=1&field_id=newsimage&relative_url=1" type="button" class="btn btn-primary ripple upload-news-image-btn stand-alone-filemanager">
+										<a href="/filemanager/dialog.php?type=1&field_id=newsimage&relative_url=1" class="btn btn-primary ripple upload-news-image-btn stand-alone-filemanager">
 											<i class="la la-image"></i>
 										</a>
 									</span>
-									<input type="text" class="form-control" name="thumbnail" id="newsimage" value="" required disabled>
+									<input type="text" class="form-control" name="thumbnail" id="newsimage" value="" required>
 								</div>
 							</div>
 						</div>
@@ -75,7 +75,7 @@
 					<div class="form-group row d-flex align-items-center mb-5">
 						<label class="col-md-2 form-control-label d-flex justify-content-md-end">Nội dung</label>
 						<div class="col-md-10">
-							<textarea type="text" class="form-control tinymce_content" name="content" value="<?= set_value('news_category_name') ?>" autocomplete="off"></textarea>
+							<textarea type="text" class="form-control tinymce_content" name="content" value="<?= set_value('news_content') ?>" autocomplete="off"></textarea>
 							<small>
 								<code>Bắt buộc</code>
 							</small>
@@ -84,8 +84,8 @@
 					
 					<!-- --------------------- -->
 					<div class="form-group row d-flex align-items-center mb-5">
-						<label class="col-md-3 form-control-label d-flex justify-content-md-end">Trạng thái</label>
-						<div class="col-md-6">
+						<label class="col-md-2 form-control-label d-flex justify-content-md-end">Trạng thái</label>
+						<div class="col-md-10">
 							<div class="custom-control custom-radio styled-radio d-inline-block">
 								<input class="custom-control-input" type="radio" name="status" id="opt-01" checked value="1">
 								<label class="custom-control-descfeedback" for="opt-01">Ẩn</label>
@@ -104,7 +104,7 @@
 					<div class="form-group row d-flex align-items-center mb-5">
 						<label class="col-md-2 form-control-label d-flex justify-content-md-end">Tiêu đề</label>
 						<div class="col-md-10">
-							<input type="text" class="form-control" name="title" value="">
+							<input type="text" class="form-control" name="title" value="<?= set_value('title') ?>">
 							<small>
 								<code></code>
 							</small>
@@ -114,7 +114,7 @@
 					<div class="form-group row d-flex align-items-center mb-5">
 						<label class="col-md-2 form-control-label d-flex justify-content-md-end">Từ khóa</label>
 						<div class="col-md-10">
-							<input type="text" class="form-control" name="keyword" value="">
+							<input type="text" class="form-control" name="keyword" value="<?= set_value('keyword') ?>">
 							<small>
 								<!-- <code>Bắt buộc.</code> -->
 							</small>
@@ -124,7 +124,7 @@
 					<div class="form-group row d-flex align-items-center mb-5">
 						<label class="col-md-2 form-control-label d-flex justify-content-md-end">Mô tả</label>
 						<div class="col-md-10">
-							<input type="text" class="form-control" name="description" value="">
+							<input type="text" class="form-control" name="description" value="<?= set_value('description') ?>">
 							<small>
 								<!-- <code>Bắt buộc.</code> -->
 							</small>

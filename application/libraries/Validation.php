@@ -107,6 +107,27 @@ class Validation
 			'rules' => 'trim|min_length[3]|is_unique[news_categories.alias]'
 		],
 
+		'news_name' => [
+			'field' => 'news_name',
+			'label' => 'Tiêu đề tin tức',
+			'rules' => 'trim|required|min_length[10]|is_unique[news.name]'
+		],
+		'news_alias' => [
+			'field' => 'news_alias',
+			'label' => 'Đường dẫn',
+			'rules' => 'trim|required|min_length[10]'
+		],
+		'news_thumbnail' => [
+			'field' => 'news_thumbnail',
+			'label' => 'Hình đại diện',
+			'rules' => 'trim|required'
+		],
+		'news_content' => [
+			'field' => 'news_content',
+			'label' => 'Nội dung tin tức',
+			'rules' => 'trim|required'
+		],
+
 
 	);
 
