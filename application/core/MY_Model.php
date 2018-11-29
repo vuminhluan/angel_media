@@ -187,6 +187,7 @@ class MY_Model extends CI_Model
 			$condition_or_id = [$this->primaryKey => $condition_or_id];
 		}
 		$this->db->delete($this->table, $condition_or_id);
+		return $this->db->affected_rows() > 0;
 	}
 
 }

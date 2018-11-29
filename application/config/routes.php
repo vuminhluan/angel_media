@@ -139,6 +139,17 @@ $route['admin/news/new'] = 'backend/news/render_create_news_page';
 $route['admin/news/create'] = 'backend/news/create_news';
 
 
+// Dashboard - Menu : Danh sách menu, chỉnh sửa menu, ...
+$route['admin/menu'] = 'backend/menu/render_menu_list_page';
+
+$route['admin/menu/(:num)/delete'] = 'backend/menu/delete_menu/$1';
+$route['admin/menu/(:num)/edit'] = 'backend/menu/render_edit_menu_page/$1';
+$route['admin/menu/update'] = 'backend/menu/update_menu';
+
+$route['admin/menu/new'] = 'backend/menu/render_create_menu_page';
+$route['admin/menu/create'] = 'backend/menu/create_menu';
+
+
 // AJAX ROUTE
 $route['ajax/create-alias'] = 'ajax/create_alias';
 

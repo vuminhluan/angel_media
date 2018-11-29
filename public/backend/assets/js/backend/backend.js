@@ -1,4 +1,21 @@
-// Active menu
+
+var datatableLanguage = {
+	"lengthMenu": "Hiển thị _MENU_ dòng",
+	"zeroRecords": "Không có dữ liệu",
+	// "info": "Showing page _PAGE_ of _PAGES_",
+	"info": "Từ dòng _START_ tới _END_ của _TOTAL_ dòng",
+	"infoEmpty": "Không có dữ liệu",
+	"search": "Tìm kiếm",
+	"paginate" : {
+		"first": "Đầu",
+		"last": "Cuối",
+		"next": "Sau",
+		"previous": "Trước"
+	}
+	// "infoFiltered": "(filtered from _MAX_ total records)"
+};
+
+// Active sidebar menu
 $(document).ready(function() {
 	var tab = $('input#menu_tab').val();
 	if (tab) {
@@ -82,7 +99,7 @@ $(document).ready(function() {
 
 			relative_urls:false,
 			filemanager_title: "Angel Media - File Manager",
-			external_filemanager_path: baseUrl+"public/plugins/filemanager/",
+			external_filemanager_path: baseUrl+"/filemanager/",
 			external_plugins: { "filemanager" : baseUrl+"filemanager/plugin.min.js"}
 		});
 	}
@@ -125,6 +142,7 @@ $(document).ready(function() {
  	//---------------------------------------------------
  	if ($('#user_group_list_datatable')[0]) {
 	 	var table = $('#user_group_list_datatable').DataTable( {
+			"language" : datatableLanguage,
 	 		"processing": true,
 	 		"serverSide": true,
 	 		"ajax": baseUrl+"/admin/user-groups/datatable_json",
@@ -195,6 +213,7 @@ $(document).ready(function() {
  	//---------------------------------------------------
  	if ($('#news_category_list_datatable')[0]) {
 	 	var table = $('#news_category_list_datatable').DataTable( {
+			"language" : datatableLanguage,
 	 		"processing": true,
 	 		"serverSide": true,
 	 		"ajax": baseUrl+"/admin/news/category/datatable_json",
@@ -246,6 +265,7 @@ $(document).ready(function() {
  	//---------------------------------------------------
  	if ($('#news_list_datatable')[0]) {
 	 	var table = $('#news_list_datatable').DataTable( {
+			"language" : datatableLanguage,
 	 		"processing": true,
 	 		"serverSide": true,
 	 		"ajax": baseUrl+"/admin/news/datatable_json",

@@ -15,8 +15,10 @@ class News extends Admin_Controller
 	}
 
 	public function index() {
-		// echo ellipsize('Loremipsumdolorsitamet.', 7, .5); return;
-		echo $this->User->get_all_users();
+		// echo $this->News->test();
+		echo "<pre>";
+		$this->prt($this->News->test());
+		return;
 	}
 
 
@@ -191,7 +193,7 @@ class News extends Admin_Controller
 	// ================= END NEWS CATEGORY - DANH MỤC TIN TỨC ================= //
 
 
-	// ================= NEWS - TIN TỨC ================= //
+	// ================= QUẢN LÝ NEWS - TIN TỨC ================= //
 
 	/**
 	 * Render trang danh sách tin tức
@@ -204,7 +206,33 @@ class News extends Admin_Controller
 			'view' => 'backend/pages/news/news_list',
 			'tab' => 'news,news_list'
 		];
+		// $news = $this->News->
 		$this->load->view('backend/layout', $view_data);
+	}
+
+	/**
+	 * 
+	 */
+	public function news_datatable_json() {
+		
+		$news = $this->News->get_all_news();
+		$news_data = array();
+		$alias_prefix = "tin-tuc/";
+		foreach ($news['data'] as $news_piece) {
+			$news_data[] = array(
+				$news_piece['news_id'],
+				$news_piece['news_name'],
+				$alias_prefix.$news_piece['news_alias'],
+				$news_piece['category_name'],
+				$news_piece['news_created_at'],
+				'<div class="action-buttons td-actions text-right">
+					<a href="'.base_url("admin/news/".$news_piece['news_id']."/edit").'" class="edit-action"><i class="la la-edit edit"></i></a>
+					<a data-news_piece-name="'.$news_piece['news_name'].'" data-href="'.base_url("admin/news/".$news_piece['news_id']."/delete").'" href="#/" class="delete-action"><i class="la la-close delete"></i></a>
+				</div>'
+			);
+		}
+		$news['data'] = $news_data;
+		echo json_encode($news);						   
 	}
 
 	/**
@@ -221,28 +249,6 @@ class News extends Admin_Controller
 			'tab' => 'news,news_create'
 		];
 		$this->load->view('backend/layout', $view_data);
-	}
-
-	public function news_datatable_json() {
-		
-		$news = $this->News->get_all_news();
-		$news_data = array();
-		$alias_prefix = "tin-tuc/";
-		foreach ($news['data'] as $news_piece) {
-			$news_data[] = array(
-				$news_piece['news_id'],
-				$news_piece['news_name'],
-				$alias_prefix.$news_piece['news_alias'],
-				$news_piece['category_name'],
-				$news_piece['news_created_at'],
-				'<div class="action-buttons td-actions text-right">
-					<a href="'.base_url("admin/news/".$news_piece['news_id']."/edit").'" class="edit-action"><i class="la la-edit edit"></i></a>
-					<a data-news_piece-name="'.$news_piece['news_name'].'" data-href="'.base_url("admin/news/news_piece/".$news_piece['news_id']."/delete").'" href="#/" class="delete-action"><i class="la la-close delete"></i></a>
-				</div>'
-			);
-		}
-		$news['data']=$news_data;
-		echo json_encode($news);						   
 	}
 
 	/**
@@ -264,6 +270,7 @@ class News extends Admin_Controller
 		
 		$data_to_insert = [
 			'category_id' => $this->input->post('select_news_category'),
+			'author' => $this->session->userdata('id'),
 			'name' => $this->input->post('name'),
 			'alias' => make_alias($this->input->post('name')),
 			'thumbnail' => $this->input->post('thumbnail'),
@@ -271,8 +278,9 @@ class News extends Admin_Controller
 			'caption' => $this->input->post('caption'),
 			'created_at' => date('Y-m-d H:i:s'),
 			'status' => $this->input->post('status'),
+			'title' => $this->input->post('title') ? $this->input->post('title') : $this->input->post('name'),
 			'keyword' => $this->input->post('keyword'),
-			'description' => $this->input->post('keyword'),
+			'description' => $this->input->post('description'),
 		];
 
 		if (!$this->News->insert($data_to_insert)) {
@@ -284,11 +292,93 @@ class News extends Admin_Controller
 			redirect(base_url('admin/news'));
 			return;
 		}
-
-		
-
-
 	}
+
+	/**
+	* Render trang chỉnh sửa tin tức
+	*
+	*/
+	public function render_edit_news_page($news_id) {
+		$news = (array) $this->News->first_or_fail($news_id);
+		$categories = $this->NewsCategory->all();
+		$view_data = [
+			'title' => 'Chỉnh sửa tin tức',
+			'view' => 'backend/pages/news/news_edit',
+			'categories' => $categories,
+			'news' => $news,
+			'tab' => 'news,'
+		];
+		$this->load->view('backend/layout', $view_data);
+	}
+	
+	/*
+	*
+	* Cập nhật tin tức
+	*
+	*/
+	public function update_news() {
+		$news_id = $this->input->post('id') ? $this->input->post('id') : -1;
+		$form_data = [
+			// 'news_name' => $this->input->post('name'),
+			'news_alias' => make_alias($this->input->post('name')),
+			'news_thumbnail' => $this->input->post('thumbnail'),
+			'news_content' => $this->input->post('content', FALSE),
+		];
+
+		$present_news = (array) $this->News->first_or_fail($news_id);
+		if ($present_news['name'] != $this->input->post('name')) {
+			$form_data['news_name'] = $this->input->post('name');
+		}
+		// $this->prt($form_data); return;
+
+		// Sử dụng Library Validation
+		if ($this->validation->validate_form($form_data) == FALSE) {
+			$this->render_edit_news_page($news_id);
+			return;
+		}
+
+		$data_to_update = [
+			'category_id' => $this->input->post('select_news_category'),
+			'author' => $this->session->userdata('id'),
+			'name' => $this->input->post('name'),
+			'alias' => make_alias($this->input->post('name')),
+			'thumbnail' => $this->input->post('thumbnail'),
+			'content' => $this->input->post('content', FALSE),
+			'caption' => $this->input->post('caption'),
+			'status' => $this->input->post('status'),
+			'title' => $this->input->post('title') ? $this->input->post('title') : $this->input->post('name'),
+			'keyword' => $this->input->post('keyword'),
+			'description' => $this->input->post('description'),
+		];
+		// $this->prt($data_to_update); return;
+
+		if (!$this->News->update_news($data_to_update, $news_id)) {
+			$this->flash('Có lỗi xảy ra, không thể cập nhật tin tức ngay bây giờ');
+			redirect(base_url('admin/news/'.$news_id.'/edit'));
+			return;
+		} else {
+			$this->flash('Cập nhật tin tức thành công');
+			redirect(base_url('admin/news'));
+			return;
+		}
+	}
+
+	/*
+	*
+	* Xóa tin tức tin tức
+	*
+	*/
+	public function delete_news($news_id) {
+		$news = $this->News->first_or_fail($news_id);
+		if (!$this->News->delete_news($news_id)) {
+			$this->flash('Có lỗi xảy ra, không thể xóa tin tức này');
+		} else {
+			$this->flash('Xóa tin tức thành công');
+		}
+		redirect(base_url('admin/news'));
+	}
+
+
 
 	// ================= END NEWS - TIN TỨC ================= //
 

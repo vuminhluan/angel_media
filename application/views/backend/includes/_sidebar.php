@@ -30,7 +30,7 @@
 			</li>
 			<li data-primary-tab="news" ><a href="#dropdown-icons" aria-expanded="false" data-toggle="collapse"><i class="la la-newspaper-o"></i><span>Tin tức</span></a>
 				<ul id="dropdown-icons" class="collapse list-unstyled pt-0">
-					<li><a href="icons-lineawesome.html">Danh sách tin tức</a></li>
+					<li data-secondary-tab="news_list"><a href="<?= base_url('admin/news') ?>">Danh sách tin tức</a></li>
 					<li><a href="<?= base_url('admin/news/new') ?>">Thêm tin tức mới</a></li>
 					<li data-secondary-tab="category_list"><a href="<?= base_url('admin/news/categories') ?>">Danh mục tin tức</a></li>
 					<li data-secondary-tab="category_create"><a href="<?= base_url('admin/news/category/new') ?>">Thêm danh mục tin tức</a></li>
@@ -55,14 +55,10 @@
 		</ul>
 		<span class="heading">Cài đặt</span>
 		<ul class="list-unstyled">
-			<li><a href="#dropdown-authentication" aria-expanded="false" data-toggle="collapse"><i class="la la-user"></i><span>Authentication</span></a>
+			<li data-primary-tab="menu"><a href="#dropdown-authentication" aria-expanded="false" data-toggle="collapse"><i class="la la-bars"></i><span>Menu</span></a>
 				<ul id="dropdown-authentication" class="collapse list-unstyled pt-0">
-					<li><a href="pages-login.html">Login</a></li>
-					<li><a href="pages-login-02.html">Login 02</a></li>
-					<li><a href="pages-register.html">Register</a></li>
-					<li><a href="pages-forgot-password.html">Forgot Password</a></li>
-					<li><a href="pages-lock-screen.html">Lock Screen</a></li>
-					<li><a href="pages-mail-confirm.html">Mail Confirmation</a></li>
+					<li data-secondary-tab="menu_list"><a href="<?= base_url('admin/menu') ?>">Danh sách menu</a></li>
+					<li data-secondary-tab="menu_create"><a href="<?= base_url('admin/menu/new') ?>">Thêm menu mới</a></li>
 				</ul>
 			</li>
 			<li><a href="#dropdown-generic" aria-expanded="false" data-toggle="collapse"><i class="la la-file-text"></i><span>Generic</span></a>

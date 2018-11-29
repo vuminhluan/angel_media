@@ -56,4 +56,21 @@ class News_model extends MY_Model
 		return $this->get_where($this->table, ['alias' => $alias])->row();
 	}
 
+	/**
+	 * Cập nhật tin tức
+	 * @param: mảng chứa dữ liệu cập nhật và id tin tức muốn cập nhật
+	 * 
+	 */
+	public function update_news($data, $id) {
+		return $this->update($data, [$this->primaryKey => $id]);
+	}
+
+
+	/**
+	 * Xóa tin tức
+	 */
+	public function delete_news($news_id) {
+		return $this->delete($news_id);
+	}
+
 }

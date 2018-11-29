@@ -23,12 +23,14 @@ class Luan extends MY_Controller
 
 	public function crop_image() {
 		$image_config["image_library"] = "gd2";
-		$image_config["source_image"] = 'D:/xampp/htdocs/admin.dev/source/avatars/avatar2.png';
-		$image_config['create_thumb'] = TRUE;
+		$image_config["source_image"] = 'D:/xampp/htdocs/admin.dev/source/test/test2.jpg';
+		$image_config['new_image'] = 'D:/xampp/htdocs/admin.dev/source/test/test2_test.jpg';
+		// $image_config['create_thumb'] = TRUE;
+		$image_config['create_thumb'] = FALSE;
 		$image_config['maintain_ratio'] = TRUE;
-		$image_config['quality'] = "1%";
-		$image_config['width'] = 300;
-		$image_config['height'] = 400;
+		$image_config['quality'] = "70%";
+		$image_config['width'] = 3000;
+		// $image_config['height'] = 400;
 
 		$this->load->library('image_lib');
 		$this->image_lib->initialize($image_config);
