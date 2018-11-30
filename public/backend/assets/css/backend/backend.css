@@ -26,3 +26,34 @@
 .fancybox-content {
 	height: 600px !important;
 }
+
+table#menu_list .badge1 {
+	color: #fff;
+	background-color: #17a2b8;
+}
+
+table#menu_list .badge2 {
+	color: #fff;
+	background-color: #dc3545;
+}
+
+table#menu_list .badge3 {
+	color: #fff;
+	background-color: #ffc107;
+}
+
+table#menu_list .badge4 {
+	color: #fff;
+	background-color: #28a745;
+}
+
+table#menu_list .badge5, table#menu_list .badge6, table#menu_list .badge7, table#menu_list .badge8 {
+	color: #fff;
+	background-color: #007bff;
+	/* #dc3545 */
+}
+
+.submenu-sign {
+	color: #000;
+	font-size: 20px
+}

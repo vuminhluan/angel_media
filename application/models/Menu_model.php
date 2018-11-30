@@ -6,116 +6,68 @@ class Menu_model extends MY_Model
   public function __construct()
   {
     parent::__construct();
-    $this->table = "news";
+    $this->table = "menu";
   }
 
   /**
    * Lấy ra danh sách menu
    */
-
-  public function get_parent_info($chID)
+  public function get_menu_list($condition = [])
   {
-    settype($chID, "int");
-    $this->db->where('menu_id', $chID);
-    $query = $this->db->get('angel_menu');
-    return $result = $query->row_array();
+    return $this->db->where($condition)
+                    ->order_by('orders', 'ASC')
+                    ->get($this->table)->result_array();
   }
 
-  public function menu_list()
+  /**
+   * Lấy ra danh sách menu (trang danh sách)
+   */
+  public function get_menu_and_parent()
   {
+    $this->db->select([
+      'menu.id as menu_id', 'menu.name as menu_name', 'menu.link as menu_link',
+      'menu.orders as menu_order', 'menu.status as menu_status', 'menu.target as menu_target',
+      'parent.id as parent_id', 'parent.name as parent_name', 'parent.link as parent_link'
+    ]);
+    $this->db->from('menu as menu');
+    $this->db->join('menu as parent', 'menu.parent_id = parent.id');
+    return $this->db->get()->result_array();
+  }
 
-    $this->db->where('menu_parent_id', 0);
-    $this->db->order_by('menu_order', 'asc');
-    $query = $this->db->get('angel_menu');
-    $query = $query->result_array();
-
-    foreach ($query as &$key) {
-
-      $params = $key['menu_id'];
-      $this->db->where('menu_parent_id', $params);
-      $this->db->order_by('menu_order', 'asc');
-      $sql2 = $this->db->get('angel_menu');
-      $query2 = $sql2->result_array();
-
-      if (!empty($query2)) {
-        $key['menulv2'] = $query2;
-        foreach ($key['menulv2'] as &$row) {
-          $get_parent_info = $this->get_parent_info($row['menu_parent_id']);
-          $row['chName'] = $get_parent_info['menu_name']; // Lấy tên danh mục cha
-
-          $params2 = $row['menu_id'];
-
-          $this->db->where('menu_parent_id', $params2);
-          $this->db->order_by('menu_order', 'asc');
-          $sql3 = $this->db->get('angel_menu');
-          $query3 = $sql3->result_array();
-
-          if (!empty($query3)) {
-            $row['menulv3'] = $query3;
-            foreach ($row['menulv3'] as &$ti) {
-              $get_parent_info = $this->get_parent_info($ti['menu_parent_id']);
-              $ti['chName'] = $get_parent_info['menu_name']; // Lấy tên danh mục cha
-            }
-          }
-        }
-      }
+  /**
+   * Thêm menu mới vào danh sách menu
+   * @param  array  $data [dữ liệu để thêm mới]
+   * @return bool        [description]
+   */
+  public function create_menu($data = array())
+  {
+    if (!$data) {
+      return FALSE;
     }
-    return $query;
+    return $this->insert($data);
   }
 
-  public function menu_add()
+  /**
+   * [Lấy danh sách menu con khi có id của menu cha bất kì]
+   * @param  int $parent_id id menu cha
+   * @return array danh sách menu con
+   */
+  public function get_children($parent_id)
   {
+		return $this->db->where(['parent_id'=> $parent_id])->order_by('orders')->get($this->table)->result_array();
+	}
 
-    $chID = $this->input->post('menu_parent_id');
-    $Name = $this->input->post('menu_name');
-    $Url = $this->input->post('menu_link');
-    // $Icon = $this->input->post('menu_icon');
-    $Icon = '';
-    $Thutu = $this->input->post('menu_order');
-    $Status = $this->input->post('menu_status');
-    $Target = $this->input->post('menu_target');
-
-    $data = [
-      'menu_name' => $this->input->post('menu_name'),
-      'menu_link' => $this->input->post('menu_link'),
-      'menu_icon' => '',
-      'menu_order' => $this->input->post('menu_order'),
-      'menu_status' => $this->input->post('menu_status'),
-      'menu_target' => $this->input->post('menu_target'),
-      'menu_parent_id' => $this->input->post('menu_parent_id'),
-    ];
-
-    $this->db->insert('angel_menu', $data);
-  }
-
-  public function menu_detail($menuID)
+	public function get_children_after_creating($parent_id, $order)
   {
-    settype($menuID, 'int');
-    $sql = "SELECT * FROM angel_menu WHERE menu_id = $menuID";
-    $query = $this->db->query($sql);
-    return $query->row_array();
-  }
+    return $this->db->where(['parent_id'=> $parent_id, 'orders >=' => $order])
+    ->order_by('orders')
+    ->get($this->table)->result_array();
+	}
 
-  public function menu_update($menuID)
+	public function update_orders_after_creating($update_array)
   {
-    $data = [
-      'menu_name' => $this->input->post('menu_name'),
-      'menu_link' => $this->input->post('menu_link'),
-      'menu_icon' => '',
-      'menu_order' => $this->input->post('menu_order'),
-      'menu_status' => $this->input->post('menu_status'),
-      'menu_target' => $this->input->post('menu_target'),
-      'menu_parent_id' => $this->input->post('menu_parent_id'),
-    ];
-    $this->db->where('menu_id', $menuID)->update('angel_menu', $data);
-  }
-
-  public function menu_delete($menuID)
-  {
-    settype($menuID, 'int');
-    $sql = "DELETE FROM angel_menu WHERE menu_parent_id = $menuID OR menu_id = $menuID";
-    $this->db->query($sql);
-  }
+		$this->db->update_batch($this->table, $update_array, 'id');
+	}
 
 }
 

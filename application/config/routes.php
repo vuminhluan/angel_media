@@ -153,6 +153,9 @@ $route['admin/menu/create'] = 'backend/menu/create_menu';
 // AJAX ROUTE
 $route['ajax/create-alias'] = 'ajax/create_alias';
 
+// AJAX - MENU
+$route['ajax/get-menu-children-by-parent-id/(:num)'] = 'ajax/get_menu_children_by_parent_id/$1';
+
 
 
 // ========= ========= END ADMIN ROUTES ========= ========= //

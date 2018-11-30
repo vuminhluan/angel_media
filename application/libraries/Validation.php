@@ -2,7 +2,7 @@
 <?php
 
 /**
- * 
+ *
  */
 class Validation
 {
@@ -127,6 +127,12 @@ class Validation
 			'label' => 'Nội dung tin tức',
 			'rules' => 'trim|required'
 		],
+
+		'menu_name' => [
+			'field' => 'menu_name',
+			'label' => 'Menu',
+			'rules' => 'trim|required|min_length[3]|is_unique[menu.name]'
+		]
 
 
 	);

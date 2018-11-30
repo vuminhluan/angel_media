@@ -7,7 +7,7 @@
 			</div>
 			<div class="widget-body">
 				<?php echo form_open(base_url('admin/news/create'), ['class'=>'form-horizontal create-news-form']); ?>
-				<!-- --------------------- -->
+				<!-- ======================= -->
 				<div class="form-group row d-flex align-items-center mb-5">
 					<label class="col-md-2 form-control-label d-flex justify-content-md-end">Danh mục</label>
 					<div class="col-md-6">
@@ -21,7 +21,7 @@
 							</small> -->
 						</div>
 					</div>
-					<!-- --------------------- -->
+					<!-- ======================= -->
 					<div class="form-group row d-flex align-items-center mb-5">
 						<label class="col-md-2 form-control-label d-flex justify-content-md-end">Tiêu đề tin tức</label>
 						<div class="col-md-10">
@@ -31,7 +31,7 @@
 							</small>
 						</div>
 					</div>
-					<!-- --------------------- -->
+					<!-- ======================= -->
 					<div class="form-group row d-flex align-items-center mb-5">
 						<label class="col-md-2 form-control-label d-flex justify-content-md-end">Đường dấn</label>
 						<div class="col-md-10">
@@ -41,7 +41,7 @@
 							</small>
 						</div>
 					</div>
-					<!-- --------------------- -->
+					<!-- ======================= -->
 					<div class="form-group row d-flex align-items-center mb-5">
 						<label class="col-md-2 form-control-label d-flex justify-content-md-end">Mô tả</label>
 						<div class="col-md-10">
@@ -51,7 +51,7 @@
 							</small>
 						</div>
 					</div>
-					<!-- --------------------- -->
+					<!-- ======================= -->
 					<div class="form-group row d-flex align-items-center mb-5">
 						<label class="col-lg-2 form-control-label d-flex justify-content-md-end">Hình đại diện</label>
 						<div class="col-lg-10">
@@ -71,7 +71,7 @@
 							</div>
 						</div>
 					</div>
-					<!-- --------------------- -->
+					<!-- ======================= -->
 					<div class="form-group row d-flex align-items-center mb-5">
 						<label class="col-md-2 form-control-label d-flex justify-content-md-end">Nội dung</label>
 						<div class="col-md-10">
@@ -81,8 +81,8 @@
 							</small>
 						</div>
 					</div>
-					
-					<!-- --------------------- -->
+
+					<!-- ======================= -->
 					<div class="form-group row d-flex align-items-center mb-5">
 						<label class="col-md-2 form-control-label d-flex justify-content-md-end">Trạng thái</label>
 						<div class="col-md-10">
@@ -98,8 +98,8 @@
 							</div>
 						</div>
 					</div>
-					
-					<!-- --------------------- -->
+
+					<!-- ======================= -->
 					<div class="em-separator separator-dashed"></div>
 					<div class="form-group row d-flex align-items-center mb-5">
 						<label class="col-md-2 form-control-label d-flex justify-content-md-end">Tiêu đề</label>
@@ -110,7 +110,7 @@
 							</small>
 						</div>
 					</div>
-					<!-- --------------------- -->
+					<!-- ======================= -->
 					<div class="form-group row d-flex align-items-center mb-5">
 						<label class="col-md-2 form-control-label d-flex justify-content-md-end">Từ khóa</label>
 						<div class="col-md-10">
@@ -120,7 +120,7 @@
 							</small>
 						</div>
 					</div>
-					<!-- --------------------- -->
+					<!-- ======================= -->
 					<div class="form-group row d-flex align-items-center mb-5">
 						<label class="col-md-2 form-control-label d-flex justify-content-md-end">Mô tả</label>
 						<div class="col-md-10">
@@ -130,13 +130,13 @@
 							</small>
 						</div>
 					</div>
-					<!-- --------------------- -->
+					<!-- ======================= -->
 
 					<div class="em-separator separator-dashed"></div>
 					<div class="col-md-10 offset-md-2 text-right">
 						<button class="btn btn-gradient-02" type="submit">Thêm mới</button>
 					</div>
-					<!-- --------------------- -->
+					<!-- ======================= -->
 				<?php echo form_close(); ?>
 			</div>
 		</div>

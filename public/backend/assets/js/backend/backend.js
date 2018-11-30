@@ -53,7 +53,7 @@ $(document).ready(function() {
 // stand alone file manager
 $(document).ready(function() {
 	if ($('.stand-alone-filemanager')[0]) {
-		$('.stand-alone-filemanager').fancybox({	
+		$('.stand-alone-filemanager').fancybox({
 			'width'		  : 900,
 			'height'	  : 600,
 			'type'		  : 'iframe',
@@ -190,7 +190,7 @@ $(document).ready(function() {
 		var unicodeString = $(this).val();
 		var prefix = $('input.alias').attr('data-alias-prefix');
 		// alert(prefix); return;
-		
+
 		if (unicodeString) {
 			$.ajax({
 				url: baseUrl + 'ajax/create-alias',
@@ -259,6 +259,7 @@ $(document).ready(function() {
 	});
 });
 
+// ======================= TIN TỨC ========================= //
 
 // Datatable Danh sách tin tức
 $(document).ready(function() {
@@ -311,4 +312,49 @@ $(document).ready(function() {
 		deleteNoty.show();
 
 	});
+});
+
+
+// ======================== MENU ======================== //
+// Recursive MENU - table
+$(document).ready(function() {
+	var menu = $('table#menu_list tbody tr');
+	var margin = 0;
+	$(menu).each(function(index, item) {
+		margin = ($(item).attr('data-lv') - 1) * 5;
+		$(item).find('td.menu-name').css('padding-left', margin);
+	});
+});
+
+
+// Recursive MENU - select option
+$(document).ready(function() {
+	var menu = $('select.select-menu-parent option');
+	var lv = 0;
+	$(menu).filter("[data-lv=1]").css('color', '#dc3545');
+	$(menu).each(function(index, item) {
+		lv = ($(item).attr('data-lv') - 1);
+		for (var i = 0; i < lv; i++) {
+			$(item).prepend('&nbsp;&nbsp;');
+		}
+		// console.log(item);
+	});
+});
+
+// Phát sinh vị trí khi chọn menu cha
+$(document).ready(function () {
+	get_children();
+	function get_children(menuParentID = 0) {
+		var url = baseUrl+'ajax/get-menu-children-by-parent-id/'+menuParentID;
+		$('.create-menu-form select[name=select_orders]').load(url, function (response, status, request) {
+			// alert('load vi tri thanh cong');
+			console.log(response);
+		});
+	}
+
+	$('select[name=select_menu_parent]').change(function () {
+		var menuParentID = $(this).val();
+		get_children(menuParentID);
+	});
+
 });

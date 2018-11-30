@@ -2,11 +2,11 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
- * 
+ *
  */
 class News extends Admin_Controller
 {
-	
+
 	function __construct() {
 		parent::__construct();
 		$this->load->model('News_model', 'News');
@@ -93,7 +93,7 @@ class News extends Admin_Controller
 	 * News Categories Datatable JSON
 	 */
 	public function news_categories_datatable_json() {
-		
+
 		$categories = $this->NewsCategory->get_all_news_categories();
 		$category_data = array();
 		$alias_prefix = "tin-tuc/danh-muc/";
@@ -109,7 +109,7 @@ class News extends Admin_Controller
 			);
 		}
 		$categories['data']=$category_data;
-		echo json_encode($categories);						   
+		echo json_encode($categories);
 	}
 
 
@@ -211,10 +211,10 @@ class News extends Admin_Controller
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	public function news_datatable_json() {
-		
+
 		$news = $this->News->get_all_news();
 		$news_data = array();
 		$alias_prefix = "tin-tuc/";
@@ -232,7 +232,7 @@ class News extends Admin_Controller
 			);
 		}
 		$news['data'] = $news_data;
-		echo json_encode($news);						   
+		echo json_encode($news);
 	}
 
 	/**
@@ -267,7 +267,7 @@ class News extends Admin_Controller
 			$this->render_create_news_page();
 			return;
 		}
-		
+
 		$data_to_insert = [
 			'category_id' => $this->input->post('select_news_category'),
 			'author' => $this->session->userdata('id'),
@@ -310,7 +310,7 @@ class News extends Admin_Controller
 		];
 		$this->load->view('backend/layout', $view_data);
 	}
-	
+
 	/*
 	*
 	* Cập nhật tin tức
