@@ -10,18 +10,18 @@ class Menu_model extends MY_Model
   }
 
   /**
-   * Lấy ra danh sách menu
-   */
+  * Lấy ra danh sách menu
+  */
   public function get_menu_list($condition = [])
   {
     return $this->db->where($condition)
-                    ->order_by('orders', 'ASC')
-                    ->get($this->table)->result_array();
+    ->order_by('orders', 'ASC')
+    ->get($this->table)->result_array();
   }
 
   /**
-   * Lấy ra danh sách menu (trang danh sách)
-   */
+  * Lấy ra danh sách menu (trang danh sách)
+  */
   public function get_menu_and_parent()
   {
     $this->db->select([
@@ -35,10 +35,10 @@ class Menu_model extends MY_Model
   }
 
   /**
-   * Thêm menu mới vào danh sách menu
-   * @param  array  $data [dữ liệu để thêm mới]
-   * @return bool        [description]
-   */
+  * Thêm menu mới vào danh sách menu
+  * @param  array  $data [dữ liệu để thêm mới]
+  * @return bool        [description]
+  */
   public function create_menu($data = array())
   {
     if (!$data) {
@@ -48,26 +48,81 @@ class Menu_model extends MY_Model
   }
 
   /**
-   * [Lấy danh sách menu con khi có id của menu cha bất kì]
-   * @param  int $parent_id id menu cha
-   * @return array danh sách menu con
-   */
-  public function get_children($parent_id)
+  * Lấy danh sách menu con khi có id của menu cha bất kì (Ajax, ...)
+  * @param  int $parent_id id menu cha
+  * @param array điều kiện lọc
+  * @return array danh sách menu con theo điều kiện
+  */
+  public function get_children($parent_id, $where = [])
   {
-		return $this->db->where(['parent_id'=> $parent_id])->order_by('orders')->get($this->table)->result_array();
-	}
+    $where['parent_id'] = $parent_id;
+    return $this->db->where($where)->order_by('orders')->get($this->table)->result_array();
+  }
 
-	public function get_children_after_creating($parent_id, $order)
+  public function get_preceded_siblings_with_included($parent_id, $order)
   {
-    return $this->db->where(['parent_id'=> $parent_id, 'orders >=' => $order])
-    ->order_by('orders')
-    ->get($this->table)->result_array();
-	}
+    $where = [ 'orders >=' => $order ];
+    return $this->get_children($parent_id, $where);
+  }
 
-	public function update_orders_after_creating($update_array)
+  public function get_preceded_siblings_with_no_included($parent_id, $order)
   {
-		$this->db->update_batch($this->table, $update_array, 'id');
-	}
+    $where = [ 'orders >' => $order ];
+    return $this->get_children($parent_id, $where);
+  }
+
+  public function get_followed_siblings_with_no_included($parent_id, $order)
+  {
+    $where = [ 'orders <' => $order ];
+    return $this->get_children($parent_id, $where);
+  }
+
+  public function get_followed_siblings_with_included($parent_id, $order)
+  {
+    $where = [ 'orders <=' => $order ];
+    return $this->get_children($parent_id, $where);
+  }
+
+  public function get_between_followed_siblings($parent_id, $new_order, $old_order)
+  {
+    $where = [
+      'orders >=' => $new_order,
+      'orders <=' => $old_order
+    ];
+    return $this->get_children($parent_id, $where);
+  }
+
+  public function get_between_preceded_siblings($parent_id, $new_order, $old_order)
+  {
+    $where = [
+      'orders >=' => $old_order,
+      'orders <' => $new_order
+    ];
+    return $this->get_children($parent_id, $where);
+  }
+
+  public function update_orders($update_array)
+  {
+    $this->db->update_batch($this->table, $update_array, 'id');
+  }
+
+  /**
+  * Xóa menu
+  * @param  int $menu_id id menu muốn xóa
+  * @return bool
+  */
+  public function delete_menu($menu_id)
+  {
+    return $this->delete($menu_id);
+  }
+
+  public function update_menu($data = [], $id)
+  {
+    if (!$data) {
+      return FALSE;
+    }
+    return $this->update($data, ['id' => $id]);
+  }
 
 }
 

@@ -321,7 +321,7 @@ $(document).ready(function() {
 	var menu = $('table#menu_list tbody tr');
 	var margin = 0;
 	$(menu).each(function(index, item) {
-		margin = ($(item).attr('data-lv') - 1) * 5;
+		margin = ($(item).attr('data-lv') - 1) * 20;
 		$(item).find('td.menu-name').css('padding-left', margin);
 	});
 });
@@ -335,7 +335,7 @@ $(document).ready(function() {
 	$(menu).each(function(index, item) {
 		lv = ($(item).attr('data-lv') - 1);
 		for (var i = 0; i < lv; i++) {
-			$(item).prepend('&nbsp;&nbsp;');
+			$(item).prepend('&nbsp;&nbsp;&nbsp;&nbsp;');
 		}
 		// console.log(item);
 	});
@@ -343,11 +343,19 @@ $(document).ready(function() {
 
 // Phát sinh vị trí khi chọn menu cha
 $(document).ready(function () {
-	get_children();
+	var menuParentID = $('select[name=select_menu_parent]').attr('data-parent') ? $('select[name=select_menu_parent]').attr('data-parent') : 0;
+	var exceptionID = $('select[name=select_menu_parent]').attr('data-exception') ? $('select[name=select_menu_parent]').attr('data-exception') : 0;
+	// alert(exceptionID); return;
+
+	get_children(menuParentID);
 	function get_children(menuParentID = 0) {
-		var url = baseUrl+'ajax/get-menu-children-by-parent-id/'+menuParentID;
+		var url = baseUrl+'ajax/get-menu-children-by-parent-id/'+menuParentID+'/'+exceptionID;
 		$('.create-menu-form select[name=select_orders]').load(url, function (response, status, request) {
 			// alert('load vi tri thanh cong');
+			var orderValue = $('select[name=select_orders]').attr('data-order');
+			if (orderValue) {
+				$('.create-menu-form select[name=select_orders] option[value='+orderValue+']').prop('selected', true);
+			}
 			console.log(response);
 		});
 	}
@@ -356,5 +364,39 @@ $(document).ready(function () {
 		var menuParentID = $(this).val();
 		get_children(menuParentID);
 	});
+});
 
+
+// Delete menu Xóa menu
+$(document).ready(function() {
+	$('table#menu_list').on('click', '.action-buttons .delete-action', function(event) {
+		event.preventDefault();
+		var href = $(this).attr('data-href');
+		var menuName = $(this).attr('data-menu-name') ? '"'+$(this).attr('data-menu-name')+'"' : 'này';
+		var deleteNoty = new Noty({
+			text: 'Bạn muốn xóa tin tức: '+menuName+' ? Nếu xóa sẽ không thể khôi phục lại được',
+			layout:'centerRight',
+			buttons: [
+				Noty.button('Xóa', 'btn btn-danger', function () {
+					window.location.href=href;
+				}, {id: 'button1', 'data-status': 'ok'}),
+
+				Noty.button('Bỏ qua', 'btn btn-success', function () {
+					deleteNoty.close();
+				})
+			]
+		});
+		deleteNoty.show();
+
+	});
+});
+
+
+// Chỉnh sửa menu - lấy ra vị trí đã chọn
+$(document).ready(function() {
+	// var orderValue = $('select[name=select_orders]').attr('data-order');
+	// if (orderValue) {
+	// 	$('.create-menu-form select[name=select_orders] option[value='+orderValue+']').prop('selected', true);
+	// }
+	// console.log($('.create-menu-form select[name=select_orders] option').html());
 });

@@ -56,13 +56,16 @@ function render_menu_table($node, &$i = 2) {
 			echo "<td class='menu-name'><span class='submenu-sign'>&#8627;</span> <span class='badge badge".$i."'>".$i." </span> ".$submenu['name']."</td>";
 			echo "<td>".$submenu['link']."</td>";
 			echo "<td>".$node['name']."</td>";
-			echo "<td>".$node['orders']." - ".$submenu['orders']."</td>";
+			// echo "<td>".$node['orders']." - ".$submenu['orders']."</td>";
 			echo "<td>".$status."</td>";
 			echo "<td>$action</td>";
 			echo "</tr>";
+			if (count($submenu['submenu']) > 0) {
+				$i++;
+			}
+			render_menu_table($submenu, $i);
 		}
-		$i++;
-		render_menu_table($submenu, $i);
+		$i -= 1;
 	}
 }
 
@@ -73,7 +76,7 @@ function render_selection_menu($menu_list, $choosen_id = "", $i = 1)
 		if ($choosen_id && $choosen_id == $menu['id']) {
 			echo "selected";
 		}
-		echo ">";
+		echo ">"; // <option data-lv="1" value="2" selected>
 		if ($menu['parent_id'] != 0) {
 			echo "&#8627;";
 		}
@@ -81,8 +84,9 @@ function render_selection_menu($menu_list, $choosen_id = "", $i = 1)
 		if (count($menu['submenu']) > 0) {
 			$i++;
 			render_selection_menu($menu['submenu'], $choosen_id, $i);
-			$i = 1;
+			$i -= 1;
 		}
+		// $i = 1;
 	}
 
 	// echo "<option>------------------</option>";

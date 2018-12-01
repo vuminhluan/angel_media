@@ -1,10 +1,10 @@
 <?php
 
 /**
- * 
+ *
  */
 class MY_Model extends CI_Model
-{	
+{
 	function __construct() {
 		parent::__construct();
 	}
@@ -75,12 +75,12 @@ class MY_Model extends CI_Model
 						->count_all_results($this->table) > 0;
 	}
 
-	
+
 	/**
 	* Tìm đối tượng của một bảng nào đó. Nếu không có trả về trang 404
-	* 
+	*
 	* @param id hoặc mảng
-	* @return 404 hoặc đối tượng nếu tồn tại 
+	* @return 404 hoặc đối tượng nếu tồn tại
 	*/
 
 	public function first_or_fail($where) {
@@ -100,9 +100,9 @@ class MY_Model extends CI_Model
 
 	/**
 	* Tìm đối tượng của một bảng nào đó theo id
-	* 
+	*
 	* @param id
-	* @return 404 hoặc đối tượng nếu tồn tại 
+	* @return 404 hoặc đối tượng nếu tồn tại
 	*/
 
 	public function find($id) {
@@ -129,19 +129,10 @@ class MY_Model extends CI_Model
 		return $this->db->affected_rows() > 0;
 	}
 
-	/**
-	 * 
-	 * Cập nhật nhiều bộ dữ liệu cùng lúc
-	 * 
-	 * @param: 1. mảng dữ liệu cập nhật [tên_cột => giá trị mới] | 2. mảng truy vấn điều kiện []
-	 * @return: Số dòng dữ liệu bị thay đổi
-	 * 
-	 */
 
-	
 	/**
 	 * Thêm 1 bộ dữ liệu vào bảng trong database
-	 * 
+	 *
 	 * @param Mảng $data chứa dữ liệu cần insert (tên cột => giá trị)
 	 * @return số dòng bị thay đổi
 	 */
@@ -154,7 +145,7 @@ class MY_Model extends CI_Model
 
 	/**
 	 * Lấy tất cả dữ liệu từ 1 bảng
-	 * 
+	 *
 	 * @param ---
 	 * @return mảng chứa dữ liệu của 1 bảng
 	 *
@@ -167,7 +158,7 @@ class MY_Model extends CI_Model
 
 	/**
 	 * Lấy cột của một bảng
-	 * 
+	 *
 	 * @param ---
 	 * @return mảng chứa dữ liệu 1 cột của 1 mảng
 	 *

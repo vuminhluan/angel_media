@@ -13,7 +13,7 @@
 								<th>Menu</th>
 								<th>Đường dẫn</th>
 								<th>Menu cha</th>
-								<th>Vị trí</th>
+								<!-- <th>Vị trí</th> -->
 								<th>Trạng thái</th>
 								<th class="text-right">Chức năng</th>
 							</tr>
@@ -21,13 +21,18 @@
 						<tbody>
 							<?php $i = 1 ?>
 							<?php foreach ($recursive_menu as $menu): ?>
+								<?php
+									// echo "<pre>";
+									// print_r($recursive_menu['Album']);
+									// break;
+								?>
 								<?php $status = $menu['status'] ? "<span class='badge badge-success'>Hiện</span>" : "<span class='badge badge-dark'>Ẩn</span>"; ?>
 								<tr class="parent-menu" data-lv="1">
 									<!-- <td><?= $i++ ?></td> -->
 									<td class="menu-name"> <span class="badge badge1">1</span> <?= $menu['name'] ?></td>
 									<td><?= $menu['link'] ?></td>
 									<td>---</td>
-									<td><?= $menu['orders'] ?></td>
+									<!-- <td><?= $menu['orders'] ?></td> -->
 									<td><?= $status ?></td>
 									<td>
 										<div class="action-buttons td-actions text-right">
@@ -42,6 +47,7 @@
 								</tr>
 								<!-- helpers/myhelper_helper.php  -->
 								<?php render_menu_table($menu) ?>
+
 							<?php endforeach; ?>
 						</tbody>
 					</table>
