@@ -184,7 +184,7 @@ $(document).ready(function() {
 
 
 
-// Tạo alias cho danh mục tin tức (Trang thêm danh mục và trang sửa danh mục)
+// Tạo alias cho 1 chuỗi tin tức (Trang thêm danh mục và trang sửa danh mục)
 $(document).ready(function() {
 	$('input.unicode').keyup(function(event) {
 		var unicodeString = $(this).val();

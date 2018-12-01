@@ -150,6 +150,17 @@ $route['admin/menu/new'] = 'backend/menu/render_create_menu_page';
 $route['admin/menu/create'] = 'backend/menu/create_menu';
 
 
+// Dashboard - Landing : Danh sách các trang nội dung, chỉnh sửa ,... (giới thiệu, quy định, faqs, ...)
+$route['admin/landing'] = 'backend/landing/render_landing_list_page';
+
+$route['admin/landing/(:num)/delete'] = 'backend/landing/delete_landing/$1';
+$route['admin/landing/(:num)/edit'] = 'backend/landing/render_edit_landing_page/$1';
+$route['admin/landing/update'] = 'backend/landing/update_landing';
+
+$route['admin/landing/new'] = 'backend/landing/render_create_landing_page';
+$route['admin/landing/create'] = 'backend/landing/create_landing';
+
+
 // AJAX ROUTE
 $route['ajax/create-alias'] = 'ajax/create_alias';
 

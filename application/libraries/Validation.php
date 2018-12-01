@@ -132,6 +132,22 @@ class Validation
 			'field' => 'menu_name',
 			'label' => 'Menu',
 			'rules' => 'trim|required|min_length[3]|is_unique[menu.name]'
+		],
+
+		'landing_name' => [
+			'field' => 'landing_name',
+			'label' => 'Tên trang nội dung',
+			'rules' => 'trim|required|min_length[5]|is_unique[menu.name]'
+		],
+		'landing_content' => [
+			'field' => 'landing_content',
+			'label' => 'Nội dung',
+			'rules' => 'trim|required'
+		],
+		'landing_caption' => [
+			'field' => 'landing_caption',
+			'label' => 'Mô tả',
+			'rules' => 'trim'
 		]
 
 

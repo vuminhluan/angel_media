@@ -36,6 +36,12 @@
 					<li data-secondary-tab="category_create"><a href="<?= base_url('admin/news/category/new') ?>">Thêm danh mục tin tức</a></li>
 				</ul>
 			</li>
+			<li data-primary-tab="landing"><a href="#dropdown-authentication" aria-expanded="false" data-toggle="collapse"><i class="la la-header"></i><span>Trang nội dung</span></a>
+				<ul id="dropdown-authentication" class="collapse list-unstyled pt-0">
+					<li data-secondary-tab="landing_list"><a href="<?= base_url('admin/landing') ?>">Danh sách Trang nội dung</a></li>
+					<li data-secondary-tab="landing_create"><a href="<?= base_url('admin/landing/new') ?>">Thêm Trang nội dung mới</a></li>
+				</ul>
+			</li>
 			<li><a href="#dropdown-forms" aria-expanded="false" data-toggle="collapse"><i class="la la-list-alt"></i><span>Forms</span></a>
 				<ul id="dropdown-forms" class="collapse list-unstyled pt-0">
 					<li><a href="forms-basic.html">Form Basic</a></li>
