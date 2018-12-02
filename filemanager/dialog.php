@@ -1,4 +1,9 @@
 <?php
+// session_start();
+// echo "<pre>";
+// $_SESSION['id'] = 10;
+// print_r($_SESSION);
+// return;
 $config = include 'config/config.php';
 //TODO switch to array
 extract($config, EXTR_OVERWRITE);
@@ -492,7 +497,7 @@ foreach($files as $k=>$file){
 		$current_folders_number++;
 		if($show_folder_size){
 			list($size,$nfiles,$nfolders) = folder_info($current_path.$rfm_subfolder.$subdir.$file,false);
-			
+
 		} else {
 			$size=0;
 		}

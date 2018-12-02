@@ -1,6 +1,6 @@
 <?php
-class Datatable 
-{	
+class Datatable
+{
 	function __construct()
 	{
 		$this->obj =& get_instance();
@@ -29,7 +29,7 @@ class Datatable
 			}
 			$SQL.= " AND ( ";
 			$SQL.= implode("OR",$qry);
-			$SQL.= " ) ";	
+			$SQL.= " ) ";
 		}
         //------------------------------------------------
 		if(!empty($GROUP_BY))
@@ -47,8 +47,8 @@ class Datatable
 
 		$query = $this->obj->db->query($SQL);
 		$data = $query->result_array();
-		
+
 		return array("recordsTotal"=>$total,"recordsFiltered"=>$filtered,'data' => $data);
-	}	
+	}
 }
 ?>

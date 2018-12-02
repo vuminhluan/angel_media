@@ -7,14 +7,14 @@
 			</div>
 			<div class="widget-body">
 				<div class="table-responsive">
-					<table id="news_list_datatable" class="table mb-0">
+					<table id="landing_list_datatable" class="table mb-0">
 						<thead>
 							<tr>
 								<th>#</th>
-								<th>Tiêu đề</th>
+								<th>Tên trang</th>
 								<th>Đường dẫn</th>
-								<th>Danh mục</th>
 								<th>Ngày tạo</th>
+								<th>Trạng thái</th>
 								<th class="text-right">Chức năng</th>
 							</tr>
 						</thead>

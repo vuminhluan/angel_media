@@ -148,6 +148,17 @@ class Validation
 			'field' => 'landing_caption',
 			'label' => 'Mô tả',
 			'rules' => 'trim'
+		],
+
+		'slide_name' => [
+			'field' => 'slide_name',
+			'label' => 'Tên slide',
+			'rules' => 'trim|required|min_length[5]'
+		],
+		'slide_image' => [
+			'field' => 'slide_image',
+			'label' => 'Hình slide',
+			'rules' => 'trim|required'
 		]
 
 
@@ -178,6 +189,7 @@ class Validation
 	public function validate_form($form_data) {
 		if (!$form_data) {
 			return FALSE;
+
 		}
 		// Vì dữ liệu khi validate là mảng tự tạo, không phải input->post() => set_data()
 		$this->CI->form_validation->set_data($form_data);

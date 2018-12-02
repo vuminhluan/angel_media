@@ -36,18 +36,18 @@
 					<li data-secondary-tab="category_create"><a href="<?= base_url('admin/news/category/new') ?>">Thêm danh mục tin tức</a></li>
 				</ul>
 			</li>
-			<li data-primary-tab="landing"><a href="#dropdown-authentication" aria-expanded="false" data-toggle="collapse"><i class="la la-header"></i><span>Trang nội dung</span></a>
-				<ul id="dropdown-authentication" class="collapse list-unstyled pt-0">
+			<li data-primary-tab="landing"><a href="#dropdown-landing" aria-expanded="false" data-toggle="collapse"><i class="la la-header"></i><span>Trang nội dung</span></a>
+				<ul id="dropdown-landing" class="collapse list-unstyled pt-0">
 					<li data-secondary-tab="landing_list"><a href="<?= base_url('admin/landing') ?>">Danh sách Trang nội dung</a></li>
 					<li data-secondary-tab="landing_create"><a href="<?= base_url('admin/landing/new') ?>">Thêm Trang nội dung mới</a></li>
 				</ul>
 			</li>
-			<li><a href="#dropdown-forms" aria-expanded="false" data-toggle="collapse"><i class="la la-list-alt"></i><span>Forms</span></a>
-				<ul id="dropdown-forms" class="collapse list-unstyled pt-0">
-					<li><a href="forms-basic.html">Form Basic</a></li>
-					<li><a href="forms-validation.html">Form Validation</a></li>
-					<li><a href="forms-wizard.html">Form Wizard</a></li>
-					<li><a href="forms-select.html">Bootstrap Select</a></li>
+			<li data-primary-tab="product"><a href="#dropdown-product" aria-expanded="false" data-toggle="collapse"><i class="la la-archive"></i><span>Sản phẩm</span></a>
+				<ul id="dropdown-product" class="collapse list-unstyled pt-0">
+					<li data-secondary-tab="product_list"><a href="<?= base_url('admin/products') ?>">Danh sách sản phẩm</a></li>
+					<li data-secondary-tab="product_create"><a href="<?= base_url('admin/product/new') ?>">Thêm sản phẩm mới</a></li>
+					<li data-secondary-tab="product_cate_list"><a href="<?= base_url('admin/product/categories') ?>">Danh mục sản phẩm</a></li>
+					<li data-secondary-tab="product_cate_create"><a href="<?= base_url('admin/product/category/new') ?>">Thêm danh mục sản phẩm</a></li>
 				</ul>
 			</li>
 			<li><a href="#dropdown-tables" aria-expanded="false" data-toggle="collapse"><i class="la la-th-large"></i><span>Tables</span></a>
@@ -61,10 +61,16 @@
 		</ul>
 		<span class="heading">Cài đặt</span>
 		<ul class="list-unstyled">
-			<li data-primary-tab="menu"><a href="#dropdown-authentication" aria-expanded="false" data-toggle="collapse"><i class="la la-bars"></i><span>Menu</span></a>
-				<ul id="dropdown-authentication" class="collapse list-unstyled pt-0">
+			<li data-primary-tab="menu"><a href="#dropdown-menu" aria-expanded="false" data-toggle="collapse"><i class="la la-bars"></i><span>Menu</span></a>
+				<ul id="dropdown-menu" class="collapse list-unstyled pt-0">
 					<li data-secondary-tab="menu_list"><a href="<?= base_url('admin/menu') ?>">Danh sách menu</a></li>
 					<li data-secondary-tab="menu_create"><a href="<?= base_url('admin/menu/new') ?>">Thêm menu mới</a></li>
+				</ul>
+			</li>
+			<li data-primary-tab="slideshow"><a href="#dropdown-slideshow" aria-expanded="false" data-toggle="collapse"><i class="la la-clone"></i><span>Slideshow</span></a>
+				<ul id="dropdown-slideshow" class="collapse list-unstyled pt-0">
+					<li data-secondary-tab="slideshow_list"><a href="<?= base_url('admin/slideshow') ?>">Danh sách slideshow</a></li>
+					<li data-secondary-tab="slideshow_create"><a href="<?= base_url('admin/slideshow/new') ?>">Thêm slide mới</a></li>
 				</ul>
 			</li>
 			<li><a href="#dropdown-generic" aria-expanded="false" data-toggle="collapse"><i class="la la-file-text"></i><span>Generic</span></a>

@@ -74,13 +74,13 @@
 						<label class="col-md-2 form-control-label d-flex justify-content-md-end">Trạng thái</label>
 						<div class="col-md-10">
 							<div class="custom-control custom-radio styled-radio d-inline-block">
-								<input class="custom-control-input" type="radio" name="status" id="opt-01" checked value="0">
+								<input class="custom-control-input" type="radio" name="status" id="opt-01" value="0">
 								<label class="custom-control-descfeedback" for="opt-01">Ẩn</label>
 							</div>
 							&nbsp;
 							&nbsp;
 							<div class="custom-control custom-radio styled-radio d-inline-block">
-								<input class="custom-control-input" type="radio" name="status" id="opt-02" value="1">
+								<input class="custom-control-input" type="radio" name="status" id="opt-02" checked value="1">
 								<label class="custom-control-descfeedback" for="opt-02">Hiện</label>
 							</div>
 						</div>

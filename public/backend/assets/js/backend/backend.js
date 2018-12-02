@@ -133,8 +133,6 @@ $(document).ready(function() {
 	 		table.search(keyword).draw();
 	 	});
  	}
-
-
 });
 
 // Datatable Danh sách nhóm thành viên
@@ -154,8 +152,6 @@ $(document).ready(function() {
 	 		]
 	 	});
  	}
-
-
 });
 
 // Xóa nhóm thành viên
@@ -392,11 +388,96 @@ $(document).ready(function() {
 });
 
 
-// Chỉnh sửa menu - lấy ra vị trí đã chọn
+// ========================= Trang nội dung ============================= //
+
+// Datatable Danh sách Trang nội dung
 $(document).ready(function() {
-	// var orderValue = $('select[name=select_orders]').attr('data-order');
-	// if (orderValue) {
-	// 	$('.create-menu-form select[name=select_orders] option[value='+orderValue+']').prop('selected', true);
-	// }
-	// console.log($('.create-menu-form select[name=select_orders] option').html());
+ 	//---------------------------------------------------
+ 	if ($('#landing_list_datatable')[0]) {
+	 	var table = $('#landing_list_datatable').DataTable( {
+			"language" : datatableLanguage,
+	 		"processing": true,
+	 		"serverSide": true,
+	 		"ajax": baseUrl+"/admin/landing/datatable_json",
+	 		"order": [[3,'DESC']],
+	 		"columnDefs": [
+		 		{ "targets": 0, "name": "L.id", 'searchable':true, 'orderable':true},
+		 		{ "targets": 1, "name": "L.name", 'searchable':true, 'orderable':true,},
+		 		{ "targets": 2, "name": "L.alias", 'searchable':true, 'orderable':true,},
+		 		{ "targets": 3, "name": "L.created_at", 'searchable':true, 'orderable':true,},
+		 		{ "targets": 4, "name": "L.status", 'searchable':false, 'orderable':true,},
+				{ "targets": 5, "name": "Action", 'searchable':false, 'orderable':false,},
+	 		]
+	 	});
+ 	}
+});
+
+// Xóa Trang nội dung
+$(document).ready(function() {
+	$('table#landing_list_datatable').on('click', '.action-buttons .delete-action', function(event) {
+		event.preventDefault();
+		var href = $(this).attr('data-href');
+		var landing_name = $(this).attr('data-landing-name') ? '"'+$(this).attr('data-landing-name')+'"' : 'này';
+		var deleteNoty = new Noty({
+			text: 'Bạn muốn xóa Trang: '+landing_name+' ? Nếu xóa sẽ không thể khôi phục lại được.',
+			layout:'centerRight',
+			buttons: [
+				Noty.button('Xóa', 'btn btn-danger', function () {
+					window.location.href=href;
+				}, {id: 'button1', 'data-status': 'ok'}),
+
+				Noty.button('Bỏ qua', 'btn btn-success', function () {
+					deleteNoty.close();
+				})
+			]
+		});
+		deleteNoty.show();
+
+	});
+});
+
+
+// SLIDESHOW
+// Datatable Danh sách nhóm thành viên
+$(document).ready(function() {
+ 	//---------------------------------------------------
+ 	if ($('#slideshow_datatable')[0]) {
+	 	var table = $('#slideshow_datatable').DataTable( {
+			"language" : datatableLanguage,
+	 		"processing": true,
+	 		"serverSide": true,
+	 		"ajax": baseUrl+"/admin/slideshow/datatable_json",
+	 		"order": [[0,'desc']],
+	 		"columnDefs": [
+		 		{ "targets": 0, "name": "id", 'searchable':false, 'orderable':false},
+		 		{ "targets": 1, "name": "name", 'searchable':false, 'orderable':false,},
+		 		{ "targets": 2, "name": "image", 'searchable':false, 'orderable':false,},
+		 		{ "targets": 3, "name": "Chức năng", 'searchable':false, 'orderable':false,},
+	 		]
+	 	});
+ 	}
+});
+
+// Xóa slide
+$(document).ready(function() {
+	$('table#slideshow_datatable').on('click', '.action-buttons .delete-action', function(event) {
+		event.preventDefault();
+		var href = $(this).attr('data-href');
+		var slide_name = $(this).attr('data-slide-name') ? '"'+$(this).attr('data-slide-name')+'"' : 'này';
+		var deleteNoty = new Noty({
+			text: 'Bạn muốn xóa Slide: '+slide_name+' ? Nếu xóa sẽ không thể khôi phục lại được.',
+			layout:'centerRight',
+			buttons: [
+				Noty.button('Xóa', 'btn btn-danger', function () {
+					window.location.href=href;
+				}, {id: 'button1', 'data-status': 'ok'}),
+
+				Noty.button('Bỏ qua', 'btn btn-success', function () {
+					deleteNoty.close();
+				})
+			]
+		});
+		deleteNoty.show();
+
+	});
 });

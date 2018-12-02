@@ -152,6 +152,7 @@ $route['admin/menu/create'] = 'backend/menu/create_menu';
 
 // Dashboard - Landing : Danh sách các trang nội dung, chỉnh sửa ,... (giới thiệu, quy định, faqs, ...)
 $route['admin/landing'] = 'backend/landing/render_landing_list_page';
+$route['admin/landing/datatable_json'] = 'backend/landing/landing_datatable_json';
 
 $route['admin/landing/(:num)/delete'] = 'backend/landing/delete_landing/$1';
 $route['admin/landing/(:num)/edit'] = 'backend/landing/render_edit_landing_page/$1';
@@ -159,6 +160,18 @@ $route['admin/landing/update'] = 'backend/landing/update_landing';
 
 $route['admin/landing/new'] = 'backend/landing/render_create_landing_page';
 $route['admin/landing/create'] = 'backend/landing/create_landing';
+
+
+// Dashboard - Slideshow : Danh sách Slides, chỉnh sửa Slides ,...
+$route['admin/slideshow'] = 'backend/slideshow/render_slideshow_list_page';
+$route['admin/slideshow/datatable_json'] = 'backend/slideshow/slideshow_datatable_json';
+
+$route['admin/slideshow/(:num)/delete'] = 'backend/slideshow/delete_slideshow/$1';
+$route['admin/slideshow/(:num)/edit'] = 'backend/slideshow/render_edit_slideshow_page/$1';
+$route['admin/slideshow/update'] = 'backend/slideshow/update_slideshow';
+
+$route['admin/slideshow/new'] = 'backend/slideshow/render_create_slideshow_page';
+$route['admin/slideshow/create'] = 'backend/slideshow/create_slideshow';
 
 
 // AJAX ROUTE
