@@ -73,6 +73,9 @@
 					<li data-secondary-tab="slideshow_create"><a href="<?= base_url('admin/slideshow/new') ?>">Thêm slide mới</a></li>
 				</ul>
 			</li>
+
+			<li data-primary-tab="filemanager"><a href="<?= base_url('filemanager/dialog.php?type=0') ?>"><i class="la la-folder-open-o"></i><span>File managers</span></a></li>
+
 			<li><a href="#dropdown-generic" aria-expanded="false" data-toggle="collapse"><i class="la la-file-text"></i><span>Generic</span></a>
 				<ul id="dropdown-generic" class="collapse list-unstyled pt-0">
 					<li><a href="pages-coming-soon.html">Coming Soon</a></li>

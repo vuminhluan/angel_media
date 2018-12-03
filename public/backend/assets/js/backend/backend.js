@@ -62,9 +62,9 @@ $(document).ready(function() {
 	}
 });
 function responsive_filemanager_callback(field_id){
-  var src = $('#'+field_id).val();
-  $('img.'+field_id).attr('src', src);
-  $.fancybox.close();
+	var src = $('#'+field_id).val();
+	$('img.'+field_id).attr('src', src);
+	$.fancybox.close();
 }
 
 
@@ -81,20 +81,20 @@ $(document).ready(function() {
 			height:200,
 			fontsize_formats: "8pt 10pt 12pt 14pt 18pt 24pt 36pt",
 			plugins: [
-			"advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker",
-			"searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
-			"save table contextmenu directionality emoticons template paste textcolor ",
-			"responsivefilemanager"
+				"advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker",
+				"searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
+				"save table contextmenu directionality emoticons template paste textcolor ",
+				"responsivefilemanager"
 			],
 			toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor| responsivefilemanager | sizeselect | fontselect | fontsizeselect",
 			style_formats: [
-			{title: 'Bold text', inline: 'b'},
-			{title: 'Red text', inline: 'span', styles: {color: '#ff0000'}},
-			{title: 'Red header', block: 'h1', styles: {color: '#ff0000'}},
-			{title: 'Example 1', inline: 'span', classes: 'example1'},
-			{title: 'Example 2', inline: 'span', classes: 'example2'},
-			{title: 'Table styles'},
-			{title: 'Table row 1', selector: 'tr', classes: 'tablerow1'}
+				{title: 'Bold text', inline: 'b'},
+				{title: 'Red text', inline: 'span', styles: {color: '#ff0000'}},
+				{title: 'Red header', block: 'h1', styles: {color: '#ff0000'}},
+				{title: 'Example 1', inline: 'span', classes: 'example1'},
+				{title: 'Example 2', inline: 'span', classes: 'example2'},
+				{title: 'Table styles'},
+				{title: 'Table row 1', selector: 'tr', classes: 'tablerow1'}
 			],
 
 			relative_urls:false,
@@ -109,49 +109,49 @@ $(document).ready(function() {
 
 // Datatable Danh sách thành viên
 $(document).ready(function() {
- 	//---------------------------------------------------
- 	if ($('#user_list_datatable')[0]) {
-	 	var table = $('#user_list_datatable').DataTable( {
-	 		"processing": true,
-	 		"serverSide": true,
-	 		"ajax": baseUrl+"/admin/users/datatable_json",
-	 		"order": [[2,'desc']],
-	 		"columnDefs": [
-		 		{ "targets": 0, "name": "U.id", 'searchable':true, 'orderable':true},
-		 		{ "targets": 1, "name": "email", 'searchable':true, 'orderable':true,},
-		 		{ "targets": 2, "name": "created_at", 'searchable':true, 'orderable':true,},
-		 		{ "targets": 3, "name": "status", 'searchable':false, 'orderable':false,},
-		 		{ "targets": 4, "name": "group_name", 'searchable':true, 'orderable':true,},
-		 		{ "targets": 5, "name": "Action", 'searchable':false, 'orderable':false,},
-	 		]
-	 	});
- 		$('#user_list_datatable').on('click', '.btn.btn-info.btn-square', function(event) {
-	 		event.preventDefault();
-	 		keyword = $(this).html();
-	 		$('input[type=search]').val(keyword);
-	 		// table.fnFilter(keyword,4,true,false);
-	 		table.search(keyword).draw();
-	 	});
- 	}
+	//---------------------------------------------------
+	if ($('#user_list_datatable')[0]) {
+		var table = $('#user_list_datatable').DataTable( {
+			"processing": true,
+			"serverSide": true,
+			"ajax": baseUrl+"/admin/users/datatable_json",
+			"order": [[2,'desc']],
+			"columnDefs": [
+				{ "targets": 0, "name": "U.id", 'searchable':true, 'orderable':true},
+				{ "targets": 1, "name": "email", 'searchable':true, 'orderable':true,},
+				{ "targets": 2, "name": "created_at", 'searchable':true, 'orderable':true,},
+				{ "targets": 3, "name": "status", 'searchable':false, 'orderable':false,},
+				{ "targets": 4, "name": "group_name", 'searchable':true, 'orderable':true,},
+				{ "targets": 5, "name": "Action", 'searchable':false, 'orderable':false,},
+			]
+		});
+		$('#user_list_datatable').on('click', '.btn.btn-info.btn-square', function(event) {
+			event.preventDefault();
+			keyword = $(this).html();
+			$('input[type=search]').val(keyword);
+			// table.fnFilter(keyword,4,true,false);
+			table.search(keyword).draw();
+		});
+	}
 });
 
 // Datatable Danh sách nhóm thành viên
 $(document).ready(function() {
- 	//---------------------------------------------------
- 	if ($('#user_group_list_datatable')[0]) {
-	 	var table = $('#user_group_list_datatable').DataTable( {
+	//---------------------------------------------------
+	if ($('#user_group_list_datatable')[0]) {
+		var table = $('#user_group_list_datatable').DataTable( {
 			"language" : datatableLanguage,
-	 		"processing": true,
-	 		"serverSide": true,
-	 		"ajax": baseUrl+"/admin/user-groups/datatable_json",
-	 		"order": [[1,'asc']],
-	 		"columnDefs": [
-		 		{ "targets": 0, "name": "no", 'searchable':false, 'orderable':false},
-		 		{ "targets": 1, "name": "group_name", 'searchable':true, 'orderable':true,},
-		 		{ "targets": 2, "name": "Chức năng", 'searchable':false, 'orderable':false,},
-	 		]
-	 	});
- 	}
+			"processing": true,
+			"serverSide": true,
+			"ajax": baseUrl+"/admin/user-groups/datatable_json",
+			"order": [[1,'asc']],
+			"columnDefs": [
+				{ "targets": 0, "name": "no", 'searchable':false, 'orderable':false},
+				{ "targets": 1, "name": "group_name", 'searchable':true, 'orderable':true,},
+				{ "targets": 2, "name": "Chức năng", 'searchable':false, 'orderable':false,},
+			]
+		});
+	}
 });
 
 // Xóa nhóm thành viên
@@ -206,29 +206,29 @@ $(document).ready(function() {
 
 // Datatable Danh sách danh mục tin tức
 $(document).ready(function() {
- 	//---------------------------------------------------
- 	if ($('#news_category_list_datatable')[0]) {
-	 	var table = $('#news_category_list_datatable').DataTable( {
+	//---------------------------------------------------
+	if ($('#news_category_list_datatable')[0]) {
+		var table = $('#news_category_list_datatable').DataTable( {
 			"language" : datatableLanguage,
-	 		"processing": true,
-	 		"serverSide": true,
-	 		"ajax": baseUrl+"/admin/news/category/datatable_json",
-	 		// "order": [[2,'desc']],
-	 		"columnDefs": [
-		 		{ "targets": 0, "name": "id", 'searchable':true, 'orderable':true},
-		 		{ "targets": 1, "name": "name", 'searchable':true, 'orderable':true,},
-		 		{ "targets": 2, "name": "alias", 'searchable':true, 'orderable':true,},
-		 		{ "targets": 3, "name": "Action", 'searchable':false, 'orderable':false,},
-	 		]
-	 	});
- 		// $('#news_category_list_datatable').on('click', '.btn.btn-info.btn-square', function(event) {
-	 	// 	event.preventDefault();
-	 	// 	keyword = $(this).html();
-	 	// 	$('input[type=search]').val(keyword);
-	 	// 	// table.fnFilter(keyword,4,true,false);
-	 	// 	table.search(keyword).draw();
-	 	// });
- 	}
+			"processing": true,
+			"serverSide": true,
+			"ajax": baseUrl+"/admin/news/category/datatable_json",
+			// "order": [[2,'desc']],
+			"columnDefs": [
+				{ "targets": 0, "name": "id", 'searchable':true, 'orderable':true},
+				{ "targets": 1, "name": "name", 'searchable':true, 'orderable':true,},
+				{ "targets": 2, "name": "alias", 'searchable':true, 'orderable':true,},
+				{ "targets": 3, "name": "Action", 'searchable':false, 'orderable':false,},
+			]
+		});
+		// $('#news_category_list_datatable').on('click', '.btn.btn-info.btn-square', function(event) {
+		// 	event.preventDefault();
+		// 	keyword = $(this).html();
+		// 	$('input[type=search]').val(keyword);
+		// 	// table.fnFilter(keyword,4,true,false);
+		// 	table.search(keyword).draw();
+		// });
+	}
 });
 
 // Xóa danh mục tin tức
@@ -259,31 +259,31 @@ $(document).ready(function() {
 
 // Datatable Danh sách tin tức
 $(document).ready(function() {
- 	//---------------------------------------------------
- 	if ($('#news_list_datatable')[0]) {
-	 	var table = $('#news_list_datatable').DataTable( {
+	//---------------------------------------------------
+	if ($('#news_list_datatable')[0]) {
+		var table = $('#news_list_datatable').DataTable( {
 			"language" : datatableLanguage,
-	 		"processing": true,
-	 		"serverSide": true,
-	 		"ajax": baseUrl+"/admin/news/datatable_json",
-	 		"order": [[0,'asc']],
-	 		"columnDefs": [
-		 		{ "targets": 0, "name": "N.id", 'searchable':true, 'orderable':true},
-		 		{ "targets": 1, "name": "N.name", 'searchable':true, 'orderable':true,},
-		 		{ "targets": 2, "name": "N.alias", 'searchable':true, 'orderable':true,},
-		 		{ "targets": 3, "name": "NC.name", 'searchable':true, 'orderable':true,},
-		 		{ "targets": 4, "name": "N.created_at", 'searchable':true, 'orderable':true,},
-		 		{ "targets": 5, "name": "Action", 'searchable':false, 'orderable':false,},
-	 		]
-	 	});
- 		// $('#news_list_datatable').on('click', '.btn.btn-info.btn-square', function(event) {
-	 	// 	event.preventDefault();
-	 	// 	keyword = $(this).html();
-	 	// 	$('input[type=search]').val(keyword);
-	 	// 	// table.fnFilter(keyword,4,true,false);
-	 	// 	table.search(keyword).draw();
-	 	// });
- 	}
+			"processing": true,
+			"serverSide": true,
+			"ajax": baseUrl+"/admin/news/datatable_json",
+			"order": [[0,'asc']],
+			"columnDefs": [
+				{ "targets": 0, "name": "N.id", 'searchable':true, 'orderable':true},
+				{ "targets": 1, "name": "N.name", 'searchable':true, 'orderable':true,},
+				{ "targets": 2, "name": "N.alias", 'searchable':true, 'orderable':true,},
+				{ "targets": 3, "name": "NC.name", 'searchable':true, 'orderable':true,},
+				{ "targets": 4, "name": "N.created_at", 'searchable':true, 'orderable':true,},
+				{ "targets": 5, "name": "Action", 'searchable':false, 'orderable':false,},
+			]
+		});
+		// $('#news_list_datatable').on('click', '.btn.btn-info.btn-square', function(event) {
+		// 	event.preventDefault();
+		// 	keyword = $(this).html();
+		// 	$('input[type=search]').val(keyword);
+		// 	// table.fnFilter(keyword,4,true,false);
+		// 	table.search(keyword).draw();
+		// });
+	}
 });
 
 // Xóa tin tức
@@ -392,24 +392,24 @@ $(document).ready(function() {
 
 // Datatable Danh sách Trang nội dung
 $(document).ready(function() {
- 	//---------------------------------------------------
- 	if ($('#landing_list_datatable')[0]) {
-	 	var table = $('#landing_list_datatable').DataTable( {
+	//---------------------------------------------------
+	if ($('#landing_list_datatable')[0]) {
+		var table = $('#landing_list_datatable').DataTable( {
 			"language" : datatableLanguage,
-	 		"processing": true,
-	 		"serverSide": true,
-	 		"ajax": baseUrl+"/admin/landing/datatable_json",
-	 		"order": [[3,'DESC']],
-	 		"columnDefs": [
-		 		{ "targets": 0, "name": "L.id", 'searchable':true, 'orderable':true},
-		 		{ "targets": 1, "name": "L.name", 'searchable':true, 'orderable':true,},
-		 		{ "targets": 2, "name": "L.alias", 'searchable':true, 'orderable':true,},
-		 		{ "targets": 3, "name": "L.created_at", 'searchable':true, 'orderable':true,},
-		 		{ "targets": 4, "name": "L.status", 'searchable':false, 'orderable':true,},
+			"processing": true,
+			"serverSide": true,
+			"ajax": baseUrl+"/admin/landing/datatable_json",
+			"order": [[3,'DESC']],
+			"columnDefs": [
+				{ "targets": 0, "name": "L.id", 'searchable':true, 'orderable':true},
+				{ "targets": 1, "name": "L.name", 'searchable':true, 'orderable':true,},
+				{ "targets": 2, "name": "L.alias", 'searchable':true, 'orderable':true,},
+				{ "targets": 3, "name": "L.created_at", 'searchable':true, 'orderable':true,},
+				{ "targets": 4, "name": "L.status", 'searchable':false, 'orderable':true,},
 				{ "targets": 5, "name": "Action", 'searchable':false, 'orderable':false,},
-	 		]
-	 	});
- 	}
+			]
+		});
+	}
 });
 
 // Xóa Trang nội dung
@@ -440,22 +440,22 @@ $(document).ready(function() {
 // SLIDESHOW
 // Datatable Danh sách nhóm thành viên
 $(document).ready(function() {
- 	//---------------------------------------------------
- 	if ($('#slideshow_datatable')[0]) {
-	 	var table = $('#slideshow_datatable').DataTable( {
+	//---------------------------------------------------
+	if ($('#slideshow_datatable')[0]) {
+		var table = $('#slideshow_datatable').DataTable( {
 			"language" : datatableLanguage,
-	 		"processing": true,
-	 		"serverSide": true,
-	 		"ajax": baseUrl+"/admin/slideshow/datatable_json",
-	 		"order": [[0,'desc']],
-	 		"columnDefs": [
-		 		{ "targets": 0, "name": "id", 'searchable':false, 'orderable':false},
-		 		{ "targets": 1, "name": "name", 'searchable':false, 'orderable':false,},
-		 		{ "targets": 2, "name": "image", 'searchable':false, 'orderable':false,},
-		 		{ "targets": 3, "name": "Chức năng", 'searchable':false, 'orderable':false,},
-	 		]
-	 	});
- 	}
+			"processing": true,
+			"serverSide": true,
+			"ajax": baseUrl+"/admin/slideshow/datatable_json",
+			"order": [[0,'desc']],
+			"columnDefs": [
+				{ "targets": 0, "name": "id", 'searchable':false, 'orderable':false},
+				{ "targets": 1, "name": "name", 'searchable':false, 'orderable':false,},
+				{ "targets": 2, "name": "image", 'searchable':false, 'orderable':false,},
+				{ "targets": 3, "name": "Chức năng", 'searchable':false, 'orderable':false,},
+			]
+		});
+	}
 });
 
 // Xóa slide
@@ -480,4 +480,162 @@ $(document).ready(function() {
 		deleteNoty.show();
 
 	});
+});
+
+
+//  ================= SẢN PHÂM ================ //
+// Danh mục sản phẩm
+// Datatable Danh sách danh mục tin tức
+$(document).ready(function() {
+	//---------------------------------------------------
+	if ($('#product_category_list_datatable')[0]) {
+		var table = $('#product_category_list_datatable').DataTable( {
+			"language" : datatableLanguage,
+			"processing": true,
+			"serverSide": true,
+			"ajax": baseUrl+"/admin/product/category/datatable_json",
+			// "order": [[2,'desc']],
+			"columnDefs": [
+				{ "targets": 0, "name": "id", 'searchable':true, 'orderable':true},
+				{ "targets": 1, "name": "name", 'searchable':true, 'orderable':true,},
+				{ "targets": 2, "name": "alias", 'searchable':true, 'orderable':true,},
+				{ "targets": 3, "name": "Action", 'searchable':false, 'orderable':false,},
+			]
+		});
+	}
+});
+
+
+// Xóa danh mục sản phẩm
+$(document).ready(function() {
+	$('table#product_category_list_datatable').on('click', '.action-buttons .delete-action', function(event) {
+		event.preventDefault();
+		var href = $(this).attr('data-href');
+		var categoryName = $(this).attr('data-category-name') ? '"'+$(this).attr('data-category-name')+'"' : 'này';
+		var deleteNoty = new Noty({
+			text: 'Bạn muốn xóa danh mục: '+categoryName+' ? Nếu xóa sẽ không thể khôi phục lại được',
+			layout:'centerRight',
+			buttons: [
+				Noty.button('Xóa', 'btn btn-danger', function () {
+					window.location.href=href;
+				}, {id: 'button1', 'data-status': 'ok'}),
+
+				Noty.button('Bỏ qua', 'btn btn-success', function () {
+					deleteNoty.close();
+				})
+			]
+		});
+		deleteNoty.show();
+
+	});
+});
+
+
+// END DANH MỤC SẢN PHẨM
+
+
+
+// SẢN PHẨM
+function unique(array) {
+	var result = [];
+	$.each(array, function(i, e) {
+		if ($.inArray(e, result) == -1) result.push(e);
+	});
+	return result;
+}
+$(document).ready(function() {
+	// Xóa 1 checkbox (màu sắc hoặc kích thước)
+	$('#options_modal').on('click', '.remove-option-item', function(event) {
+		event.preventDefault();
+		var checkbox_to_delete = $(this).attr('data-parent');
+		$('.'+checkbox_to_delete).remove();
+	});
+
+	// Thêm checkbox màu sắc
+	$('.add-more-color').click(function(event) {
+		var value = $('.add-more-color-value').val();
+		var colors = $("input[name='color[]']");
+		var num = colors.length + 1;
+		if (!value) {
+			return;
+		}
+		var checkbox = "<div class='mb-3 color"+num+"'> <div class='styled-checkbox'> <input value='"+value+"' type='checkbox' name='color[]' id='color"+num+"' checked disabled> <label for='color"+num+"'>"+value+" <i data-parent='color"+num+"' class='la la-times remove-option-item'></i> </label> </div> </div>";
+		$('.color-box').append(checkbox);
+	});
+
+	// Thêm checkbox kích thước
+	$('.add-more-size').click(function(event) {
+		var value = $('.add-more-size-value').val();
+		var sizes = $("input[name='size[]']");
+		var num = sizes.length + 1;
+		if (!value) {
+			return;
+		}
+		var checkbox = "<div class='mb-3 size"+num+"'> <div class='styled-checkbox'> <input checked disable value='"+value+"' type='checkbox' name='size[]' id='size"+num+"' checked disabled> <label for='size"+num+"'>"+value+" <i data-parent='size"+num+"' class='la la-times remove-option-item'></i> </label> </div> </div>";
+		$('.size-box').append(checkbox);
+	});
+
+	// Tạo phiên bản sản phẩm (màu sắc + kích thước + ...)
+	$('.save-product-options-button').click(function(event) {
+		// Lấy mảng màu sắc (các checkbox màu sắc đã được checked)
+		var colors = $("input[name='color[]']").map(function() {
+			return $(this).val();
+		}).get();
+		// Lấy mảng kích thước (các checkbox kích thước đã được checked)
+		var sizes = $("input[name='size[]']").map(function() {
+			return $(this).val();
+		}).get();
+		// Remove duplicate
+		var colors_array = unique(colors);
+		var sizes_array = unique(sizes);
+		// console.log(colors_array);
+		// console.log(sizes_array);
+
+		var productName = $("input[name='name']").val();
+		if (colors_array.length == 0 || sizes_array.length == 0 || !productName) {
+			return;
+		}
+
+		$.ajax({
+			url: baseUrl+'/ajax/create-products-version',
+			type: 'GET',
+			data: {
+				color_str_list: colors_array.join(','),
+				size_str_list: sizes_array.join(','),
+				product_name: productName
+			}
+		})
+		.done(function(response) {
+			console.log("success");
+			alert('success');
+			// Load bảng các phiên bản của sản phẩm
+			$('.versions-table').html(response);
+		})
+		.fail(function(err) {
+			console.log("error");
+			alert("error");
+		});
+
+	});
+
+	$('.versions-table').on('click', '.btn-remove-item', function(event) {
+		var rowID = $(this).attr('data-rowid');
+		$.ajax({
+			url: baseUrl+'/ajax/remove-product-version',
+			type: 'GET',
+			data: {rowid: rowID}
+		})
+		.done(function(response) {
+			console.log("success");
+			alert('success');
+			// Load bảng các phiên bản của sản phẩm
+			$('.versions-table').html(response);
+		})
+		.fail(function(err) {
+			console.log(err);
+			alert('error');
+		});
+
+	});
+
 });

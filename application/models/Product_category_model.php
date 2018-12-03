@@ -1,20 +1,25 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Slideshow_model extends MY_Model
+class Product_category_model extends MY_Model
 {
   public function __construct()
   {
     parent::__construct();
-    $this->table = "slideshow";
+    $this->table = "product_categories";
   }
 
-  public function get_all_slides()
+  public function create_product_category($data)
   {
-    return $this->db->get($this->table)->result_array();
+    return $this->insert($data);
   }
 
-  public function get_slides_for_datatable()
+  // public function get_all_slides()
+  // {
+  //   return $this->db->get($this->table)->result_array();
+  // }
+
+  public function get_categories_for_datatable()
   {
     $this->db->select('*');
     $this->db->from($this->table);
@@ -22,12 +27,9 @@ class Slideshow_model extends MY_Model
     return $this->datatable->LoadJson($SQL);
   }
 
-  // public function check_table()
-  // {
-  //   return $this->check_table() > 0;
-  // }
 
-  public function update_slideshow($data, $id)
+
+  public function update_category($data, $id)
   {
     return $this->update($data, [$this->primaryKey => $id]);
   }

@@ -159,7 +159,67 @@ class Validation
 			'field' => 'slide_image',
 			'label' => 'Hình slide',
 			'rules' => 'trim|required'
-		]
+		],
+
+		// PRODUCT CATEGORY
+		'product_category_name' => [
+			'field' => 'product_category_name',
+			'label' => 'Tên danh mục',
+			'rules' => 'trim|required|min_length[3]'
+		],
+		'product_category_alias' => [
+			'field' => 'product_category_alias',
+			'label' => 'Đường dẫn',
+			'rules' => 'trim|min_length[3]'
+		],
+		// END PRODUCT CATEGORY
+
+		// PRODUCT
+		'product_name' => [
+			'field' => 'product_name',
+			'label' => 'Tên sản phẩm',
+			'rules' => 'trim|required|min_length[10]|is_unique[products.name]'
+		],
+		'product_alias' => [
+			'field' => 'product_alias',
+			'label' => 'Alias',
+			'rules' => 'trim'
+		],
+		'product_caption' => [
+			'field' => 'product_caption',
+			'label' => 'Mô tả sản phẩm',
+			'rules' => 'trim'
+		],
+		'product_thumbnail' => [
+			'field' => 'product_thumbnail',
+			'label' => 'Ảnh đại diện',
+			'rules' => 'trim|required'
+		],
+		'product_content' => [
+			'field' => 'product_content',
+			'label' => 'Nội dung',
+			'rules' => 'trim'
+		],
+		// PRODUCT
+
+
+		// SEO
+		'title' => [
+			'field' => 'title',
+			'label' => 'Tiêu đề SEO',
+			'rules' => 'trim'
+		],
+		'keyword' => [
+			'field' => 'keyword',
+			'label' => 'Từ khóa',
+			'rules' => 'trim'
+		],
+		'description' => [
+			'field' => 'description',
+			'label' => 'Mô tả',
+			'rules' => 'trim'
+		],
+		// END SEO
 
 
 	);

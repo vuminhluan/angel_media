@@ -57,3 +57,20 @@ table#menu_list .badge5, table#menu_list .badge6, table#menu_list .badge7, table
 	color: #000;
 	font-size: 20px
 }
+
+
+
+/* SẢN PHẨM */
+#options_modal .mb-3 {
+	display: inline-block !important;
+	margin: 0 20px 0 0
+}
+
+.remove-option-item {
+	color: red;
+	font-weight: bold;
+}
+.add-more-option-item {
+	font-size: 30px;
+	cursor: pointer;
+}

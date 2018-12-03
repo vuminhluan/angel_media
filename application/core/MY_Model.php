@@ -63,6 +63,15 @@ class MY_Model extends CI_Model
 	// }
 
 	/**
+	 * Kiểm tra table có dữ liệu hay không
+	 * @return int số dòng dữ liệu có trong bảng
+	 */
+	public function check_table()
+  {
+    return $this->db->count_all_results($this->table);
+  }
+
+	/**
 	 * Check 1 cột với dữ liệu truyền vào
 	 * @param: tên cột và dữ liệu muốn check
 	 */

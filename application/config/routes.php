@@ -174,11 +174,43 @@ $route['admin/slideshow/new'] = 'backend/slideshow/render_create_slideshow_page'
 $route['admin/slideshow/create'] = 'backend/slideshow/create_slideshow';
 
 
-// AJAX ROUTE
+// Dashboard - Product Category : Danh sách danh mục sản phẩm, chỉnh sửa Danh mục sản phẩm, ...
+$route['admin/product/categories'] = 'backend/product/render_product_category_list_page';
+$route['admin/product/category/datatable_json'] = 'backend/product/product_categories_datatable_json';
+
+$route['admin/product/category/(:num)/delete'] = 'backend/product/delete_product_category/$1';
+$route['admin/product/category/(:num)/edit'] = 'backend/product/render_edit_product_category_page/$1';
+$route['admin/product/category/update'] = 'backend/product/update_product_category';
+
+$route['admin/product/category/new'] = 'backend/product/render_create_product_category_page';
+$route['admin/product/category/create'] = 'backend/product/create_product_category';
+
+
+// Dashboard - Sản phẩm : Danh sách sản phẩm, chỉnh sửa sản phẩm, ...
+$route['admin/products'] = 'backend/product/render_product_list_page';
+$route['admin/product/datatable_json'] = 'backend/product/product_datatable_json';
+
+$route['admin/product/(:num)/delete'] = 'backend/product/delete_product/$1';
+$route['admin/product/(:num)/edit'] = 'backend/product/render_edit_product_page/$1';
+$route['admin/product/update'] = 'backend/product/update_product';
+
+$route['admin/product/new'] = 'backend/product/render_create_product_page';
+$route['admin/product/create'] = 'backend/product/create_product';
+
+
+// == AJAX ROUTE ==
+
+// AJAX - Tạo alias (tin tức, sản phẩm,...)
 $route['ajax/create-alias'] = 'ajax/create_alias';
 
 // AJAX - MENU
 $route['ajax/get-menu-children-by-parent-id/(:num)/(:num)'] = 'ajax/get_menu_children_by_parent_id/$1/$2';
+
+// AJAX - Tạo phiên bản cho sản phẩm khi sản phẩm mới (màu sắc, kích thước)
+$route['ajax/create-products-version'] = 'ajax/create_products_version';
+
+// AJAX - Xóa một phiên bản của sản phẩm khi thêm sản phẩm mới (màu sắc, kích thước)
+$route['ajax/remove-product-version'] = 'ajax/remove_product_version';
 
 
 
