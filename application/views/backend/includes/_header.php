@@ -1,6 +1,6 @@
 <!--Begin Header -->
 <header class="header">
-	<nav class="navbar fixed-top">         
+	<nav class="navbar fixed-top">
 		<!-- Begin Search Box-->
 		<div class="search-box">
 			<button class="dismiss"><i class="ion-close-round"></i></button>
@@ -13,7 +13,7 @@
 		<div class="navbar-holder d-flex align-items-center align-middle justify-content-between">
 			<!-- Begin Logo -->
 			<div class="navbar-header">
-				<a href="db-default.html" class="navbar-brand">
+				<a href="<?= base_url('admin') ?>" class="navbar-brand">
 					<div class="brand-image brand-big">
 						<img src="<?= base_url('public/backend/assets/img/logo-angel.png') ?>" alt="logo" class="logo-big">
 					</div>
@@ -111,23 +111,23 @@
 							<img src="<?= base_url($this->session->userdata('avatar')) ?>" alt="..." class="rounded-circle avatar">
 						</li>
 						<li>
-							<a href="<?= base_url('admin/profile') ?>" class="dropdown-item"> 
+							<a href="<?= base_url('admin/profile') ?>" class="dropdown-item">
 								<?= ellipsize($this->session->userdata('email'), 20, 1) ?> <br>
 							</a>
 						</li>
 						<!-- <li>
-							<a href="app-mail.html" class="dropdown-item"> 
+							<a href="app-mail.html" class="dropdown-item">
 								Messages
 							</a>
 						</li>
 						<li>
-							<a href="#" class="dropdown-item no-padding-bottom"> 
+							<a href="#" class="dropdown-item no-padding-bottom">
 								Settings
 							</a>
 						</li> -->
 						<li class="separator"></li>
 						<!-- <li>
-							<a href="pages-faq.html" class="dropdown-item no-padding-top"> 
+							<a href="pages-faq.html" class="dropdown-item no-padding-top">
 								Faq
 							</a>
 						</li> -->

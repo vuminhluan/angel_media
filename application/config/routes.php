@@ -204,6 +204,8 @@ $route['admin/product/(:num)/versions/(:num)'] = 'backend/product/render_edit_ve
 $route['admin/product/version/update'] = 'backend/product/update_version';
 $route['admin/product/(:num)/version/(:num)/delete'] = 'backend/product/delete_version/$1/$2';
 
+$route['admin/product/version/create'] = 'backend/product/create_version';
+
 // == AJAX ROUTE ==
 
 // AJAX - Tạo alias (tin tức, sản phẩm,...)

@@ -98,3 +98,10 @@ table#menu_list .badge5, table#menu_list .badge6, table#menu_list .badge7, table
 .version-list li.active a {
 	color: #fff;
 }
+
+.add-more-version-button {
+	display: inline-block;
+	font-size: 30px;
+	vertical-align: middle;
+	display: none;
+}

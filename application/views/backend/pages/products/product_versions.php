@@ -3,7 +3,10 @@
 		<!-- Sorting -->
 		<div class="widget has-shadow">
 			<div class="widget-header bordered no-actions d-flex align-items-center">
-				<h4><?= $product['name'] ?></h4>
+				<h4>
+					<a href="<?= base_url('admin/product/'.$product['id'].'/edit')?>"><?= $product['name'] ?></a>
+
+				</h4>
 			</div>
 			<!-- <div class="widget-body">
 				<div class="">
@@ -29,15 +32,49 @@
 				</div>
 			</div>
 		</div>
+
+		<div class="widget widget-12 has-shadow">
+			<div class="widget-body">
+				<did>
+					<h3>Thêm phiên bản mới</h3>
+					<br>
+					<?php echo form_open('admin/product/version/create', ['class' => 'create-product-version-form']); ?>
+						<input type="hidden" name="product_id" value="<?= $product['id'] ?>">
+						<div class="form-group">
+							<label for="">Kích thước:</label>
+							<input required type="text" class="form-control" name="size">
+						</div>
+						<div class="form-group">
+							<label for="">Màu sắc:</label>
+							<input required type="text" class="form-control" name="color">
+						</div>
+						<div class="form-group">
+							<label for="">Giá ban đầu:</label>
+							<input type="text" class="form-control" name="original_price">
+						</div>
+						<div class="form-group">
+							<label for="">Giá bán hiện tại:</label>
+							<input required type="text" class="form-control" name="price">
+						</div>
+						<button type="submit" class="btn btn-primary">Submit</button>
+					<?php echo form_close(); ?>
+				</did>
+			</div>
+		</div>
 	</div>
 	<!-- End version list -->
+
+
+	<!-- Thêm phiên bản -->
+
+	<!-- Thêm phiên bản -->
 
 	<!-- Begin version detail -->
 	<div class="col-xl-8 col-md-7">
 		<?php echo form_open(base_url('admin/product/version/update'), ['class'=>'update-product-version-form']); ?>
 		<div class="widget widget-12 has-shadow">
 			<div class="widget-body">
-				<h4>Thuộc tính</h4>
+				<h3>Thuộc tính</h3>
 				<br>
 
 				<input type="hidden" name="version_id" value="<?= $versions[$index]["id"] ?>">
@@ -85,8 +122,8 @@
 
 		<div class="widget widget-12 has-shadow">
 			<div class="widget-body text-right">
-				<button class="btn ripple btn-dark">Cập nhật phiên bản</button>
 				<a href="#/" data-href="<?= base_url('admin/product/'.$product['id'].'/version/'.$versions[$index]["id"].'/delete') ?>" class="btn ripple btn-danger delete-version-button" data-version-name="<?=$versions[$index]["size"]."-".$versions[$index]["color"]?>">Xóa phiên bản</a>
+				<button class="btn ripple btn-dark">Cập nhật phiên bản</button>
 			</div>
 		</div>
 		<?php form_close(); ?>

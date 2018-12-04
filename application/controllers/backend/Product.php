@@ -532,6 +532,11 @@ class Product extends Admin_Controller
 		return;
 	}
 
+	/**
+	 * Xóa 1 phiên bản
+	 * @param  int $product_id
+	 * @param  int $version_id
+	 */
 	public function delete_version($product_id, $version_id)
 	{
 		if (!$this->ProductDetail->delete_version($product_id, $version_id)) {
@@ -540,6 +545,47 @@ class Product extends Admin_Controller
 			$this->flash('Đã xóa phiên bản được chọn');
 		}
 		redirect(base_url('admin/product/'.$product_id.'/versions/0'));
+	}
+
+	/**
+	 * Xóa tất cả phiên bản của một sản phẩm
+	 * @param  int $product_id  - Mã sản phẩm
+	 */
+	public function delete_all_versions_by_product($product_id)
+	{
+		// code...
+	}
+
+	/**
+	 * Thêm một phiên bản (POST)
+	 */
+	public function create_version()
+	{
+		$product_id = $this->input->post('product_id');
+		$form_data = [
+			'product_id'     => $product_id,
+			'size'           => $this->input->post('size'),
+			'color'          => $this->input->post('color'),
+			'original_price' => $this->input->post('original_price') ? $this->input->post('original_price') : 0,
+			'price'          => $this->input->post('price'),
+		];
+		// $this->prt($form_data);return;
+
+
+		// echo $product_id;return;
+		// Sử dụng Library Validation
+		if ($this->validation->validate_form($form_data) == FALSE) {
+			$this->flash(validation_errors());
+			redirect('admin/product/'.$product_id.'/versions/0');
+		}
+
+		if (!$this->ProductDetail->create_version($form_data)) {
+			$this->flash('Có lỗi xảy ra, không thể thêm phiên bản mới ngay lúc này');
+		} else {
+			$this->flash('Thêm phiên bản mới thành công');
+		}
+		redirect('admin/product/'.$product_id.'/versions/0');
+
 	}
 
 

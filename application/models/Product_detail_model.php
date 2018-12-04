@@ -47,4 +47,9 @@ class Product_detail_model extends MY_Model
     return $this->delete(['product_id' => $product_id]);
   }
 
+  public function create_version($data)
+  {
+    return $this->insert($data);
+  }
+
 }
