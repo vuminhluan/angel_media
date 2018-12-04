@@ -25,7 +25,7 @@
 					<div class="form-group row d-flex align-items-center mb-5">
 						<label class="col-md-2 form-control-label d-flex justify-content-md-end">Tên sản phẩm</label>
 						<div class="col-md-10">
-							<input type="text" class="form-control unicode name" name="name" value="<?= set_value('product_name') ?>" autocomplete="off">
+							<input required type="text" class="form-control unicode name" name="name" value="<?= set_value('product_name') ?>" autocomplete="off">
 							<small>
 								<code>Bắt buộc. Tối thiểu 10 ký tự</code>
 							</small>
@@ -77,7 +77,7 @@
 						<div class="col-md-10">
 							<textarea type="text" class="form-control tinymce_content" name="content" value="" autocomplete="off"><?= set_value('product_content') ?></textarea>
 							<small>
-								<code>Bắt buộc</code>
+								<code>Nên có</code>
 							</small>
 						</div>
 					</div>
@@ -87,15 +87,35 @@
 						<label class="col-md-2 form-control-label d-flex justify-content-md-end">Trạng thái</label>
 						<div class="col-md-10">
 							<div class="custom-control custom-radio styled-radio d-inline-block">
-								<input class="custom-control-input" type="radio" name="status" id="opt-01" checked value="0">
-								<label class="custom-control-descfeedback" for="opt-01">Ẩn</label>
+								<input class="custom-control-input" type="radio" name="status" id="opt-02" checked value="1">
+								<label class="custom-control-descfeedback" for="opt-02">Hiện</label>
 							</div>
 							&nbsp;
 							&nbsp;
 							<div class="custom-control custom-radio styled-radio d-inline-block">
-								<input class="custom-control-input" type="radio" name="status" id="opt-02" value="1">
-								<label class="custom-control-descfeedback" for="opt-02">Hiện</label>
+								<input class="custom-control-input" type="radio" name="status" id="opt-01" value="0">
+								<label class="custom-control-descfeedback" for="opt-01">Ẩn</label>
 							</div>
+						</div>
+					</div>
+					<!-- ======================= -->
+					<div class="form-group row d-flex align-items-center mb-5">
+						<label class="col-md-2 form-control-label d-flex justify-content-md-end text-danger">Giá ban đầu</label>
+						<div class="col-md-5">
+							<input type="text" class="form-control" name="original_price" value="<?= set_value('original_price') ?>" autocomplete="off">
+							<!-- <small>
+								<code>Bắt buộc</code>
+							</small> -->
+						</div>
+					</div>
+					<!-- ======================= -->
+					<div class="form-group row d-flex align-items-center mb-5">
+						<label class="col-md-2 form-control-label d-flex justify-content-md-end text-success">Giá bán hiện tại</label>
+						<div class="col-md-5">
+							<input required type="text" class="form-control" name="price" value="<?= set_value('price') ?>" autocomplete="off">
+							<small>
+								<code>Bắt buộc</code>
+							</small>
 						</div>
 					</div>
 					<!-- ======================= -->

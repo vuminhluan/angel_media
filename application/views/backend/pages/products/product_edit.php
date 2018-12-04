@@ -6,15 +6,16 @@
 				<h4><?= $title ?></h4>
 			</div>
 			<div class="widget-body">
-				<?php echo form_open(base_url('admin/news/update'), ['class'=>'form-horizontal create-news-form']); ?>
-				<input type="hidden" name="id" value="<?= $news['id'] ?>">
-				<!-- --------------------- -->
+				<?php echo form_open(base_url('admin/product/update'), ['class'=>'form-horizontal create-product-form']); ?>
+
+				<input type="hidden" name="product_id" value="<?= $product['id'] ?>">
+				<!-- ======================= -->
 				<div class="form-group row d-flex align-items-center mb-5">
 					<label class="col-md-2 form-control-label d-flex justify-content-md-end">Danh mục</label>
 					<div class="col-md-6">
-						<select required class="custom-select form-control" name="select_news_category">
+						<select required class="custom-select form-control" name="select_product_category">
 							<?php foreach ($categories as $category): ?>
-								<option <?= $category['id'] == $news['category_id'] ? "selected" : "" ?> value="<?= $category['id'] ?>" ><?= $category['name'] ?></option>
+								<option value="<?= $category['id'] ?>" <?= $product['category_id'] == $category['id'] ? "selected" : '' ?> ><?= $category['name'] ?></option>
 							<?php endforeach; ?>
 						</select>
 							<!-- <small>
@@ -22,122 +23,157 @@
 							</small> -->
 						</div>
 					</div>
-					<!-- --------------------- -->
+					<!-- ======================= -->
 					<div class="form-group row d-flex align-items-center mb-5">
-						<label class="col-md-2 form-control-label d-flex justify-content-md-end">Tiêu đề tin tức</label>
+						<label class="col-md-2 form-control-label d-flex justify-content-md-end">Tên sản phẩm</label>
 						<div class="col-md-10">
-							<input type="text" class="form-control unicode name" name="name" value="<?= $news['name'] ?>" autocomplete="off">
+							<input type="text" class="form-control unicode name" name="name" value="<?= $product['name'] ?>" autocomplete="off">
 							<small>
 								<code>Bắt buộc. Tối thiểu 10 ký tự</code>
 							</small>
 						</div>
 					</div>
-					<!-- --------------------- -->
+					<!-- ======================= -->
 					<div class="form-group row d-flex align-items-center mb-5">
 						<label class="col-md-2 form-control-label d-flex justify-content-md-end">Đường dấn</label>
 						<div class="col-md-10">
-							<input type="text" class="form-control alias news_category_alias" data-alias-prefix="tin-tuc/" name="alias" disabled value="tin-tuc/<?= $news['alias'] ?>">
+							<input type="text" class="form-control alias product_category_alias" data-alias-prefix="san-pham/" name="alias" disabled value="san-pham/<?= $product['alias'] ?>">
 							<small>
 								<!-- <code>Bắt buộc</code> -->
 							</small>
 						</div>
 					</div>
-					<!-- --------------------- -->
+					<!-- ======================= -->
 					<div class="form-group row d-flex align-items-center mb-5">
-						<label class="col-md-2 form-control-label d-flex justify-content-md-end">Mô tả</label>
+						<label class="col-md-2 form-control-label d-flex justify-content-md-end">Mô tả ngắn</label>
 						<div class="col-md-10">
-							<textarea type="text" class="form-control news_category_name" name="caption" autocomplete="off"><?= $news['caption'] ?></textarea>
+							<textarea type="text" class="form-control" name="caption" value="" autocomplete="off"><?= $product['caption'] ?></textarea>
 							<small>
 								<code>Nên có</code>
 							</small>
 						</div>
 					</div>
-					<!-- --------------------- -->
+					<!-- ======================= -->
 					<div class="form-group row d-flex align-items-center mb-5">
-						<label class="col-lg-2 form-control-label d-flex justify-content-md-end">Hình đại diện</label>
+						<label class="col-lg-2 form-control-label d-flex justify-content-md-end">Ảnh</label>
 						<div class="col-lg-10">
 							<div class="form-group">
 								<div>
-									<img class="newsimage" src="<?= base_url($news['thumbnail']) ?>" alt="" style="display: block; max-width: 100%">
+									<img class="productimage" src="<?= $product['image'] ?>" alt="" style="display: block; max-width: 300px">
 								</div>
 								<br>
 								<div class="input-group">
 									<span class="input-group-btn">
-										<a href="/filemanager/dialog.php?type=1&field_id=newsimage&relative_url=1" class="btn btn-primary ripple upload-news-image-btn stand-alone-filemanager">
+										<a href="/filemanager/dialog.php?type=1&field_id=productimage&relative_url=1" class="btn btn-primary ripple upload-product-image-btn stand-alone-filemanager">
 											<i class="la la-image"></i>
 										</a>
 									</span>
-									<input type="text" class="form-control" name="thumbnail" id="newsimage" value="<?= $news['thumbnail'] ?>" required>
+									<input type="text" class="form-control" name="thumbnail" id="productimage" value="<?= $product['image'] ?>" required>
 								</div>
 							</div>
 						</div>
 					</div>
-					<!-- --------------------- -->
+					<!-- ======================= -->
 					<div class="form-group row d-flex align-items-center mb-5">
 						<label class="col-md-2 form-control-label d-flex justify-content-md-end">Nội dung</label>
 						<div class="col-md-10">
-							<textarea type="text" class="form-control tinymce_content" name="content" autocomplete="off"><?= $news['content'] ?></textarea>
+							<textarea type="text" class="form-control tinymce_content" name="content" value="" autocomplete="off"><?= $product['content'] ?></textarea>
+							<small>
+								<code>Nên có</code>
+							</small>
+						</div>
+					</div>
+
+					<!-- ======================= -->
+					<div class="form-group row d-flex align-items-center mb-5">
+						<label class="col-md-2 form-control-label d-flex justify-content-md-end">Trạng thái</label>
+						<div class="col-md-10">
+							<div class="custom-control custom-radio styled-radio d-inline-block">
+								<input class="custom-control-input" type="radio" name="status" id="opt-02" <?= $product['status'] ? "checked" : "" ?> value="1">
+								<label class="custom-control-descfeedback" for="opt-02">Hiện</label>
+							</div>
+							&nbsp;
+							&nbsp;
+							<div class="custom-control custom-radio styled-radio d-inline-block">
+								<input class="custom-control-input" type="radio" name="status" id="opt-01" <?= !$product['status'] ? "checked" : "" ?> value="0">
+								<label class="custom-control-descfeedback" for="opt-01">Ẩn</label>
+							</div>
+						</div>
+					</div>
+					<!-- ======================= -->
+					<?php if (count($versions) == 0): ?>
+					<div class="form-group row d-flex align-items-center mb-5">
+						<label class="col-md-2 form-control-label d-flex justify-content-md-end text-danger">Giá ban đầu</label>
+						<div class="col-md-5">
+							<input type="text" class="form-control" name="original_price" value="<?= $product['original_price'] ?>" autocomplete="off">
+							<!-- <small>
+								<code>Bắt buộc</code>
+							</small> -->
+						</div>
+					</div>
+					<!-- ======================= -->
+					<div class="form-group row d-flex align-items-center mb-5">
+						<label class="col-md-2 form-control-label d-flex justify-content-md-end text-success">Giá bán hiện tại</label>
+						<div class="col-md-5">
+							<input type="text" class="form-control" name="price" value="<?= $product['price'] ?>" autocomplete="off">
 							<small>
 								<code>Bắt buộc</code>
 							</small>
 						</div>
 					</div>
-					
-					<!-- --------------------- -->
+				<?php endif; ?>
+					<!-- ======================= -->
+					<div class="em-separator separator-dashed"></div>
+					<!-- ======================= -->
 					<div class="form-group row d-flex align-items-center mb-5">
-						<label class="col-md-2 form-control-label d-flex justify-content-md-end">Trạng thái</label>
+						<label class="col-md-2 form-control-label d-flex justify-content-md-end"></label>
 						<div class="col-md-10">
-							<div class="custom-control custom-radio styled-radio d-inline-block">
-								<input class="custom-control-input" type="radio" name="status" id="opt-01" <?= !$news['status'] ? "checked" : "" ?> value="0">
-								<label class="custom-control-descfeedback" for="opt-01">Ẩn</label>
-							</div>
-							&nbsp;
-							&nbsp;
-							<div class="custom-control custom-radio styled-radio d-inline-block">
-								<input class="custom-control-input" type="radio" name="status" id="opt-02" <?= $news['status'] ? 'checked' : '' ?> value="1">
-								<label class="custom-control-descfeedback" for="opt-02">Hiện</label>
+
+							<p>
+								<?php if (count($versions) > 0): ?>
+									<a href="<?= base_url('admin/product/'.$product['id'].'/versions/0') ?>">Chỉnh sửa thuộc tính (kích thước, màu sắc và giá tiền)</a>
+								<?php else: ?>
+									<a href="#/" data-toggle="modal" data-target="#options_modal">Thêm thuộc tính cho sản phẩm (kích thước, màu sắc)</a>
+								<?php endif; ?>
+							</p>
+							<div class="versions-table">
+								<!-- Sau khi chọn kích thước mà màu sắc, một table sẽ hiển thị ở đây...  -->
 							</div>
 						</div>
 					</div>
-					
-					<!-- --------------------- -->
+
+					<!-- ======================= -->
 					<div class="em-separator separator-dashed"></div>
 					<div class="form-group row d-flex align-items-center mb-5">
 						<label class="col-md-2 form-control-label d-flex justify-content-md-end">Tiêu đề</label>
 						<div class="col-md-10">
-							<input type="text" class="form-control" name="title" value="<?= $news['title'] ?>">
+							<input type="text" class="form-control" name="title" value="<?= $product['title'] ?>">
 							<small>
 								<code></code>
 							</small>
 						</div>
 					</div>
-					<!-- --------------------- -->
+					<!-- ======================= -->
 					<div class="form-group row d-flex align-items-center mb-5">
 						<label class="col-md-2 form-control-label d-flex justify-content-md-end">Từ khóa</label>
 						<div class="col-md-10">
-							<input type="text" class="form-control" name="keyword" value="<?= $news['keyword'] ?>">
-							<small>
-								<!-- <code>Bắt buộc.</code> -->
-							</small>
+							<input type="text" class="form-control" name="keyword" value="<?= $product['keyword'] ?>">
 						</div>
 					</div>
-					<!-- --------------------- -->
+					<!-- ======================= -->
 					<div class="form-group row d-flex align-items-center mb-5">
 						<label class="col-md-2 form-control-label d-flex justify-content-md-end">Mô tả</label>
 						<div class="col-md-10">
-							<input type="text" class="form-control" name="description" value="<?= $news['description'] ?>">
-							<small>
-								<!-- <code>Bắt buộc.</code> -->
-							</small>
+							<input type="text" class="form-control" name="description" value="<?= $product['description'] ?>">
 						</div>
 					</div>
-					<!-- --------------------- -->
+					<!-- ======================= -->
 
 					<div class="em-separator separator-dashed"></div>
 					<div class="col-md-10 offset-md-2 text-right">
 						<button class="btn btn-gradient-02" type="submit">Cập nhật</button>
 					</div>
-					<!-- --------------------- -->
+					<!-- ======================= -->
 				<?php echo form_close(); ?>
 			</div>
 		</div>
@@ -145,3 +181,79 @@
 	</div>
 </div>
 <!-- End Row -->
+
+<!-- MODAL OPTIONS -->
+<div id="options_modal" class="modal fade">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title">Thuộc tính</h4>
+				<button type="button" class="close" data-dismiss="modal">
+					<span aria-hidden="true">×</span>
+					<span class="sr-only">đóng</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<?php echo form_open('', ['class' => "select-product-options-form"]); ?>
+				<!-- =========================== -->
+				<div class="form-group row d-flex align-items-center mb-5">
+					<label class="col-lg-12 form-control-label">Màu sắc </label>
+					<!-- <i data-toggle="modal" data-target="#color_modal" class="la la-plus-circle add-color add-more-option-item"></i> -->
+					<div class="col-lg-12">
+						<br>
+						<div class="input-group">
+							<span class="input-group-btn">
+								<button type="button" class="btn btn-primary ripple add-more-color add-more-button">
+									Thêm
+								</button>
+							</span>
+							<input type="text" class="form-control add-more-color-value add-more-value">
+						</div>
+						<br>
+					</div>
+					<div class="col-lg-12 color-box">
+						<!-- <div class="mb-3 color1">
+							<div class="styled-checkbox">
+								<input type="checkbox" name="color[]" id="color1" disabled>
+								<label for="color1">Màu 1 <i data-parent="color1" class="la la-times remove-option-item"></i> </label>
+							</div>
+						</div> -->
+					</div>
+				</div>
+				<!-- ================================ -->
+				<div class="form-group row d-flex align-items-center mb-5">
+					<label class="col-lg-12 form-control-label">Kích thước</label>
+					<div class="col-lg-12">
+						<br>
+						<div class="input-group">
+							<span class="input-group-btn">
+								<button type="button" class="btn btn-primary ripple add-more-size add-more-button">
+									Thêm
+								</button>
+							</span>
+							<input type="text" class="form-control add-more-size-value add-more-value">
+						</div>
+						<br>
+					</div>
+					<div class="col-lg-12 size-box">
+						<!-- <div class="mb-3 size1">
+							<div class="styled-checkbox">
+								<input type="checkbox" name="size[]" id="size1" checked disabled>
+								<label for="size1">KT1 <i data-parent="size1" class="la la-times remove-option-item"></i> </label>
+							</div>
+						</div> -->
+					</div>
+				</div>
+				<!-- ================================ -->
+
+
+				<?php echo form_close(); ?>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-shadow" data-dismiss="modal">Đóng</button>
+				<button type="button" class="btn btn-primary save-product-options-button">Lưu</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- End  MODAL OPTIONS -->

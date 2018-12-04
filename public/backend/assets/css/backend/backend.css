@@ -74,3 +74,27 @@ table#menu_list .badge5, table#menu_list .badge6, table#menu_list .badge7, table
 	font-size: 30px;
 	cursor: pointer;
 }
+
+#product_list_datatable .product-image {
+	max-width: 80px;
+}
+
+/* SẢN PHẨM - PHIÊN BẢN */
+.version-list {
+
+}
+.version-list li {
+	display: block;
+}
+.version-list li a {
+	display: block;
+	padding: 15px
+}
+
+.version-list li.active {
+	background-color: #2c304d;
+}
+
+.version-list li.active a {
+	color: #fff;
+}

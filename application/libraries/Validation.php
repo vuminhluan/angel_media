@@ -180,6 +180,11 @@ class Validation
 			'label' => 'Tên sản phẩm',
 			'rules' => 'trim|required|min_length[10]|is_unique[products.name]'
 		],
+		'product_name_edit' => [
+			'field' => 'product_name',
+			'label' => 'Tên sản phẩm',
+			'rules' => 'trim|required|min_length[10]'
+		],
 		'product_alias' => [
 			'field' => 'product_alias',
 			'label' => 'Alias',
@@ -199,6 +204,26 @@ class Validation
 			'field' => 'product_content',
 			'label' => 'Nội dung',
 			'rules' => 'trim'
+		],
+		'original_price' => [
+			'field' => 'original_price',
+			'label' => 'Giá ban đầu',
+			'rules' => 'trim|numeric'
+		],
+		'price' => [
+			'field' => 'price',
+			'label' => 'Giá bán hiện tại',
+			'rules' => 'trim|required|numeric'
+		],
+		'color' => [
+			'field' => 'color',
+			'label' => 'Màu sắc',
+			'rules' => 'trim|required'
+		],
+		'size' => [
+			'field' => 'size',
+			'label' => 'Kích thước',
+			'rules' => 'trim|required'
 		],
 		// PRODUCT
 

@@ -5,7 +5,7 @@
         <th>#</th>
         <th>Tên</th>
         <th>Thuộc tính</th>
-        <th>Giá</th>
+        <!-- <th>Giá</th> -->
         <th></th>
       </tr>
     </thead>
@@ -24,7 +24,7 @@
               <?php endforeach; ?>
             </p>
           </td>
-          <td> Giá: <input type="number" name="" value=""> </td>
+          <!-- <td> Giá: <input type="number" name="" value="0" min="0"> </td> -->
           <td> <button data-rowid="<?= $items['rowid'] ?>" type="button" class="btn btn-dark btn-remove-item"> <i class="la la-trash-o"></i> </button> </td>
         </tr>
       <?php endforeach; ?>

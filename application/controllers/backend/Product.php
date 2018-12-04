@@ -11,14 +11,15 @@ class Product extends Admin_Controller
 		parent::__construct();
 		$this->load->model('Product_category_model', 'ProductCategory');
 		$this->load->model('Product_model', 'Product');
+		$this->load->model('Product_detail_model', 'ProductDetail');
 		$this->load->library('datatable'); // loaded my custom serverside datatable library
 	}
 
 	public function index() {
 		// echo $this->News->test();
 		// echo "<pre>";
-		// $this->prt($this->News->test());
-		// return;
+		$this->prt($this->Product->test());
+		return;
 		echo "a";return;
 	}
 
@@ -185,13 +186,13 @@ class Product extends Admin_Controller
 	/**
 	 * Render trang danh sách tin tức
 	 */
-	public function render_news_list_page() {
+	public function render_product_list_page() {
 		$view_data = [
-			'title' => 'Danh sách tin tức',
+			'title' => 'Danh sách sản phẩm',
 			// 'css_file' => 'backend/includes/css_file/datatable_css.php',
 			// 'js_file' => 'backend/includes/js_file/datatable_js.php',
-			'view' => 'backend/pages/news/news_list',
-			'tab' => 'news,news_list'
+			'view' => 'backend/pages/products/product_list',
+			'tab' => 'product,product_list'
 		];
 		// $news = $this->News->
 		$this->load->view('backend/layout', $view_data);
@@ -200,26 +201,32 @@ class Product extends Admin_Controller
 	/**
 	 *
 	 */
-	public function news_datatable_json() {
+	public function product_datatable_json() {
 
-		$news = $this->News->get_all_news();
-		$news_data = array();
-		$alias_prefix = "tin-tuc/";
-		foreach ($news['data'] as $news_piece) {
-			$news_data[] = array(
-				$news_piece['news_id'],
-				$news_piece['news_name'],
-				$alias_prefix.$news_piece['news_alias'],
-				$news_piece['category_name'],
-				$news_piece['news_created_at'],
+		$products = $this->Product->get_products_for_datatable();
+		$product_data = array();
+		$alias_prefix = "san-pham/";
+		foreach ($products['data'] as $product) {
+			$total_version = $product['total_version'];
+			$version = $total_version > 0 ? "<a href='".base_url('admin/product/'.$product['product_id'].'/versions/0')."'>Có ".$total_version." phiên bản </a>" : 'Có 0 phiên bản';
+			$product_data[] = array(
+				// $product['product_id'],
+				$product['cate_name'],
+				$product['product_name'],
+				$alias_prefix.$product['product_alias'],
+				'<img width="100px" class="product-image" src="'.$product['product_image'].'" />',
+
+				// "<a href='".base_url('admin/product/'.$product['product_id'].'/versions/0')."'>Có ".$total_version." phiên bản </a>",
+				$version,
+
 				'<div class="action-buttons td-actions text-right">
-					<a href="'.base_url("admin/news/".$news_piece['news_id']."/edit").'" class="edit-action"><i class="la la-edit edit"></i></a>
-					<a data-news_piece-name="'.$news_piece['news_name'].'" data-href="'.base_url("admin/news/".$news_piece['news_id']."/delete").'" href="#/" class="delete-action"><i class="la la-close delete"></i></a>
+					<a href="'.base_url("admin/product/".$product['product_id']."/edit").'" class="edit-action"><i class="la la-edit edit"></i></a>
+					<a data-product-name="'.$product['product_name'].'" data-href="'.base_url("admin/product/".$product['product_id']."/delete").'" href="#/" class="delete-action"><i class="la la-close delete"></i></a>
 				</div>'
 			);
 		}
-		$news['data'] = $news_data;
-		echo json_encode($news);
+		$products['data'] = $product_data;
+		echo json_encode($products);
 	}
 
 	/**
@@ -251,6 +258,8 @@ class Product extends Admin_Controller
 			'product_thumbnail' => $this->input->post('thumbnail'),
 			'product_content'   => $this->input->post('content', FALSE),
 			'title'             => $this->input->post('title'),
+			'price'             => $this->input->post('price'),
+			'original_price'    => $this->input->post('original_price'),
 			'keyword'           => $this->input->post('keyword'),
 			'description'       => $this->input->post('description'),
 		];
@@ -262,117 +271,275 @@ class Product extends Admin_Controller
 			return;
 		}
 
-		echo "OK"; return;
+		// echo "OK"; return;
 
-		// $data_to_insert = [
-		// 	'category_id' => $this->input->post('select_news_category'),
-		// 	'author' => $this->session->userdata('id'),
-		// 	'name' => $this->input->post('name'),
-		// 	'alias' => make_alias($this->input->post('name')),
-		// 	'thumbnail' => $this->input->post('thumbnail'),
-		// 	'content' => $this->input->post('content', FALSE),
-		// 	'caption' => $this->input->post('caption'),
-		// 	'created_at' => date('Y-m-d H:i:s'),
-		// 	'status' => $this->input->post('status'),
-		// 	'title' => $this->input->post('title') ? $this->input->post('title') : $this->input->post('name'),
-		// 	'keyword' => $this->input->post('keyword'),
-		// 	'description' => $this->input->post('description'),
-		// ];
-		//
-		// if (!$this->News->insert($data_to_insert)) {
-		// 	$this->flash('Thêm tin tức thành công');
-		// 	$this->render_create_news_page();
-		// 	return;
-		// } else {
-		// 	$this->flash('Thêm tin tức thành công');
-		// 	redirect(base_url('admin/news'));
-		// 	return;
-		// }
+		$data_to_insert = [
+			'category_id'    => $this->input->post('select_product_category'),
+			// 'creater'     => $this->session->userdata('id'),
+			'name'           => $this->input->post('name'),
+			'alias'          => make_alias($this->input->post('name')),
+			'image'          => $this->input->post('thumbnail'),
+			'content'        => $this->input->post('content', FALSE),
+			'caption'        => $this->input->post('caption'),
+			'created_at'     => date('Y-m-d H:i:s'),
+			'status'         => $this->input->post('status'),
+			'price'          => $this->input->post('price'),
+			'original_price' => $this->input->post('original_price') ? $this->input->post('original_price') : 0,
+			'title'          => $this->input->post('title') ? $this->input->post('title') : $this->input->post('name'),
+			'keyword'        => $this->input->post('keyword'),
+			'description'    => $this->input->post('description'),
+		];
+
+		// $this->load->library('cart');
+		// $cart = $this->cart->contents();
+		// $this->prt($cart);
+		// return;
+
+		if (!$last_insert_id = $this->Product->create_product($data_to_insert)) {
+			$this->flash('Thêm sản phẩm thất bại');
+			$this->render_create_product_page();
+			return;
+		} else {
+			// echo $last_insert_id;
+
+			$this->load->library('cart');
+			// Nếu có tạo các phiên bản cho sản phẩm
+			if ($this->cart->total_items() > 0) {
+				$versions = [];
+				foreach ($this->cart->contents() as $items) {
+					$versions[] = [
+						'product_id' => $last_insert_id,
+						// 'options' => json_encode($items['options'], JSON_UNESCAPED_UNICODE),
+						'size'           => $items['options']['Size'] ? $items['options']['Size']   : NULL,
+						'color'          => $items['options']['Color'] ? $items['options']['Color'] : NULL,
+						'original_price' => $this->input->post('original_price') ? $this->input->post('original_price') : 0,
+						'price'          => $this->input->post('price') ? $this->input->post('price') : 0,
+					];
+				}
+				// $this->prt($versions);
+				// return;
+				$this->ProductDetail->insert_product_versions($versions);
+			}
+
+			$this->flash('Thêm sản phẩm thành công');
+			redirect(base_url('admin/products'));
+			return;
+		}
 	}
 
 	/**
-	* Render trang chỉnh sửa tin tức
-	*
-	*/
-	public function render_edit_news_page($news_id) {
-		$news = (array) $this->News->first_or_fail($news_id);
-		$categories = $this->NewsCategory->all();
+	 * Xóa sản phẩm
+	 * @param  int $product_id - Mã sản phẩm
+	 */
+	public function delete_product($product_id)
+	{
+		// echo "Xóa sản phẩm à ??"; return;
+		// 1. Tìm và xóa những phiên bản của nó
+		// 2. Xóa sản phẩm
+
+		// Xóa phiên bản
+		$flag = TRUE;
+		if (!$this->ProductDetail->detele_all_version_of_product($product_id)) {
+			$flag = FALSE;
+		}
+
+		// Xóa sản phẩm
+		if ($flag) {
+			if (!$this->Product->delete_product($product_id)) {
+				$flag = FALSE;
+			}
+		}
+
+		if ($flag) {
+			$this->flash('Xóa sản phẩm thành công');
+		} else {
+			$this->flash('Có lỗi xảy ra, không thể xóa sản phẩm bây giờ');
+		}
+		redirect(base_url('admin/products'));
+		return;
+	}
+
+	public function render_edit_product_page($product_id)
+	{
+		// Xóa session cart dùng để tạo versions cho sản phẩm (màu sắc, kích thước,...)
+		// $this->load->library('cart');
+		// $this->cart->destroy();
+
+		$categories = $this->ProductCategory->all();
+		$product = (array) $this->Product->first_or_fail($product_id);
+		$versions = $this->ProductDetail->get_versions_by_product($product_id);
+
 		$view_data = [
-			'title' => 'Chỉnh sửa tin tức',
-			'view' => 'backend/pages/news/news_edit',
+			'title' => 'Thêm sản phẩm mới',
 			'categories' => $categories,
-			'news' => $news,
-			'tab' => 'news,'
+			'product' => $product,
+			'versions' => $versions,
+			'view' => 'backend/pages/products/product_edit',
+			'tab' => 'product,'
 		];
 		$this->load->view('backend/layout', $view_data);
 	}
 
-	/*
-	*
-	* Cập nhật tin tức
-	*
-	*/
+	/**
+	 * Cập nhật sản phẩm
+	 */
+	public function update_product()
+	{
+		// echo "update product"; return;
+		$product_id = $this->input->post('product_id');
+		$product = (array) $this->Product->first_or_fail($product_id);
 
-	public function update_news() {
-		$news_id = $this->input->post('id') ? $this->input->post('id') : -1;
 		$form_data = [
-			// 'news_name' => $this->input->post('name'),
-			'news_alias' => make_alias($this->input->post('name')),
-			'news_thumbnail' => $this->input->post('thumbnail'),
-			'news_content' => $this->input->post('content', FALSE),
+			'product_alias'     => make_alias($this->input->post('name')),
+			'product_caption'   => $this->input->post('caption'),
+			'product_thumbnail' => $this->input->post('thumbnail'),
+			'product_content'   => $this->input->post('content', FALSE),
+			'title'             => $this->input->post('title'),
+			'price'             => $this->input->post('price'),
+			'original_price'    => $this->input->post('original_price'),
+			'keyword'           => $this->input->post('keyword'),
+			'description'       => $this->input->post('description'),
 		];
 
-		$present_news = (array) $this->News->first_or_fail($news_id);
-		if ($present_news['name'] != $this->input->post('name')) {
-			$form_data['news_name'] = $this->input->post('name');
+		if ($product['name'] != $this->input->post('name')) {
+			$form_data['product_name'] = $this->input->post('name');
 		}
-		// $this->prt($form_data); return;
+
 
 		// Sử dụng Library Validation
 		if ($this->validation->validate_form($form_data) == FALSE) {
-			$this->render_edit_news_page($news_id);
+			$this->render_edit_product_page($product_id);
 			return;
 		}
 
-		$data_to_update = [
-			'category_id' => $this->input->post('select_news_category'),
-			'author' => $this->session->userdata('id'),
-			'name' => $this->input->post('name'),
-			'alias' => make_alias($this->input->post('name')),
-			'thumbnail' => $this->input->post('thumbnail'),
-			'content' => $this->input->post('content', FALSE),
-			'caption' => $this->input->post('caption'),
-			'status' => $this->input->post('status'),
-			'title' => $this->input->post('title') ? $this->input->post('title') : $this->input->post('name'),
-			'keyword' => $this->input->post('keyword'),
-			'description' => $this->input->post('description'),
-		];
-		// $this->prt($data_to_update); return;
+		// echo "wait"; return;
+		// $this->prt($form_data);
+		// return;
 
-		if (!$this->News->update_news($data_to_update, $news_id)) {
-			$this->flash('Có lỗi xảy ra, không thể cập nhật tin tức ngay bây giờ');
-			redirect(base_url('admin/news/'.$news_id.'/edit'));
+		$data_to_update = [
+			'category_id'    => $this->input->post('select_product_category'),
+			// 'creater'     => $this->session->userdata('id'),
+			'name'           => $this->input->post('name'),
+			'alias'          => make_alias($this->input->post('name')),
+			'image'          => $this->input->post('thumbnail'),
+			'content'        => $this->input->post('content', FALSE),
+			'caption'        => $this->input->post('caption'),
+			'created_at'     => date('Y-m-d H:i:s'),
+			'status'         => $this->input->post('status'),
+			'price'          => $this->input->post('price'),
+			'original_price' => $this->input->post('original_price') ? $this->input->post('original_price') : 0,
+			'title'          => $this->input->post('title') ? $this->input->post('title') : $this->input->post('name'),
+			'keyword'        => $this->input->post('keyword'),
+			'description'    => $this->input->post('description'),
+		];
+
+		// $this->Product->update_product($data_to_update, $product_id);
+		// $this->flash('update thành công');
+		// $this->render_edit_product_page($product_id);
+		// return;
+
+		// $this->prt($data_to_insert);
+		// return;
+
+		if (!$this->Product->update_product($data_to_update, $product_id)) {
+			$this->flash('Thêm sản phẩm thất bại');
+			$this->render_edit_product_page($product_id);
 			return;
 		} else {
-			$this->flash('Cập nhật tin tức thành công');
-			redirect(base_url('admin/news'));
+			// echo $last_insert_id;
+
+			$this->load->library('cart');
+			// Nếu có tạo các phiên bản cho sản phẩm
+			if ($this->cart->total_items() > 0) {
+				$versions = [];
+				foreach ($this->cart->contents() as $items) {
+					$versions[] = [
+						'product_id' => $product_id,
+						'size'           => $items['options']['Size'] ? $items['options']['Size']   : NULL,
+						'color'          => $items['options']['Color'] ? $items['options']['Color'] : NULL,
+						'original_price' => $this->input->post('original_price') ? $this->input->post('original_price') : 0,
+						'price'          => $this->input->post('price') ? $this->input->post('price') : 0,
+					];
+				}
+				// $this->prt($versions);
+				// return;
+				$this->ProductDetail->insert_product_versions($versions);
+			}
+
+			$this->flash('Thêm sản phẩm thành công');
+			redirect(base_url('admin/products'));
 			return;
 		}
 	}
 
-	/*
-	*
-	* Xóa tin tức tin tức
-	*
-	*/
-	public function delete_news($news_id) {
-		$news = $this->News->first_or_fail($news_id);
-		if (!$this->News->delete_news($news_id)) {
-			$this->flash('Có lỗi xảy ra, không thể xóa tin tức này');
-		} else {
-			$this->flash('Xóa tin tức thành công');
+
+
+
+
+	/**
+	 * Redner trang Xem và chỉnh sửa phiên bản sản phẩm
+	 * @param  int  $product_id  - mã sản phẩm
+	 * @param  integer $version_index - Vị trí hiện tại của phiên bản trong danh sách phiên bản của 1 sản phẩm
+	 * @return VIEW
+	 */
+	public function render_edit_version_page($product_id, $version_index = 0)
+	{
+		// echo $version_id; return;
+		// echo "edit versions"; return;
+		$product = (array) $this->Product->first_or_fail($product_id);
+		$versions = $this->ProductDetail->get_versions_by_product($product['id']);
+		if (!$versions) {
+			echo "Sản phẩm này không có phiên bản nào !"; return;
 		}
-		redirect(base_url('admin/news'));
+		if ($version_index >= count($versions)) {
+			$version_index = 0;
+		}
+		$view_data = [
+			'title'    => 'Chỉnh sửa phiên bản',
+			'product'  => $product,
+			'versions' => $versions,
+			'index'    => $version_index,
+			'view'     => 'backend/pages/products/product_versions',
+			'tab'      => 'product,'
+		];
+		$this->load->view('backend/layout', $view_data);
+	}
+
+	public function update_version()
+	{
+		$product_id = $this->input->post('product_id');
+		$version_id = $this->input->post('version_id');
+		$index      = $this->input->post('version_index');
+		$form_data = [
+			'original_price' => $this->input->post('original_price') ? $this->input->post('original_price') : 0,
+			'price'          => $this->input->post('price'),
+			'size'           => $this->input->post('size'),
+			'color'          => $this->input->post('color')
+		];
+
+		// Sử dụng Library Validation
+		if ($this->validation->validate_form($form_data) == FALSE) {
+			$this->render_edit_version_page($product_id, $index);
+			return;
+		}
+
+		if (!$this->ProductDetail->update_version($form_data, $version_id)) {
+			$this->flash('Có lỗi xảy ra, cập nhật phiên bản thất bại');
+		} else {
+			$this->flash('Cập nhật phiên bản thành công');
+		}
+		$this->render_edit_version_page($product_id, $index);
+		return;
+	}
+
+	public function delete_version($product_id, $version_id)
+	{
+		if (!$this->ProductDetail->delete_version($product_id, $version_id)) {
+			$this->flash('Có lỗi xảy ra, không thể xóa phiên bản đã chọn');
+		} else {
+			$this->flash('Đã xóa phiên bản được chọn');
+		}
+		redirect(base_url('admin/product/'.$product_id.'/versions/0'));
 	}
 
 

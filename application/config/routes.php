@@ -188,15 +188,21 @@ $route['admin/product/category/create'] = 'backend/product/create_product_catego
 
 // Dashboard - Sản phẩm : Danh sách sản phẩm, chỉnh sửa sản phẩm, ...
 $route['admin/products'] = 'backend/product/render_product_list_page';
-$route['admin/product/datatable_json'] = 'backend/product/product_datatable_json';
+$route['admin/products/datatable_json'] = 'backend/product/product_datatable_json';
 
 $route['admin/product/(:num)/delete'] = 'backend/product/delete_product/$1';
+
 $route['admin/product/(:num)/edit'] = 'backend/product/render_edit_product_page/$1';
 $route['admin/product/update'] = 'backend/product/update_product';
 
 $route['admin/product/new'] = 'backend/product/render_create_product_page';
 $route['admin/product/create'] = 'backend/product/create_product';
 
+
+$route['admin/product/(:num)/versions/(:num)'] = 'backend/product/render_edit_version_page/$1/$2';
+
+$route['admin/product/version/update'] = 'backend/product/update_version';
+$route['admin/product/(:num)/version/(:num)/delete'] = 'backend/product/delete_version/$1/$2';
 
 // == AJAX ROUTE ==
 

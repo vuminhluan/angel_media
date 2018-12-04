@@ -485,7 +485,7 @@ $(document).ready(function() {
 
 //  ================= SẢN PHÂM ================ //
 // Danh mục sản phẩm
-// Datatable Danh sách danh mục tin tức
+// Datatable Danh sách danh mục sản phẩm
 $(document).ready(function() {
 	//---------------------------------------------------
 	if ($('#product_category_list_datatable')[0]) {
@@ -607,7 +607,11 @@ $(document).ready(function() {
 		})
 		.done(function(response) {
 			console.log("success");
-			alert('success');
+			alert('Tạo thành công');
+			$('.size-bx > div, .color-box > div').remove();
+			// $('#options_modal, .modal-backdrop').hide();
+			// $('body').removeClass('modal-open');
+			// $('body, html').focus();
 			// Load bảng các phiên bản của sản phẩm
 			$('.versions-table').html(response);
 		})
@@ -637,5 +641,83 @@ $(document).ready(function() {
 		});
 
 	});
+});
+
+// Datatable Danh sách sản phẩm
+$(document).ready(function() {
+	//---------------------------------------------------
+	if ($('#product_list_datatable')[0]) {
+		var table = $('#product_list_datatable').DataTable( {
+			"language" : datatableLanguage,
+			"processing": true,
+			"serverSide": true,
+			"ajax": baseUrl+"/admin/products/datatable_json",
+			"order": [[0,'desc']],
+			"columnDefs": [
+				// { "targets": 0, "name": "P.id", 'searchable'    :true, 'orderable' :true},
+				{ "targets": 0, "name": "PC.name", 'searchable' :true, 'orderable' :true},
+				{ "targets": 1, "name": "P.name", 'searchable'  :true, 'orderable' :true},
+				{ "targets": 2, "name": "P.alias", 'searchable' :false, 'orderable':false},
+				{ "targets": 3, "name": "P.image", 'searchable' :false, 'orderable':false},
+				{ "targets": 4, "name": "version", 'searchable' :false, 'orderable':false},
+				{ "targets": 5, "name": "Action", 'searchable'  :false, 'orderable':false},
+			]
+		});
+	}
+});
+
+// XÓA SẢN PHẨM
+$(document).ready(function() {
+	// XÓA SẢN PHẨM:
+	$('#product_list_datatable').on('click', '.action-buttons .delete-action', function(event) {
+		// alert('a'); return;
+		event.preventDefault();
+		var href = $(this).attr('data-href');
+		var productName = $(this).attr('data-product-name') ? '"'+$(this).attr('data-product-name')+'"' : 'này';
+		var deleteNoty = new Noty({
+			text: 'Bạn muốn xóa Sản phẩm '+productName+' ? Tất cả phiên bản cũng sẽ bị xóa và không thể khôi phục lại được',
+			layout:'centerRight',
+			buttons: [
+				Noty.button('Xóa', 'btn btn-danger', function () {
+					window.location.href=href;
+				}, {id: 'button1', 'data-status': 'ok'}),
+
+				Noty.button('Bỏ qua', 'btn btn-success', function () {
+					deleteNoty.close();
+				})
+			]
+		});
+		deleteNoty.show();
+	});
+});
+
+// VERSIONS
+$(document).ready(function() {
+	var versionID = $('input[name=version_id]').val();
+	$('.version-list').find('.version'+versionID).addClass('active');
+
+
+	// XÓA PHIÊN BẢN:
+	$('.update-product-version-form').on('click', '.delete-version-button', function(event) {
+		event.preventDefault();
+		var href = $(this).attr('data-href');
+		var versionName = $(this).attr('data-version-name') ? '"'+$(this).attr('data-version-name')+'"' : 'này';
+		var deleteNoty = new Noty({
+			text: 'Bạn muốn xóa phiên bản: '+versionName+' ? Nếu xóa sẽ không thể khôi phục lại được',
+			layout:'centerRight',
+			buttons: [
+				Noty.button('Xóa', 'btn btn-danger', function () {
+					window.location.href=href;
+				}, {id: 'button1', 'data-status': 'ok'}),
+
+				Noty.button('Bỏ qua', 'btn btn-success', function () {
+					deleteNoty.close();
+				})
+			]
+		});
+		deleteNoty.show();
+	});
 
 });
+
+//  ================= SẢN PHÂM ================ //
