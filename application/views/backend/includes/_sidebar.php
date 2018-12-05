@@ -42,6 +42,14 @@
 					<li data-secondary-tab="landing_create"><a href="<?= base_url('admin/landing/new') ?>">Thêm Trang nội dung mới</a></li>
 				</ul>
 			</li>
+			<!-- <li data-primary-tab="product"><a href="#dropdown-product" aria-expanded="false" data-toggle="collapse"><i class="la la-archive"></i><span>Đơn hàng</span></a>
+				<ul id="dropdown-product" class="collapse list-unstyled pt-0">
+					<li data-secondary-tab="product_list"><a href="<?= base_url('admin/products') ?>">Danh sách sản phẩm</a></li>
+					<li data-secondary-tab="product_create"><a href="<?= base_url('admin/product/new') ?>">Thêm sản phẩm mới</a></li>
+					<li data-secondary-tab="product_cate_list"><a href="<?= base_url('admin/product/categories') ?>">Danh mục sản phẩm</a></li>
+					<li data-secondary-tab="product_cate_create"><a href="<?= base_url('admin/product/category/new') ?>">Thêm danh mục sản phẩm</a></li>
+				</ul>
+			</li> -->
 			<li data-primary-tab="product"><a href="#dropdown-product" aria-expanded="false" data-toggle="collapse"><i class="la la-archive"></i><span>Sản phẩm</span></a>
 				<ul id="dropdown-product" class="collapse list-unstyled pt-0">
 					<li data-secondary-tab="product_list"><a href="<?= base_url('admin/products') ?>">Danh sách sản phẩm</a></li>
@@ -69,11 +77,11 @@
 			<li data-primary-tab="filemanager"><a href="<?= base_url('filemanager/dialog.php?type=0') ?>"><i class="la la-folder-open-o"></i><span>File managers</span></a></li>
 
 			<!-- Website -->
-			<li><a href="#dropdown-website" aria-expanded="false" data-toggle="collapse"><i class="la la-at"></i><span>Website</span></a>
+			<li data-primary-tab="config"><a href="#dropdown-website" aria-expanded="false" data-toggle="collapse"><i class="la la-at"></i><span>Website</span></a>
 				<ul id="dropdown-website" class="collapse list-unstyled pt-0">
-					<li><a href="<?= base_url('admin/config/contact') ?>">Thông tin liên lạc</a></li>
-					<li><a href="<?= base_url('admin/config/logo') ?>">Logo</a></li>
-					<li><a href="<?= base_url('admin/config/seo') ?>">SEO</a></li>
+					<li data-secondary-tab="config_contact"><a href="<?= base_url('admin/config/contact') ?>">Thông tin liên lạc</a></li>
+					<li data-secondary-tab="config_logo"><a href="<?= base_url('admin/config/logo') ?>">Logo</a></li>
+					<li data-secondary-tab="config_seo"><a href="<?= base_url('admin/config/seo') ?>">SEO</a></li>
 				</ul>
 			</li>
 			<!-- Website -->
