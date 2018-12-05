@@ -42,14 +42,11 @@
 					<li data-secondary-tab="landing_create"><a href="<?= base_url('admin/landing/new') ?>">Thêm Trang nội dung mới</a></li>
 				</ul>
 			</li>
-			<!-- <li data-primary-tab="product"><a href="#dropdown-product" aria-expanded="false" data-toggle="collapse"><i class="la la-archive"></i><span>Đơn hàng</span></a>
-				<ul id="dropdown-product" class="collapse list-unstyled pt-0">
-					<li data-secondary-tab="product_list"><a href="<?= base_url('admin/products') ?>">Danh sách sản phẩm</a></li>
-					<li data-secondary-tab="product_create"><a href="<?= base_url('admin/product/new') ?>">Thêm sản phẩm mới</a></li>
-					<li data-secondary-tab="product_cate_list"><a href="<?= base_url('admin/product/categories') ?>">Danh mục sản phẩm</a></li>
-					<li data-secondary-tab="product_cate_create"><a href="<?= base_url('admin/product/category/new') ?>">Thêm danh mục sản phẩm</a></li>
+			<li data-primary-tab="order"><a href="#dropdown-order" aria-expanded="false" data-toggle="collapse"><i class="la la-book"></i><span>Đơn hàng</span></a>
+				<ul id="dropdown-order" class="collapse list-unstyled pt-0">
+					<li data-secondary-tab="order_list"><a href="#/">Danh sách đơn hàng</a></li>
 				</ul>
-			</li> -->
+			</li>
 			<li data-primary-tab="product"><a href="#dropdown-product" aria-expanded="false" data-toggle="collapse"><i class="la la-archive"></i><span>Sản phẩm</span></a>
 				<ul id="dropdown-product" class="collapse list-unstyled pt-0">
 					<li data-secondary-tab="product_list"><a href="<?= base_url('admin/products') ?>">Danh sách sản phẩm</a></li>
