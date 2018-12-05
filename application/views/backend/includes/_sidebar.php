@@ -50,14 +50,6 @@
 					<li data-secondary-tab="product_cate_create"><a href="<?= base_url('admin/product/category/new') ?>">Thêm danh mục sản phẩm</a></li>
 				</ul>
 			</li>
-			<li><a href="#dropdown-tables" aria-expanded="false" data-toggle="collapse"><i class="la la-th-large"></i><span>Tables</span></a>
-				<ul id="dropdown-tables" class="collapse list-unstyled pt-0">
-					<li><a href="tables-basic.html">Basic</a></li>
-					<li><a href="tables-datatables.html">Datatables</a></li>
-					<li><a href="tables-tabledit.html">Tabledit</a></li>
-				</ul>
-			</li>
-			<li><a href="maps-leaflet.html"><i class="la la-map"></i><span>Maps</span></a></li>
 		</ul>
 		<span class="heading">Cài đặt</span>
 		<ul class="list-unstyled">
@@ -76,44 +68,15 @@
 
 			<li data-primary-tab="filemanager"><a href="<?= base_url('filemanager/dialog.php?type=0') ?>"><i class="la la-folder-open-o"></i><span>File managers</span></a></li>
 
-			<li><a href="#dropdown-generic" aria-expanded="false" data-toggle="collapse"><i class="la la-file-text"></i><span>Generic</span></a>
-				<ul id="dropdown-generic" class="collapse list-unstyled pt-0">
-					<li><a href="pages-coming-soon.html">Coming Soon</a></li>
-					<li><a href="pages-profile.html">Profile</a></li>
-					<li><a href="pages-invoice.html">Invoice</a></li>
-					<li><a href="pages-search.html">Search</a></li>
-					<li><a href="pages-faq.html">FAQ</a></li>
-					<li><a href="pages-blank.html">Blank</a></li>
+			<!-- Website -->
+			<li><a href="#dropdown-website" aria-expanded="false" data-toggle="collapse"><i class="la la-at"></i><span>Website</span></a>
+				<ul id="dropdown-website" class="collapse list-unstyled pt-0">
+					<li><a href="<?= base_url('admin/config/contact') ?>">Thông tin liên lạc</a></li>
+					<li><a href="<?= base_url('admin/config/logo') ?>">Logo</a></li>
+					<li><a href="<?= base_url('admin/config/seo') ?>">SEO</a></li>
 				</ul>
 			</li>
-			<li><a href="#dropdown-social" aria-expanded="false" data-toggle="collapse"><i class="la la-comments"></i><span>Social</span></a>
-				<ul id="dropdown-social" class="collapse list-unstyled pt-0">
-					<li><a href="pages-newsfeed.html">Newsfeed</a></li>
-					<li><a href="pages-about.html">About</a></li>
-					<li><a href="pages-events.html">Events</a></li>
-					<li><a href="pages-friends.html">Friends</a></li>
-					<li><a href="pages-groups.html">Groups</a></li>
-				</ul>
-			</li>
-			<li><a href="#dropdown-email" aria-expanded="false" data-toggle="collapse"><i class="la la-at"></i><span>Email</span></a>
-				<ul id="dropdown-email" class="collapse list-unstyled pt-0">
-					<li><a href="email-welcome.html">Welcome</a></li>
-					<li><a href="email-password.html">Reset Password</a></li>
-					<li><a href="email-order.html">Order Confirmation</a></li>
-				</ul>
-			</li>
-			<li><a href="#dropdown-pricing" aria-expanded="false" data-toggle="collapse"><i class="la la-usd"></i><span>Pricing</span></a>
-				<ul id="dropdown-pricing" class="collapse list-unstyled pt-0">
-					<li><a href="pages-pricing-tables-01.html">Style 01</a></li>
-					<li><a href="pages-pricing-tables-02.html">Style 02</a></li>
-				</ul>
-			</li>
-			<li><a href="#dropdown-error" aria-expanded="false" data-toggle="collapse"><i class="la la-exclamation-triangle"></i><span>Errors</span></a>
-				<ul id="dropdown-error" class="collapse list-unstyled pt-0">
-					<li><a href="pages-404-01.html">Style 01</a></li>
-					<li><a href="pages-404-02.html">Style 02</a></li>
-				</ul>
-			</li>
+			<!-- Website -->
 		</ul>
 
 		<!-- HƯỚNG DẪN -->

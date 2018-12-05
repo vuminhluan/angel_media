@@ -2,11 +2,11 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
- * 
+ *
  */
 class Auth extends MY_Controller
 {
-	
+
 	function __construct() {
 		parent::__construct();
 		$this->load->model('user_model', 'User');
@@ -151,7 +151,7 @@ class Auth extends MY_Controller
 			'password_confirmation' => $post['password_confirmation']
 		];
 
-		
+
 		if ($this->validation->validate_form($form_data) == FALSE) {
 			$this->load->view('backend/auth', $view_data);
 			return;
@@ -234,7 +234,7 @@ class Auth extends MY_Controller
 				$msg = "Đã xảy ra lỗi, chúng tôi không thể gửi email cho bạn bây giờ";
 			} else {
 				// 2. Gửi email
-				
+
 				if(!$sending_result = $this->send_password_reset_email($user)) {
 					$msg = "Đã xảy ra lỗi, chúng tôi không thể gửi email cho bạn bây giờ";
 				} else {
@@ -269,7 +269,7 @@ class Auth extends MY_Controller
 		$subject = 'Angel Media Đặt lại mật khẩu';
 		$message =  $body ;
 		$email = sendEmail($to, $subject, $message, $file = '' , $cc = '');
-		
+
 		return $email;
 
 	}
@@ -390,7 +390,7 @@ class Auth extends MY_Controller
 		$subject = 'Angel Media Xác nhận email - Kích hoạt tài khoản';
 		$message =  $body ;
 		$email = sendEmail($to, $subject, $message, $file = '' , $cc = '');
-		
+
 		return $email;
 	}
 
@@ -417,10 +417,10 @@ class Auth extends MY_Controller
 	/**
 	 * Xác nhận email
 	 * @param: token
-	 * @return: 
+	 * @return:
 	 */
 	public function confirm_verification($token) {
-		
+
 		if (!$token) {
 			show_404();
 		}
@@ -447,7 +447,7 @@ class Auth extends MY_Controller
 	}
 
 
-	
+
 
 
 

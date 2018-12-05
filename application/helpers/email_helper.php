@@ -2,7 +2,7 @@
 function sendEmail($to = '', $subject  = '', $body = '', $attachment = '', $cc = '')
 {
 	$controller =& get_instance();
-	$controller->load->helper('path'); 
+	$controller->load->helper('path');
 
 	$config = array();
 	$config['useragent']      = "AngelMedia";
@@ -11,7 +11,7 @@ function sendEmail($to = '', $subject  = '', $body = '', $attachment = '', $cc =
 	$config['smtp_host']      = "ssl://smtp.googlemail.com";
 	$config['smtp_port']      = "465";
 	$config['smtp_timeout'] 	= '30';
-	$config['smtp_user']    	= "vuminhluan1407@gmail.com";
+	$config['smtp_user']    	= "vuminhluantest3@gmail.com";
 	$config['smtp_pass']    	= "minhluan1234";
 	$config['mailtype'] 			= 'html';
 	$config['charset']  			= 'utf-8';
@@ -22,17 +22,17 @@ function sendEmail($to = '', $subject  = '', $body = '', $attachment = '', $cc =
 
 	$controller->email->initialize($config);
 
-	$controller->email->from( 'vuminhluan1407@gmail.com' , 'Angel Media' );
-	
+	$controller->email->from( 'vuminhluantest3@gmail.com' , 'Angel Media' );
+
 	$controller->email->to($to);
-	
+
 	$controller->email->subject($subject);
-	
+
 	$controller->email->message($body);
-	if($cc != '') 
-	{	
+	if($cc != '')
+	{
 		$controller->email->cc($cc);
-	}	
+	}
 	if($attachment != '')
 	{
 		$controller->email->attach(base_url()."pdfs/" . $attachment );

@@ -96,7 +96,7 @@
 				<!-- ĐỔI MẬT KHẨU -->
 				<div class="col-10 ml-auto">
 					<div class="section-title mt-3 mb-3">
-						<h4>03. Đổi mật khẩu</h4>
+						<h4>02. Đổi mật khẩu</h4>
 					</div>
 				</div>
 				<?php echo form_open(base_url('admin/profile/update/password'), ['class'=>'form-horizontal', 'personal-infomation-form']); ?>

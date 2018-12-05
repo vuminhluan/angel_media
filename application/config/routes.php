@@ -206,6 +206,17 @@ $route['admin/product/(:num)/version/(:num)/delete'] = 'backend/product/delete_v
 
 $route['admin/product/version/create'] = 'backend/product/create_version';
 
+
+//CONFIG: thông tin liên lạc, ...
+$route['admin/config/contact'] = 'backend/config/get_contact_info';
+$route['admin/config/contact/update'] = 'backend/config/update_contact_info';
+
+$route['admin/config/logo'] = 'backend/config/get_logo';
+$route['admin/config/logo/update'] = 'backend/config/update_logos';
+
+$route['admin/config/seo'] = 'backend/config/get_seo';
+$route['admin/config/seo/update'] = 'backend/config/update_seo';
+
 // == AJAX ROUTE ==
 
 // AJAX - Tạo alias (tin tức, sản phẩm,...)
