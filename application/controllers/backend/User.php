@@ -2,11 +2,11 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
- * 
+ *
  */
 class User extends Admin_Controller
 {
-	
+
 	function __construct() {
 		parent::__construct();
 		$this->load->model('user_model', 'User');
@@ -42,14 +42,20 @@ class User extends Admin_Controller
 		if (!$_POST) {
 			show_404();
 		}
+		$id = $this->input->post('user_id');
+		$user = $this->User->first_or_fail($id);
 
 		$form_data = [
 			'id' => $this->input->post('user_id'),
 			'firstname' => $this->input->post('firstname'),
 			'lastname' => $this->input->post('lastname'),
-			'email' => $this->input->post('email'),
+			// 'email' => $this->input->post('email'),
 			'mobile_no' => $this->input->post('phone')
 		];
+
+		if ($user->email != $this->input->post('email')) {
+			$form_data['email'] = $this->input->post('email');
+		}
 
 		// Sử dụng Library Validation
 		if ($this->validation->validate_form($form_data) == FALSE) {
@@ -57,7 +63,7 @@ class User extends Admin_Controller
 			return;
 		}
 
-		
+
 		if (!$this->User->update_personal_information($form_data)) {
 			$this->flash('Có lỗi xảy ra. Không thể cập nhật thông tin');
 		} else {
@@ -112,7 +118,7 @@ class User extends Admin_Controller
 			$this->flash('Có lỗi xảy ra, cập nhật ảnh đại diện thất bại');
 		} else {
 			$form_data['avatar'] = $this->input->post('avatar');
-		
+
 			if ($this->User->update_avatar_by_filemanager($form_data, ['id' => $this->session->userdata('id')])) {
 				$this->flash('Cập nhật ảnh đại diện thành công');
 				$this->session->set_userdata('avatar', $form_data['avatar']);
@@ -144,7 +150,7 @@ class User extends Admin_Controller
 
 
 	public function user_list_datatable_json() {
-		
+
 
 		$users = $this->User->get_all_users();
 		$user_data = array();
@@ -167,7 +173,7 @@ class User extends Admin_Controller
 			);
 		}
 		$users['data']=$user_data;
-		echo json_encode($users);						   
+		echo json_encode($users);
 	}
 
 
@@ -217,7 +223,7 @@ class User extends Admin_Controller
 			$form_data['address'] = $this->input->post('address');
 		}
 
-		
+
 		// Sử dụng Library Validation
 		if ($this->validation->validate_form($form_data) == FALSE) {
 			$this->render_edit_user_page($form_data['id']);
@@ -241,7 +247,7 @@ class User extends Admin_Controller
 		$data_to_update = $form_data;
 		$data_to_update['email'] = $form_data['email_edit'];
 		unset($data_to_update['email_edit']);
-		
+
 
 		if (!$this->User->update($data_to_update, ['id' => $data_to_update['id']])) {
 			$this->flash('Có lỗi xảy ra. Không thể cập nhật thành viên bây giờ');
@@ -297,7 +303,7 @@ class User extends Admin_Controller
 			$form_data['address'] = $this->input->post('address');
 		}
 
-		
+
 		// Sử dụng Library Validation
 		if ($this->validation->validate_form($form_data) == FALSE) {
 			$this->render_create_user_page();
@@ -356,7 +362,7 @@ class User extends Admin_Controller
 			);
 		}
 		$groups['data']=$group_data;
-		echo json_encode($groups);						   
+		echo json_encode($groups);
 	}
 
 	/**
