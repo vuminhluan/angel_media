@@ -35,7 +35,7 @@
 					<div class="form-group row d-flex align-items-center mb-5">
 						<label class="col-md-2 form-control-label d-flex justify-content-md-end">Đường dấn</label>
 						<div class="col-md-10">
-							<input type="text" class="form-control alias news_category_alias" data-alias-prefix="tin-tuc/" name="alias" disabled value="tin-tuc/<?= set_value('news_alias') ?>">
+							<input type="text" class="form-control alias news_category_alias" data-alias-prefix="<?=$alias_prefix ?>" name="alias" disabled value="<?= $alias_prefix.set_value('news_alias') ?>">
 							<small>
 								<!-- <code>Bắt buộc</code> -->
 							</small>

@@ -1,11 +1,11 @@
 
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 /**
- * 
+ *
  */
 class News_model extends MY_Model
 {
-	
+
 	function __construct() {
 		parent::__construct();
 		$this->table = "news";
@@ -13,6 +13,8 @@ class News_model extends MY_Model
 		// $this->primaryKey = "id";
 	}
 
+	public $alias_prefix = "tin-tuc/";
+	
 	/**
 	 * Tạo danh mục tin tức mới
 	 */
@@ -59,7 +61,7 @@ class News_model extends MY_Model
 	/**
 	 * Cập nhật tin tức
 	 * @param: mảng chứa dữ liệu cập nhật và id tin tức muốn cập nhật
-	 * 
+	 *
 	 */
 	public function update_news($data, $id) {
 		return $this->update($data, [$this->primaryKey => $id]);

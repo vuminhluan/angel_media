@@ -8,7 +8,7 @@
 			<div class="widget-body">
 				<?php echo form_open(base_url('admin/news/category/create'), ['class'=>'form-horizontal create-news-category-form']); ?>
 
-					<!-- --------------------- -->
+					<!-- =============================== -->
 					<div class="form-group row d-flex align-items-center mb-5">
 						<label class="col-md-3 form-control-label d-flex justify-content-md-end">Tên danh mục</label>
 						<div class="col-md-6">
@@ -18,17 +18,17 @@
 							</small>
 						</div>
 					</div>
-					<!-- --------------------- -->
+					<!-- =============================== -->
 					<div class="form-group row d-flex align-items-center mb-5">
 						<label class="col-md-3 form-control-label d-flex justify-content-md-end">Đường dấn</label>
 						<div class="col-md-6">
-							<input type="text" data-alias-prefix="tin-tuc/danh-muc/" class="form-control alias news_category_alias" name="alias" disabled value="tin-tuc/danh-muc/<?= set_value('news_category_alias_create') ?>">
+							<input type="text" data-alias-prefix="<?= $alias_prefix ?>" class="form-control alias news_category_alias" name="alias" disabled value="<?= $alias_prefix.set_value('news_category_alias_create') ?>">
 							<small>
 								<!-- <code>Bắt buộc</code> -->
 							</small>
 						</div>
 					</div>
-					<!-- --------------------- -->
+					<!-- =============================== -->
 					<!-- <div class="form-group row d-flex align-items-center mb-5">
 						<label class="col-md-3 form-control-label d-flex justify-content-md-end">Trạng thái</label>
 						<div class="col-md-6">
@@ -44,8 +44,8 @@
 							</div>
 						</div>
 					</div> -->
-					
-					<!-- --------------------- -->
+
+					<!-- =============================== -->
 					<div class="em-separator separator-dashed"></div>
 					<div class="form-group row d-flex align-items-center mb-5">
 						<label class="col-md-3 form-control-label d-flex justify-content-md-end">Tiêu đề</label>
@@ -56,7 +56,7 @@
 							</small>
 						</div>
 					</div>
-					<!-- --------------------- -->
+					<!-- =============================== -->
 					<div class="form-group row d-flex align-items-center mb-5">
 						<label class="col-md-3 form-control-label d-flex justify-content-md-end">Từ khóa</label>
 						<div class="col-md-6">
@@ -66,7 +66,7 @@
 							</small>
 						</div>
 					</div>
-					<!-- --------------------- -->
+					<!-- =============================== -->
 					<div class="form-group row d-flex align-items-center mb-5">
 						<label class="col-md-3 form-control-label d-flex justify-content-md-end">Mô tả</label>
 						<div class="col-md-6">
@@ -76,13 +76,13 @@
 							</small>
 						</div>
 					</div>
-					<!-- --------------------- -->
+					<!-- =============================== -->
 
 					<div class="em-separator separator-dashed"></div>
 					<div class="col-md-6 offset-md-3 text-right">
 						<button class="btn btn-gradient-02" type="submit">Thêm mới</button>
 					</div>
-					<!-- --------------------- -->
+					<!-- =============================== -->
 				<?php echo form_close(); ?>
 			</div>
 		</div>

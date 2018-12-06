@@ -33,9 +33,11 @@ class Product extends Admin_Controller
 	 */
 	public function render_create_product_category_page() {
 		$view_data = [
-			'title' => 'Thêm danh mục sản phẩm',
-			'view' => 'backend/pages/products/product_category_create',
-			'tab' => 'product,product_cate_new'
+			'title'        => 'Thêm danh mục sản phẩm',
+			'view'         => 'backend/pages/products/product_category_create',
+			'alias_prefix' => $this->Product->alias_prefix,
+			'tab'          => 'product,product_cate_new',
+			'alias_prefix' => $this->ProductCategory->alias_prefix
 		];
 		$this->load->view('backend/layout', $view_data);
 	}
@@ -98,7 +100,7 @@ class Product extends Admin_Controller
 
 		$categories = $this->ProductCategory->get_categories_for_datatable();
 		$category_data = array();
-		$alias_prefix = "san-pham/danh-muc/";
+		$alias_prefix = $this->ProductCategory->alias_prefix;
 		foreach ($categories['data'] as $category) {
 			$category_data[] = array(
 				$category['id'],
@@ -205,7 +207,7 @@ class Product extends Admin_Controller
 
 		$products = $this->Product->get_products_for_datatable();
 		$product_data = array();
-		$alias_prefix = "san-pham/";
+		$alias_prefix = $this->Product->alias_prefix;
 		foreach ($products['data'] as $product) {
 			$total_version = $product['total_version'];
 			$version = $total_version > 0 ? "<a href='".base_url('admin/product/'.$product['product_id'].'/versions/0')."'>Có ".$total_version." phiên bản </a>" : 'Có 0 phiên bản';
@@ -213,7 +215,7 @@ class Product extends Admin_Controller
 				// $product['product_id'],
 				$product['cate_name'],
 				$product['product_name'],
-				$alias_prefix.$product['product_alias'],
+				$alias_prefix.$product['product_alias'].'-'.$product['product_id'],
 				'<img width="100px" class="product-image" src="'.$product['product_image'].'" />',
 
 				// "<a href='".base_url('admin/product/'.$product['product_id'].'/versions/0')."'>Có ".$total_version." phiên bản </a>",
@@ -239,10 +241,11 @@ class Product extends Admin_Controller
 
 		$categories = $this->ProductCategory->all();
 		$view_data = [
-			'title' => 'Thêm sản phẩm mới',
-			'categories' => $categories,
-			'view' => 'backend/pages/products/product_create',
-			'tab' => 'product,product_create'
+			'title'        => 'Thêm sản phẩm mới',
+			'categories'   => $categories,
+			'view'         => 'backend/pages/products/product_create',
+			'tab'          => 'product,product_create',
+			'alias_prefix' => $this->Product->alias_prefix,
 		];
 		$this->load->view('backend/layout', $view_data);
 	}

@@ -9,6 +9,8 @@ class Product_model extends MY_Model
     $this->table = "products";
   }
 
+  public $alias_prefix = "san-pham/";
+
   public function create_product($data)
   {
     $this->db->insert($this->table, $data);

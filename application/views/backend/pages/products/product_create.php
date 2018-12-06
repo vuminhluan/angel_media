@@ -35,7 +35,7 @@
 					<div class="form-group row d-flex align-items-center mb-5">
 						<label class="col-md-2 form-control-label d-flex justify-content-md-end">Đường dấn</label>
 						<div class="col-md-10">
-							<input type="text" class="form-control alias product_category_alias" data-alias-prefix="san-pham/" name="alias" disabled value="sản-pham/<?= set_value('product_alias') ?>">
+							<input type="text" class="form-control alias product_category_alias" data-alias-prefix="<?= $alias_prefix ?>" name="alias" disabled value="<?= $alias_prefix.set_value('product_alias') ?>">
 							<small>
 								<!-- <code>Bắt buộc</code> -->
 							</small>

@@ -35,6 +35,7 @@ class News extends Admin_Controller
 			// 'css_file' => 'backend/includes/css_file/datatable_css.php',
 			// 'js_file' => 'backend/includes/js_file/datatable_js.php',
 			'view' => 'backend/pages/news/news_category_create',
+			'alias_prefix' => $this->NewsCategory->alias_prefix,
 			'tab' => 'news,category_create'
 		];
 		$this->load->view('backend/layout', $view_data);
@@ -96,7 +97,7 @@ class News extends Admin_Controller
 
 		$categories = $this->NewsCategory->get_all_news_categories();
 		$category_data = array();
-		$alias_prefix = "tin-tuc/danh-muc/";
+		$alias_prefix = $this->NewsCategory->alias_prefix;;
 		foreach ($categories['data'] as $category) {
 			$category_data[] = array(
 				$category['id'],
@@ -217,12 +218,12 @@ class News extends Admin_Controller
 
 		$news = $this->News->get_all_news();
 		$news_data = array();
-		$alias_prefix = "tin-tuc/";
+		$alias_prefix = $this->News->alias_prefix;
 		foreach ($news['data'] as $news_piece) {
 			$news_data[] = array(
 				$news_piece['news_id'],
 				$news_piece['news_name'],
-				$alias_prefix.$news_piece['news_alias'],
+				$alias_prefix.$news_piece['news_alias'].'-'.$news_piece['news_id'],
 				$news_piece['category_name'],
 				$news_piece['news_created_at'],
 				'<div class="action-buttons td-actions text-right">
@@ -245,6 +246,7 @@ class News extends Admin_Controller
 			'categories' => $categories,
 			// 'css_file' => 'backend/includes/css_file/datatable_css.php',
 			// 'js_file' => 'backend/includes/js_file/datatable_js.php',
+			'alias_prefix' => $this->News->alias_prefix,
 			'view' => 'backend/pages/news/news_create',
 			'tab' => 'news,news_create'
 		];

@@ -1,17 +1,19 @@
 
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 /**
- * 
+ *
  */
 class News_category_model extends MY_Model
 {
-	
+
 	function __construct() {
 		parent::__construct();
 		$this->table = "news_categories";
 		// mặc định trong MY_Model primaryKey = "id"
 		// $this->primaryKey = "id";
 	}
+
+	public $alias_prefix = "tin-tuc/";
 
 	/**
 	 * Tạo danh mục tin tức mới

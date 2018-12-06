@@ -9,6 +9,8 @@ class Product_category_model extends MY_Model
     $this->table = "product_categories";
   }
 
+  public $alias_prefix = "san-pham/";
+
   public function create_product_category($data)
   {
     return $this->insert($data);
