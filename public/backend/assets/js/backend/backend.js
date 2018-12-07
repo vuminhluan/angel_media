@@ -41,11 +41,12 @@ $(document).ready(function() {
 			layout:"top",
 			type: 'info',
 			closeWith: ['button', 'click'],
+			timeout: 2000,
 			animation: {
 				open: "animated slideInDown",
 				close: "animated slideOutUp"
 			},
-			modal: true,
+			modal: false,
 		}).show();
 	}
 });

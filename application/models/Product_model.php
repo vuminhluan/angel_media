@@ -27,7 +27,7 @@ class Product_model extends MY_Model
     $wh = ['1' => 1];
     $this->db->select([
       'P.id as product_id', 'P.name as product_name', 'P.alias as product_alias',
-      'P.image as product_image', 'p.original_price as orgiginal_price', 'P.price as price',
+      'P.image as product_image', 'P.original_price as orgiginal_price', 'P.price as price',
       'P.status as status',
       'PC.id as cate_id', 'PC.parent_id as cate_parent_id', 'PC.name as cate_name',
       'PC.alias as cate_alias',

@@ -43,7 +43,7 @@ class Slideshow extends Admin_Controller
 			$slides_data[] = array(
 				$slides['id'],
 				$slides['name'],
-				$slides['image'],
+				"<img src='".$slides['image']."' width='150px' />",
 				// $alias_prefix.$slides['landing_alias'],
 				// date('d/m/Y H:i', strtotime($slides['landing_created_at'])),
 				// $status,
