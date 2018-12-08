@@ -138,10 +138,12 @@ class Product extends Admin_Controller
 	 */
 	public function render_edit_product_category_page($category_id) {
 		$category = (array) $this->ProductCategory->first_or_fail($category_id);
+		$alias_prefix = $this->ProductCategory->alias_prefix;
 		$view_data = [
 			'title' => 'Chỉnh sửa danh mục tin tức',
 			'view' => 'backend/pages/products/product_category_edit',
 			'category' => $category,
+			'alias_prefix' => $alias_prefix,
 			'tab' => 'news,'
 		];
 		$this->load->view('backend/layout', $view_data);

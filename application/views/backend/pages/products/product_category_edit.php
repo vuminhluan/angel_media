@@ -23,7 +23,7 @@
 					<div class="form-group row d-flex align-items-center mb-5">
 						<label class="col-md-3 form-control-label d-flex justify-content-md-end">Đường dấn</label>
 						<div class="col-md-6">
-							<input type="text" data-alias-prefix="tin-tuc/danh-muc/" class="form-control alias news_category_alias" name="alias" disabled value="tin-tuc/danh-muc/<?= $category['alias'] ?>">
+							<input type="text" data-alias-prefix="<?= $alias_prefix ?>" class="form-control alias news_category_alias" name="alias" disabled value="<?= $alias_prefix.$category['alias'] ?>">
 							<small>
 								<!-- <code>Bắt buộc</code> -->
 							</small>
